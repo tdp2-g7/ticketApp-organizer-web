@@ -6,7 +6,7 @@ const initialState = {
   data: null,
 };
 
-const userReducer: Reducer = (state = initialState, action) => {
+const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
   const { type, data } = action;
   switch (type) {
     case constants.USER_ON_LOGIN_REQUESTED:
