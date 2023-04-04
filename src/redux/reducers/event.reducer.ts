@@ -25,7 +25,6 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         loading: false,
         data,
       };
-      console.log('🚀 ~ data:', data);
     case constants.EVENT_ON_GET_ALL_BY_USER_ID_SUCCEEDED:
       return {
         ...state,
@@ -33,11 +32,6 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         events: data.data.events,
         maxPage: data.data.maxPage,
       };
-      console.log('🚀 ~ data:', data);
-      console.log('🚀 ~ data:', data);
-      console.log('🚀 ~ data:', data);
-      console.log('🚀 ~ data:', data);
-
     case constants.EVENT_ON_CREATE_FAILED:
     case constants.EVENT_ON_GET_ALL_BY_USER_ID_FAILED:
       return {
