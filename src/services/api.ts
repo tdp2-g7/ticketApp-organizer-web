@@ -3,16 +3,15 @@ import { USERS_API_URL } from '../configs/configs';
 
 const api = axios.create({
   baseURL: USERS_API_URL,
-  withCredentials: true,
 });
 
 async function getOptions() {
   const options = {
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
-    mode: 'cors',
   };
   return options;
 }
@@ -22,9 +21,9 @@ function errorResponse(error: any) {
   let message = error;
   if (response) {
     const { data } = response;
-    message = data.message;
+    message = data.error;
   }
-  return new Error(message);
+  return message;
 }
 
 export async function get(url: string, headers = {}): Promise<any> {
