@@ -25,9 +25,12 @@ const CreateEventContainer: FunctionComponent = () => {
         image: image.split(',')[1],
         type: formData.type.toLowerCase(),
         date: reserveDate,
+        vacancies: Number(formData.vacancies),
+        ticketsPerPerson: Number(formData.ticketsPerPerson),
       };
+
       // TODO Change userID for organizerId
-      dispatch(onCreateEventRequested({ ...body, organizerId: '0' }));
+      dispatch(onCreateEventRequested({ ...body, userId: '0' }));
     }
   };
   return (

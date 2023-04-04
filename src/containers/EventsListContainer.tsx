@@ -14,9 +14,9 @@ const CreateEventContainer: FunctionComponent = () => {
 
   useEffect(() => {
     // TODO change userId
-    const organizerId = '0';
+    const userId = '0';
     const data = {
-      organizerId,
+      userId,
       page: currentPage,
       offset: ITEMS_PER_PAGE,
     };
