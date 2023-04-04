@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../configs/configs';
+import { USERS_API_KEY } from '../configs/configs';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
+  baseURL: USERS_API_KEY,
 });
 
 async function getOptions() {
@@ -13,9 +12,6 @@ async function getOptions() {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
-    credentials: 'include',
-    mode: 'cors',
-    withCredentials: true,
   };
   return options;
 }
@@ -25,9 +21,9 @@ function errorResponse(error: any) {
   let message = error;
   if (response) {
     const { data } = response;
-    message = data.message;
+    message = data.error;
   }
-  return new Error(message);
+  return message;
 }
 
 export async function get(url: string, headers = {}): Promise<any> {
