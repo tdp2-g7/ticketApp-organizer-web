@@ -31,8 +31,8 @@ const EventCard = (props: any) => {
       )}
       <InfoContainer>
         <DateContainer>
-          <MonthLabel>{numToMonth(event.date.getMonth())}</MonthLabel>
-          <DayLabel>{event.date.getDate()}</DayLabel>
+          <MonthLabel>{numToMonth(event.date.getMonth)}</MonthLabel>
+          <DayLabel>{event.date.getDate}</DayLabel>
           <HourLabel>{event.time.split(' ')[0]}</HourLabel>
         </DateContainer>
         <TextContainer>

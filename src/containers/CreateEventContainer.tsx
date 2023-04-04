@@ -27,7 +27,7 @@ const CreateEventContainer: FunctionComponent = () => {
         date: reserveDate,
       };
       // TODO Change userID for organizerId
-      dispatch(onCreateEventRequested({ ...body, userId: '0' }));
+      dispatch(onCreateEventRequested({ ...body, organizerId: '0' }));
     }
   };
   return (

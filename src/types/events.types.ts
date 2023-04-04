@@ -9,7 +9,7 @@ export interface IEvent {
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;
-  userId?: string;
+  organizerId?: string;
   eventId?: string;
 }
 

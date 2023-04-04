@@ -12,6 +12,7 @@ const COLORS = {
   greyMischka: '#FAFAFA',
   greyMystic: '#6A6A6A',
   mineShaft: '#272727',
+  ghost: '#CACDD3',
 
 };
 

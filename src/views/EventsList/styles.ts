@@ -28,7 +28,7 @@ export const ArrowLeftIcon = styled(ChevronLeft)`
   ${({ isDisabled }: { isDisabled?: boolean }) => isDisabled
     && css`
       pointer-events: none;
-      color: ${COLORS.greyMischka};
+      color: ${COLORS.ghost};
     `};
 `;
 
@@ -41,7 +41,7 @@ export const ArrowRightIcon = styled(ChevronRight)`
   ${({ isDisabled }: { isDisabled?: boolean }) => isDisabled
     && css`
       pointer-events: none;
-      color: ${COLORS.greyMischka};
+      color: ${COLORS.ghost};
     `};
 `;
 
