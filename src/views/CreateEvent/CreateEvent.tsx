@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
 import Input from '../../components/Input/Input';
@@ -21,11 +21,14 @@ import {
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
+import Map from '../../components/Map/Map';
 
 const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
 ) => {
   const { onCreateEvent, reserveDate, setReserveDate } = props;
+  const [location, setLocation] = useState({});
+  console.log('🚀 ~ location:', location);
 
   return (
     <>
@@ -137,13 +140,14 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 </RowContainer>
                 <div>
                   <Label>Location</Label>
-                  <Field
+                  {/* <Field
                     render={Input}
                     label='Location'
                     name='location'
                     validate={requiredValidation}
                     type='text'
-                  />
+                  /> */}
+                  <Map onSearch={setLocation} />
                 </div>
                 <ColumnContainer>
                   <Label>
