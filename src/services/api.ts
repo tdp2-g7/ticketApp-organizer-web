@@ -1,21 +1,18 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../configs/configs';
+import { USERS_API_URL } from '../configs/configs';
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: USERS_API_URL,
   withCredentials: true,
 });
 
 async function getOptions() {
   const options = {
     headers: {
-      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
-    credentials: 'include',
     mode: 'cors',
-    withCredentials: true,
   };
   return options;
 }

@@ -86,7 +86,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     render={Input}
                     multiline
                     label='Frequently asked qestions'
-                    name='FAQs'
+                    name='faqs'
                     validate={requiredValidation}
                     type='textarea'
                   />
