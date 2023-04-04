@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { USERS_API_KEY } from '../configs/configs';
+import { USERS_API_URL } from '../configs/configs';
 
 const api = axios.create({
-  baseURL: USERS_API_KEY,
+  baseURL: USERS_API_URL,
 });
 
 async function getOptions() {

@@ -13,5 +13,5 @@ export interface ICreateEventFormData {
   image: any;
   vacancies: number;
   ticketsPerPerson: number;
-  FAQs: string;
+  faqs: string;
 }
