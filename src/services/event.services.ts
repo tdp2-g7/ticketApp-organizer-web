@@ -8,6 +8,6 @@ export async function createEvent(data: IEvent): Promise<AxiosResponse> {
 }
 
 export async function getEventsByUserId(data: any): Promise<any> {
-  const response = await get(`/events/organizer/${data.organizerId}?page=${data.page}&offset=${data.offset}`);
+  const response = await get(`/events/organizer/${data.userId}?page=${data.page}&offset=${data.offset}`);
   return response;
 }

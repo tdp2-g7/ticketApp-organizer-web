@@ -32,7 +32,6 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         events: data.data.events,
         maxPage: data.data.maxPage,
       };
-
     case constants.EVENT_ON_CREATE_FAILED:
     case constants.EVENT_ON_GET_ALL_BY_USER_ID_FAILED:
       return {
