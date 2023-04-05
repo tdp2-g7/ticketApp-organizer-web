@@ -51,6 +51,7 @@ const Input: FunctionComponent<IInputProps> = (props: IInputProps) => {
         value={value}
         variant={variant}
         multiline={multiline}
+        rows={multiline ? 5 : 1}
         ref={ref}
         // eslint-disable-next-line react/jsx-no-duplicate-props
         InputProps={{

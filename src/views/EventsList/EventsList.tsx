@@ -67,7 +67,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           <MakeEventText>
             Now you can create your event very easily
           </MakeEventText>
-          <HeaderLink href='/createEvent'>Create events</HeaderLink>
+          <HeaderLink href='/createEvent'>Crear eventos</HeaderLink>
         </ColumnContainer>
       </RectangleContainer>
     </>
