@@ -1,4 +1,4 @@
-import history from '../../../helpers/history';
+import { useNavigate } from 'react-router-dom';
 import {
   CustomImg,
   DateContainer,
@@ -14,17 +14,18 @@ import {
   TextContainer,
 } from './styles';
 import NoImage from '../../../assets/noImage.png';
-import numToMonth from '../../../helpers/dates';
+import { numToMonth } from '../../../helpers/shortDates';
 
 const EventCard = (props: any) => {
   const { event } = props;
+  const navigate = useNavigate();
 
   return (
     <EventContainer
       key={event.eventId}
-      onClick={() => history.push(`/events/${event.eventId}`)}
+      onClick={() => navigate(`/events/${event.eventId}`)}
     >
-      {!event.image ? (
+      {event.image ? (
         <CustomImg src={`data:image/jpeg;base64,${event.image}`} />
       ) : (
         <CustomImg src={NoImage} />

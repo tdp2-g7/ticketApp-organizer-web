@@ -18,4 +18,5 @@ export interface IEventDefaultState {
   events: IEvent[];
   data: any;
   maxPage: number;
+  eventData: IEvent | null;
 }

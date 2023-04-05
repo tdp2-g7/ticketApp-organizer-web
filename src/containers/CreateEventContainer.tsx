@@ -12,6 +12,7 @@ const CreateEventContainer: FunctionComponent = () => {
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
+    // eslint-disable-next-line func-names
     reader.onload = function () {
       resolve(reader.result);
     };

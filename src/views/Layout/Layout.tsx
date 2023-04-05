@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LogoImg from '../../assets/logo.png';
-import history from '../../helpers/history';
 import { onLogout } from '../../redux/actions/user.actions';
 
 import {
@@ -17,6 +17,8 @@ import { ILayoutProps } from './types';
 
 const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
   const { children } = props;
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const onClickLogout = () => {
@@ -26,7 +28,7 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
   return (
     <>
       <TopNav>
-        <RowDiv onClick={() => history.push('/')}>
+        <RowDiv onClick={() => navigate('/')}>
           <Logo src={LogoImg} alt='logo' />
           <Title>TicketApp</Title>
         </RowDiv>

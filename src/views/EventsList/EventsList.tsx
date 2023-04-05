@@ -41,7 +41,6 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
         </EmptyContainer>
       ) : (
         <>
-          {' '}
           <Title>Your Events</Title>
           <EventsContainer>
             {events.map((event) => (
