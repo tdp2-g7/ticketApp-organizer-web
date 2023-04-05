@@ -2,6 +2,8 @@ export interface ICreateEventProps {
   onCreateEvent: (formData: ICreateEventFormData) => void;
   reserveDate: Date;
   setReserveDate: (date: Date) => void;
+  setEventStartTime: (startTime: any) => void;
+  setEventEndTime: (endTime: any) => void;
 }
 export interface ICreateEventFormData {
   title: string;

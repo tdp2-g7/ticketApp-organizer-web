@@ -8,6 +8,10 @@ import Layout from '../views/Layout/Layout';
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const [reserveDate, setReserveDate] = useState(new Date());
+  const [eventStartTime, setEventStartTime] = useState(null);
+  console.log('🚀 ~ eventStartTime:', eventStartTime);
+  const [eventEndTime, setEventEndTime] = useState(null);
+  console.log('🚀 ~ eventEndTime:', eventEndTime);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -39,6 +43,8 @@ const CreateEventContainer: FunctionComponent = () => {
         onCreateEvent={onCreateEvent}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
+        setEventStartTime={setEventStartTime}
+        setEventEndTime={setEventEndTime}
       />
     </Layout>
   );
