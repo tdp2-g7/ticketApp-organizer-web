@@ -31,10 +31,10 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
           <Title>TicketApp</Title>
         </RowDiv>
         <RightContainer>
-          <HeaderLink href='/createEvent'>Create event</HeaderLink>
+          <HeaderLink href='/createEvent'>Crear evento</HeaderLink>
           <HeaderLink href='/agenda'>Agenda</HeaderLink>
-          <HeaderLink href='/metrics'>Metrics</HeaderLink>
-          <HeaderLink href='/profile'>Profile</HeaderLink>
+          <HeaderLink href='/metrics'>Metricas</HeaderLink>
+          <HeaderLink href='/profile'>Perfil</HeaderLink>
           <LogoutContainer>
             <HeaderLink type='button' onClick={() => onClickLogout()}>
               Logout
