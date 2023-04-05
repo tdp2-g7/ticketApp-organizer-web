@@ -8,6 +8,7 @@ import Layout from '../views/Layout/Layout';
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const [reserveDate, setReserveDate] = useState(new Date());
+  const [location, setLocation] = useState<any>({});
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -25,6 +26,11 @@ const CreateEventContainer: FunctionComponent = () => {
         image: image.split(',')[1],
         type: formData.type.toLowerCase(),
         date: (new Date(reserveDate)).toLocaleDateString(),
+        location: {
+          lat: location.y,
+          lng: location.x,
+          label: location.label,
+        },
       };
       // TODO Change userID for organizerId
       dispatch(onCreateEventRequested({ ...body, userId: 0 }));
@@ -36,6 +42,8 @@ const CreateEventContainer: FunctionComponent = () => {
         onCreateEvent={onCreateEvent}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
+        location={location}
+        setLocation={setLocation}
       />
     </Layout>
   );

@@ -46,12 +46,15 @@ const Search = (props: any) => {
 };
 
 const Map: FC<IMapProps> = (props: IMapProps) => {
+  const {
+    onSearch, lat = -34.6037561, lng = -58.3816139, isPreview = false,
+  } = props;
   const [location, setLocation] = useState<any>({});
 
   return (
         <MapContainer
-            center={[-34.6037561, -58.3816139]}
-            zoom={13}
+            center={[lat, lng]}
+            zoom={isPreview ? 20 : 13}
             scrollWheelZoom
             style={{
               height: '30vh', width: '100wh', borderRadius: '10px',
@@ -61,14 +64,14 @@ const Map: FC<IMapProps> = (props: IMapProps) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker
-                position={[-34.6037561, -58.3816139]}
+                position={[lat, lng]}
                 icon={icon}
             >
                 <Popup>{location.label}</Popup>
                 <div style={{ position: 'absolute', top: 0, right: 0 }}>
                     <Search
                     provider={new OpenStreetMapProvider()}
-                    onSearch={props.onSearch}
+                    onSearch={onSearch}
                     setLocation={setLocation} />
                 </div>
             </Marker>
