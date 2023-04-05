@@ -50,6 +50,7 @@ export const Title = styled.p`
 export const CustomCalendarForm = styled.div`
   line-height: 2rem;
   flex-direction: column;
+  width: 90%;
 `;
 
 export const RowContainer = styled.div`

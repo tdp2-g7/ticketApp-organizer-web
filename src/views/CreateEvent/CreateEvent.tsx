@@ -1,7 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
-import TimePicker from 'react-time-picker';
+import { TimeField } from '@mui/x-date-pickers/TimeField';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Input from '../../components/Input/Input';
 import { typesOfEvents } from '../../helpers/options';
 import { requiredValidation } from '../../helpers/validations';
@@ -31,12 +34,14 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     reserveDate,
     setReserveDate,
     setEventStartTime,
+    eventStartTime,
     setEventEndTime,
+    eventEndTime,
   } = props;
 
   return (
     <>
-      <Title>Create Event</Title>
+      <Title>Crear evento</Title>
       <FormContainer>
         <Form
           onSubmit={onCreateEvent}
@@ -45,73 +50,82 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
               <CustomForm onSubmit={handleSubmit}>
                 <Container>
                   <div>
-                    <Label>Title</Label>
+                    <Label>Título</Label>
                     <Field
                       render={Input}
                       name='title'
-                      label='Title of the event'
+                      label='Título del evento'
                       validate={requiredValidation}
                       type='text'
                     />
                   </div>
                   <RowContainer>
                     <CustomCalendarForm>
-                      <Label>Date</Label>
+                      <Label>Fecha</Label>
                       <ReactDatePicker
                         selected={reserveDate}
                         onChange={(date: any) => setReserveDate(date)}
                         dateFormat='dd/MM/yyyy'
-                        placeholderText='Select date'
+                        placeholderText='Seleccionar fecha'
                         isClearable={true}
                         className='datePicker'
                       />
                     </CustomCalendarForm>
-                    <div>
-                      <Label>Time</Label>
-                      <Field
-                        render={Input}
-                        name='startTime'
-                        label='Start time of the event'
-                        validate={requiredValidation}
-                        type='text'
-                      />
-                    </div>
-                    <TimePicker
-                      nativeInputAriaLabel='Controlled picker'
-                      onChange={(newValue) => { setEventStartTime(newValue); }}
-                    />
-                    <TimePicker
-                      nativeInputAriaLabel='Controlled picker'
-                      onChange={(newValue) => { setEventEndTime(newValue); }}
-                    />
+                    <ColumnContainer>
+                      <Label>Horario</Label>
+                      <RowContainer>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer
+                            components={['TimeField', 'TimeField']}
+                          >
+                            <div style={{ width: '80%' }}>
+                              <TimeField
+                                label='Hora inicio'
+                                value={eventStartTime}
+                                onChange={(newValue) => setEventStartTime(newValue)
+                                }
+                              />
+                            </div>
+                            <div style={{ width: '80%' }}>
+                              <TimeField
+                                label='Hora fin'
+                                value={eventEndTime}
+                                onChange={(newValue) => setEventEndTime(newValue)
+                                }
+                              />
+                            </div>
+                          </DemoContainer>
+                        </LocalizationProvider>
+                      </RowContainer>
+                    </ColumnContainer>
                   </RowContainer>
                   <div>
-                    <Label>Description</Label>
+                    <Label>Descripcion</Label>
                     <Field
                       render={Input}
                       multiline
-                      label='Description'
+                      label='Descripcion'
                       name='description'
                       validate={requiredValidation}
                       type='textarea'
                     />
                   </div>
                   <div>
-                    <Label>Frequently Asked Questions</Label>
+                    <Label>Preguntas frecuentes</Label>
                     <Field
                       render={Input}
                       multiline
-                      label='Frequently asked qestions'
+                      label='Preguntas frecuentes'
                       name='faqs'
                       validate={requiredValidation}
                       type='textarea'
                     />
                   </div>
                   <div>
-                    <Label>Type of Event</Label>
+                    <Label>Tipo de evento</Label>
                     <Field
                       label='type'
-                      placeholder='Type of event'
+                      placeholder='Tipo de evento'
                       name='type'
                       validate={requiredValidation}
                     >
@@ -131,20 +145,20 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   </div>
                   <RowContainer>
                     <VacanciesContainer>
-                      <Label>Total vacancies</Label>
+                      <Label>Vacantes totales</Label>
                       <Field
                         render={Input}
-                        label='Total vacancies'
+                        label='Vacantes totales'
                         name='vacancies'
                         validate={requiredValidation}
                         type='number'
                       />
                     </VacanciesContainer>
                     <TicketsPerUserContainer>
-                      <Label>Tickets per user</Label>
+                      <Label>Entradas por persona</Label>
                       <Field
                         render={Input}
-                        label='Tickets per user'
+                        label='Entradas por persona'
                         name='ticketsPerPerson'
                         validate={requiredValidation}
                         type='number'
@@ -152,17 +166,17 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     </TicketsPerUserContainer>
                   </RowContainer>
                   <div>
-                    <Label>Location</Label>
+                    <Label>Ubicacion</Label>
                     <Field
                       render={Input}
-                      label='Location'
+                      label='Ubicacion'
                       name='location'
                       validate={requiredValidation}
                       type='text'
                     />
                   </div>
                   <ColumnContainer>
-                    <Label>Pictures</Label>
+                    <Label>Imagenes</Label>
                     <Field name='image' validate={requiredValidation}>
                       {({ input: { value, onChange, ...input } }) => (
                         <input
@@ -177,7 +191,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   </ColumnContainer>
                 </Container>
                 <ButtonContainer>
-                  <Button type='submit'>Create event</Button>
+                  <Button type='submit'>Crear evento</Button>
                 </ButtonContainer>
               </CustomForm>
             </>
