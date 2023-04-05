@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import LogoImg from '../../assets/logo.png';
-import history from '../../helpers/history';
+import { globalNavigate } from '../../helpers/history';
 import { onLogout } from '../../redux/actions/user.actions';
 
 import {
@@ -26,7 +26,7 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
   return (
     <>
       <TopNav>
-        <RowDiv onClick={() => history.push('/')}>
+        <RowDiv onClick={() => globalNavigate('/')}>
           <Logo src={LogoImg} alt='logo' />
           <Title>TicketApp</Title>
         </RowDiv>

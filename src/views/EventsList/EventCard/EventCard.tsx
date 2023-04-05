@@ -1,4 +1,4 @@
-import history from '../../../helpers/history';
+import { globalNavigate } from '../../../helpers/history';
 import {
   CustomImg,
   DateContainer,
@@ -22,7 +22,7 @@ const EventCard = (props: any) => {
   return (
     <EventContainer
       key={event.eventId}
-      onClick={() => history.push(`/events/${event.eventId}`)}
+      onClick={() => globalNavigate(`/events/${event.eventId}`)}
     >
       {!event.image ? (
         <CustomImg src={`data:image/jpeg;base64,${event.image}`} />
