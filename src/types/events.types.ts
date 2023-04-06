@@ -1,7 +1,7 @@
 export interface IEvent {
   title: string;
   description: string;
-  location: string;
+  location: ILocation;
   type: string;
   date: Date;
   time: string;
@@ -18,4 +18,10 @@ export interface IEventDefaultState {
   events: IEvent[];
   data: any;
   maxPage: number;
+}
+
+export interface ILocation {
+  lat: number;
+  lng: number;
+  label: string;
 }
