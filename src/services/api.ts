@@ -58,3 +58,14 @@ export async function put(url: string, params = {}, headers = {}): Promise<any> 
     throw errorResponse(error);
   }
 }
+
+export async function patch(url: string, params = {}, headers = {}): Promise<any> {
+  try {
+    const getToken = await getOptions();
+    const options = { ...getToken, ...headers };
+    const { data } = await api.patch(url, params, options);
+    return data;
+  } catch (error) {
+    throw errorResponse(error);
+  }
+}

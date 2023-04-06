@@ -64,3 +64,24 @@ export function onGetDetailsFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onEditRequested(data: IEvent): AnyAction {
+  return {
+    type: constants.ON_EDIT_REQUESTED,
+    data,
+  };
+}
+
+export function onEditSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.ON_EDIT_SUCCEEDED,
+    data,
+  };
+}
+
+export function onEditFailed(error: unknown): AnyAction {
+  return {
+    type: constants.ON_EDIT_FAILED,
+    error,
+  };
+}

@@ -1,10 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
-import { TimeField } from '@mui/x-date-pickers/TimeField';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Input from '../../components/Input/Input';
 import { typesOfEvents } from '../../helpers/options';
 import { requiredValidation } from '../../helpers/validations';
@@ -22,29 +18,26 @@ import {
   VacanciesContainer,
   TicketsPerUserContainer,
   ColumnContainer,
+  TimeContainer,
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
+import TimePicker from '../../components/TimePicker/TimePicker';
 
 const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
 ) => {
   const {
-    onCreateEvent,
-    reserveDate,
-    setReserveDate,
-    setEventStartTime,
-    eventStartTime,
-    setEventEndTime,
-    eventEndTime,
+    onSubmit, reserveDate, setReserveDate, eventInitialValues, isEdit,
   } = props;
 
   return (
     <>
-      <Title>Crear evento</Title>
+      <Title>{ isEdit ? 'Editar evento' : 'Crear evento' }</Title>
       <FormContainer>
         <Form
-          onSubmit={onCreateEvent}
+          onSubmit={onSubmit}
+          initialValues={eventInitialValues}
           render={({ handleSubmit }) => (
             <>
               <CustomForm onSubmit={handleSubmit}>
@@ -74,28 +67,29 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     <ColumnContainer>
                       <Label>Horario</Label>
                       <RowContainer>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer
-                            components={['TimeField', 'TimeField']}
-                          >
-                            <div style={{ width: '80%' }}>
-                              <TimeField
-                                label='Hora inicio'
-                                value={eventStartTime}
-                                onChange={(newValue) => setEventStartTime(newValue)
-                                }
+                        <TimeContainer>
+                          <Field
+                            validate={requiredValidation}
+                            name={'startTime'}
+                            render={(fieldRenderProps) => (
+                              <TimePicker
+                                label='Hora de inicio'
+                                {...fieldRenderProps}
                               />
-                            </div>
-                            <div style={{ width: '80%' }}>
-                              <TimeField
-                                label='Hora fin'
-                                value={eventEndTime}
-                                onChange={(newValue) => setEventEndTime(newValue)
-                                }
+                            )}
+                          />
+                        </TimeContainer>
+                        <TimeContainer>
+                          <Field
+                            name={'endTime'}
+                            render={(fieldRenderProps) => (
+                              <TimePicker
+                                label='Hora de fin'
+                                {...fieldRenderProps}
                               />
-                            </div>
-                          </DemoContainer>
-                        </LocalizationProvider>
+                            )}
+                          />
+                        </TimeContainer>
                       </RowContainer>
                     </ColumnContainer>
                   </RowContainer>
@@ -177,7 +171,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   </div>
                   <ColumnContainer>
                     <Label>Imagenes</Label>
-                    <Field name='image' validate={requiredValidation}>
+                    {/* <Field name='image' validate={requiredValidation}>
                       {({ input: { value, onChange, ...input } }) => (
                         <input
                           {...input}
@@ -187,11 +181,11 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                           {...props}
                         />
                       )}
-                    </Field>
+                    </Field> */}
                   </ColumnContainer>
                 </Container>
                 <ButtonContainer>
-                  <Button type='submit'>Crear evento</Button>
+                  <Button type='submit'>{ isEdit ? 'Editar evento' : 'Crear evento' }</Button>
                 </ButtonContainer>
               </CustomForm>
             </>

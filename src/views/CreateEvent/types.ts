@@ -1,13 +1,11 @@
-import { Dayjs } from 'dayjs';
+import { IEvent } from '../../types/events.types';
 
 export interface ICreateEventProps {
-  onCreateEvent: (formData: ICreateEventFormData) => void;
+  onSubmit: (formData: ICreateEventFormData) => void;
   reserveDate: Date;
+  isEdit: boolean;
   setReserveDate: (date: Date) => void;
-  setEventStartTime: (startTime: any) => void;
-  eventStartTime: Dayjs | null;
-  setEventEndTime: (endTime: any) => void;
-  eventEndTime: Dayjs | null;
+  eventInitialValues?: IEvent | null;
 }
 export interface ICreateEventFormData {
   title: string;
@@ -15,7 +13,8 @@ export interface ICreateEventFormData {
   location: string;
   type: string;
   date: Date;
-  time: string;
+  startTime: Date | null;
+  endTime: Date | null;
   image: any;
   vacancies: number;
   ticketsPerPerson: number;

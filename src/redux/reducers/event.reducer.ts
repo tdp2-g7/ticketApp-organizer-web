@@ -16,12 +16,14 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_CREATE_REQUESTED:
     case constants.ON_GET_ALL_BY_USER_ID_REQUESTED:
     case constants.ON_GET_DETAILS_REQUESTED:
+    case constants.ON_EDIT_REQUESTED:
       return {
         ...state,
         loading: true,
       };
 
     case constants.ON_CREATE_SUCCEEDED:
+    case constants.ON_EDIT_SUCCEEDED:
       return {
         ...state,
         loading: false,
@@ -43,6 +45,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_CREATE_FAILED:
     case constants.ON_GET_ALL_BY_USER_ID_FAILED:
     case constants.ON_GET_DETAILS_FAILED:
+    case constants.ON_EDIT_FAILED:
       return {
         ...state,
         loading: false,

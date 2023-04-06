@@ -18,6 +18,14 @@ const EventDetailsContainer: FunctionComponent = () => {
     }
   }, [dispatch]);
 
-  return <Layout>{eventData && <EventDetails event={eventData} />}</Layout>;
+  return (
+    <Layout>
+      {eventData && (
+        <EventDetails
+          event={eventData}
+        />
+      )}
+    </Layout>
+  );
 };
 export default EventDetailsContainer;

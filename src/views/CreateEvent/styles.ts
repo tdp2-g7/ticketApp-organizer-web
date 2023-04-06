@@ -78,3 +78,8 @@ export const TicketsPerUserContainer = styled.div`
 export const ColumnContainer = styled.div`
   flex-direction: column;
 `;
+
+export const TimeContainer = styled.div`
+  padding-right: 10px;
+  width: 40%;
+`;
