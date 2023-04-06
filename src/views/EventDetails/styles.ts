@@ -75,8 +75,8 @@ export const Subtitle = styled.p`
 `;
 
 export const InfoContainer = styled.div`
-  width: 100%;
-  margin: 0 0 0 2%;
+  width: 90%;
+  margin: 0 0 3% 2%;
 `;
 
 export const Text = styled.p`
@@ -87,28 +87,53 @@ export const Text = styled.p`
 
 export const CalendarIcon = styled(CalendarMonth)`
   transform: scale(0.75);
-  margin: 5px 0 0 10px;
+  margin: 0 0 0 10px;
 `;
 
 export const LocationIcon = styled(PlaceOutlined)`
   transform: scale(0.75);
-  margin: 5px 0 0 10px;
+  margin: 0 0 0 10px;
 `;
 
 export const LocationAndTimeRowContainer = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const PeopleIcon = styled(GroupsOutlined)`
   transform: scale(0.75);
-  margin: 5px 0 0 10px;
+  margin: 0 0 0 10px;
 `;
 
 export const PersonIcon = styled(PersonOutlineOutlined)`
   transform: scale(0.75);
-  margin: 5px 0 0 10px;
+  margin: 0 0 0 10px;
+`;
+
+export const RowContainerVacancies = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const TextOccupied = styled.p`
+  font-size: 11px;
+  margin: 0 5px 0 0;
+  color: ${COLORS.mineShaft};
+  align-items: center;
+`;
+
+export const DivOccupied = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
+export const FAQsText = styled.p`
+  font-size: 15px;
+  margin: 0 5px 0 0;
+  color: ${COLORS.mineShaft};
+  white-space: pre-line;
 `;

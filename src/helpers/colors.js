@@ -13,6 +13,8 @@ const COLORS = {
   greyMystic: '#6A6A6A',
   mineShaft: '#272727',
   ghost: '#CACDD3',
+  redMandy: '#E24F4F',
+  greenLimeade: '#2CAA00',
 
 };
 

@@ -37,11 +37,11 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
       {!(events.length > 0) ? (
         <EmptyContainer>
           <EventBusyIcon />
-          <Title> You don't have any event </Title>
+          <Title> Aún no creaste ningún evento </Title>
         </EmptyContainer>
       ) : (
         <>
-          <Title>Your Events</Title>
+          <Title>Tus eventos</Title>
           <EventsContainer>
             {events.map((event) => (
               <EventCard event={event} />
@@ -63,9 +63,9 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
       <RectangleContainer>
         <CreateEventImage src={CreateEventImg} alt='logo' />
         <ColumnContainer>
-          <MakeEventTitle>Make your own Event</MakeEventTitle>
+          <MakeEventTitle>Crea tu propio evento</MakeEventTitle>
           <MakeEventText>
-            Now you can create your event very easily
+            Ahora puedes crear tu evento muy fácilmente
           </MakeEventText>
           <HeaderLink href='/createEvent'>Crear eventos</HeaderLink>
         </ColumnContainer>

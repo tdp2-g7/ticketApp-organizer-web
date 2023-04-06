@@ -8,11 +8,9 @@ import Layout from '../views/Layout/Layout';
 
 const EventDetailsContainer: FunctionComponent = () => {
   const { eventData } = useTypedSelector((state) => state.event);
-  console.log('🚀 ~ eventData:', eventData);
   const dispatch = useDispatch();
   const params = useParams();
   const eventId = params.id;
-  console.log('🚀 ~ eventId:', eventId);
 
   useEffect(() => {
     if (eventId) {

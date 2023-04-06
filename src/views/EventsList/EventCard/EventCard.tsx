@@ -19,6 +19,13 @@ import { numToMonth } from '../../../helpers/shortDates';
 const EventCard = (props: any) => {
   const { event } = props;
 
+  const minutes = () => {
+    if (new Date(event.startTime).getMinutes() < 10) {
+      return `${new Date(event.startTime).getMinutes()}0`;
+    }
+    return new Date(event.startTime).getMinutes();
+  };
+
   return (
     <EventContainer
       key={event.eventId}
@@ -31,9 +38,11 @@ const EventCard = (props: any) => {
       )}
       <InfoContainer>
         <DateContainer>
-          <MonthLabel>{numToMonth(event.date.getMonth)}</MonthLabel>
-          <DayLabel>{event.date.getDate}</DayLabel>
-          <HourLabel>{event.time.split(' ')[0]}</HourLabel>
+          <MonthLabel>{numToMonth(new Date(event.date).getMonth())}</MonthLabel>
+          <DayLabel>{new Date(event.date).getDate()}</DayLabel>
+          <HourLabel>
+            {new Date(event.startTime).getHours()}:{minutes()}
+          </HourLabel>
         </DateContainer>
         <TextContainer>
           <EventTitle>{event.title}</EventTitle>

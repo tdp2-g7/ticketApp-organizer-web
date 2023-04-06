@@ -4,7 +4,8 @@ export interface IEvent {
   location: string;
   type: string;
   date: Date;
-  time: string;
+  startTime: Date | null;
+  endTime: Date | null;
   image: any;
   vacancies: number;
   ticketsPerPerson: number;
