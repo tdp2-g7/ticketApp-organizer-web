@@ -7,37 +7,33 @@ import { Modal } from '../../../components/Modal/Modal';
 import TimePicker from '../../../components/TimePicker/TimePicker';
 
 const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
-  const { schedule, modalSchedule, setSchedule, onClose } = props;
-  const [quantity, setQuantity] = useState(1);
-  console.log('🚀 ~ setSchedule:', setSchedule);
-  console.log('🚀 ~ schedule:', schedule);
-  console.log('🚀 ~ modalSchedule:', modalSchedule);
+  const {
+    schedule, modalSchedule, setSchedule, onClose,
+  } = props;
+  const [numbers, setNumbers] = useState<any>([1]);
 
-  const renderRow = () => (
-    <>
+  const renderRow = (number: number) => (
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       <TimeContainer>
         <Field
-          name={`startTime_${quantity}`}
+          name={`startTime_${number}`}
           render={(fieldRenderProps) => (
             <TimePicker label="Hora de inicio" {...fieldRenderProps} />
-          )}
-        />
+          )} />
       </TimeContainer>
       <TimeContainer>
         <Field
-          name={`endTime_${quantity}`}
+          name={`endTime_${number}`}
           render={(fieldRenderProps) => (
             <TimePicker label="Hora de fin" {...fieldRenderProps} />
-          )}
-        />
+          )} />
       </TimeContainer>
       <Field
         render={Input}
         label="Descripcion"
-        name={`description_${quantity}`}
-        type="text"
-      />
-    </>
+        name={`description_${number}`}
+        type="text" />
+    </div>
   );
 
   return (
@@ -49,11 +45,19 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
       <Form
         onSubmit={(values) => console.log(values)}
         render={({ handleSubmit }) => (
-          <CustomForm onSubmit={handleSubmit}>
-            {renderRow()}
-          </CustomForm>
+          <>
+            <CustomForm onSubmit={handleSubmit}>
+              <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                {numbers.map((_: any, index: number) => renderRow(index))}
+              </div>
+            </CustomForm>
+            <button style={{ display: 'flex' }} type="submit">
+              SUBMIT
+            </button>
+          </>
         )}
       />
+      <div onClick={() => setNumbers([...numbers, 1])}>AGREGAR</div>
     </Modal>
   );
 };
