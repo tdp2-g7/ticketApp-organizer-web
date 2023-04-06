@@ -8,6 +8,7 @@ export interface ICreateEventProps {
   eventStartTime: Dayjs | null;
   setEventEndTime: (endTime: any) => void;
   eventEndTime: Dayjs | null;
+  setModalSchedule: (modalSchedule: boolean) => void;
 }
 export interface ICreateEventFormData {
   title: string;

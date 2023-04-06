@@ -5,13 +5,16 @@ import { onCreateEventRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
+import ScheduleComponent from '../views/CreateEvent/Schedule/Schedule';
 
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const [reserveDate, setReserveDate] = useState(new Date());
   // eslint-disable-next-line max-len
   const [eventStartTime, setEventStartTime] = useState<Dayjs | null>(dayjs((new Date()).toDateString()));
+  const [reserveDate, setReserveDate] = useState(new Date());
   const [eventEndTime, setEventEndTime] = useState<Dayjs | null>(null);
+  const [modalSchedule, setModalSchedule] = useState(false);
+  const [schedule, setSchedule] = useState<any>([]);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -49,6 +52,13 @@ const CreateEventContainer: FunctionComponent = () => {
         eventStartTime={eventStartTime}
         setEventEndTime={setEventEndTime}
         eventEndTime={eventEndTime}
+        setModalSchedule={setModalSchedule}
+      />
+      <ScheduleComponent
+        schedule={schedule}
+        setSchedule={setSchedule}
+        modalSchedule={modalSchedule}
+        onClose={() => setModalSchedule(false)}
       />
     </Layout>
   );
