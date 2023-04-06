@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import ProgressBar from '../../components/ProgressBar';
 import {
   ArrowLeftIcon,
@@ -22,16 +22,23 @@ import {
   TextOccupied,
   DivOccupied,
   FAQsText,
+  EditOutlinedIcon,
+  ButtonContainer,
+  Button,
+  RowContainerTitleEdit,
 } from './styles';
 import { IEventDetailsProps } from './types';
 import { numToLargeMonth } from '../../helpers/longDates';
 import { ColumnContainer } from '../CreateEvent/styles';
+import { Modal } from '../../components/Modal/Modal';
 
 const EventDetails: FunctionComponent<IEventDetailsProps> = (
   props: IEventDetailsProps,
 ) => {
   const { event } = props;
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const renderPictures = () => (
     <CustomImg src={`data:image/jpeg;base64,${event.image}`} />
@@ -53,13 +60,34 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     return `${hours}:${minutes}`;
   };
 
+  const renderEditModal = () => (
+    <Modal
+      isOpen={isModalOpen}
+      title='Editar evento'
+      onClose={() => {
+        setIsModalOpen(false);
+      }}
+    >
+      <>
+        <Title>Editar evento</Title>
+      </>
+    </Modal>
+  );
+
   return (
     <>
+      {renderEditModal()}
       <RowContainer onClick={() => navigate('/')}>
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
       </RowContainer>
-      <Title>{event.title}</Title>
+      <RowContainerTitleEdit>
+        <Title>{event.title}</Title>
+        <ButtonContainer>
+          <EditOutlinedIcon />
+          <Button onClick={() => setIsModalOpen(true)}>Editar</Button>
+        </ButtonContainer>
+      </RowContainerTitleEdit>
       <ImagesContainer>
         <ArrowLeftIcon />
         {renderPictures()}

@@ -7,6 +7,7 @@ import {
   PlaceOutlined,
   GroupsOutlined,
   PersonOutlineOutlined,
+  EditOutlined,
 } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 
@@ -75,7 +76,7 @@ export const Subtitle = styled.p`
 `;
 
 export const InfoContainer = styled.div`
-  width: 90%;
+  width: 95%;
   margin: 0 0 3% 2%;
 `;
 
@@ -136,4 +137,36 @@ export const FAQsText = styled.p`
   margin: 0 5px 0 0;
   color: ${COLORS.mineShaft};
   white-space: pre-line;
+`;
+
+export const EditOutlinedIcon = styled(EditOutlined)`
+  color: ${COLORS.lightViolet};
+  transform: scale(0.8);
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin: 0 10px 10px 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: ${COLORS.lightViolet};
+  width: 80px;
+  cursor: pointer;
+`;
+
+export const Button = styled.div`
+  margin-top: 3px;
+  font-size: 15px;
+  background-color: transparent;
+  color: ${COLORS.lightViolet};
+`;
+
+export const RowContainerTitleEdit = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
