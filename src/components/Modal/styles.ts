@@ -16,6 +16,8 @@ export const CustomModal = styled(Modal)`
     box-shadow: 0 2px 4px rgba(0,0,0,0.18);
     min-width: 800px;
     min-height: 800px;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const CustomCloseIcon = styled(CloseIcon)`
