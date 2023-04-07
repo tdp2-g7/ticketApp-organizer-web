@@ -17,3 +17,7 @@ export interface ITimePickerProps {
 export interface IFormGroupProps {
   $spacing: boolean;
 }
+
+export interface IComponentProps {
+  error?: boolean;
+}

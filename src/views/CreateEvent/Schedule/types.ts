@@ -1,6 +1,5 @@
 export interface IScheduleProps {
   onClose: () => void;
-  schedule: any;
-  setSchedule: (schedule: any) => void;
+  onSubmit: any;
   modalSchedule: boolean;
 }

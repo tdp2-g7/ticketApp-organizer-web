@@ -10,7 +10,9 @@ import ScheduleComponent from '../views/CreateEvent/Schedule/Schedule';
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   // eslint-disable-next-line max-len
-  const [eventStartTime, setEventStartTime] = useState<Dayjs | null>(dayjs((new Date()).toDateString()));
+  const [eventStartTime, setEventStartTime] = useState<Dayjs | null>(
+    dayjs(new Date().toDateString()),
+  );
   const [reserveDate, setReserveDate] = useState(new Date());
   const [eventEndTime, setEventEndTime] = useState<Dayjs | null>(null);
   const [modalSchedule, setModalSchedule] = useState(false);
@@ -34,14 +36,33 @@ const CreateEventContainer: FunctionComponent = () => {
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
-        startTime: eventStartTime && new Date(eventStartTime.format('YYYY-MM-DDTHH:mm:ss')),
-        endTime: eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
+        startTime:
+          eventStartTime
+          && new Date(eventStartTime.format('YYYY-MM-DDTHH:mm:ss')),
+        endTime:
+          eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
+        schedule,
       };
 
       // TODO Change userID for organizerId
       dispatch(onCreateEventRequested({ ...body, userId: '0' }));
     }
   };
+
+  const onSubmitSchedule = (formData: any) => {
+    const arr = Object.entries(formData)
+      .filter(([key]) => key.includes('description'))
+      .map(([key, value]) => {
+        const number = key.split('_')[1];
+        return {
+          description: value,
+          starttime: formData[`startTime_${number}`],
+          endtime: formData[`endTime_${number}`],
+        };
+      });
+    setSchedule(arr);
+  };
+
   return (
     <Layout>
       <CreateEvent
@@ -55,8 +76,7 @@ const CreateEventContainer: FunctionComponent = () => {
         setModalSchedule={setModalSchedule}
       />
       <ScheduleComponent
-        schedule={schedule}
-        setSchedule={setSchedule}
+        onSubmit={onSubmitSchedule}
         modalSchedule={modalSchedule}
         onClose={() => setModalSchedule(false)}
       />

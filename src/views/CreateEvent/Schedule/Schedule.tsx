@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import _ from 'lodash';
 import Input from 'src/components/Input/Input';
+import { requiredValidation } from 'src/helpers/validations';
 import { IScheduleProps } from './types';
 import {
   CustomForm,
@@ -17,10 +18,9 @@ import TimePicker from '../../../components/TimePicker/TimePicker';
 
 const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
   const {
-    schedule, modalSchedule, setSchedule, onClose,
+    onSubmit, modalSchedule, onClose,
   } = props;
   const [numbers, setNumbers] = useState<any>([{ id: 1 }]);
-
   const [number, setNumber] = useState<number>(2);
 
   const handleDeleteRow = (id: number, form: any) => {
@@ -43,6 +43,7 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
     <RowDiv key={item.id}>
       <TimeContainer>
         <Field
+          validate={requiredValidation}
           name={`startTime_${item.id}`}
           render={(fieldRenderProps) => (
             <TimePicker label="Hora de inicio" {...fieldRenderProps} />
@@ -51,6 +52,7 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
       </TimeContainer>
       <TimeContainer>
         <Field
+          validate={requiredValidation}
           name={`endTime_${item.id}`}
           render={(fieldRenderProps) => (
             <TimePicker label="Hora de fin" {...fieldRenderProps} />
@@ -58,6 +60,7 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
         />
       </TimeContainer>
       <Field
+        validate={requiredValidation}
         render={Input}
         label="Descripcion"
         name={`description_${item.id}`}
@@ -78,7 +81,7 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
       title="Crear cronograma"
     >
       <Form
-        onSubmit={(values) => console.log(values)}
+        onSubmit={onSubmit}
         render={({ handleSubmit, form }) => (
           <CustomForm onSubmit={handleSubmit} id="myform">
             <RowDiv>
@@ -94,7 +97,8 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
             </RowDiv>
             <SubmitButtonContainer>
               <SubmitButton
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setNumber(number + 1);
                   setNumbers([...numbers, { id: number }]);
                 }}
