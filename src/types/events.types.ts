@@ -11,6 +11,7 @@ export interface IEvent {
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;
+  schedule?: ISchedule[];
   userId?: string;
   eventId?: string;
 }
@@ -21,4 +22,10 @@ export interface IEventDefaultState {
   data: any;
   maxPage: number;
   eventData: IEvent | null;
+}
+
+export interface ISchedule {
+  startTime: Date;
+  endTime: Date;
+  description: string;
 }

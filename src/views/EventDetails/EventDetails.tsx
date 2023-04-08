@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import ProgressBar from '../../components/ProgressBar';
+import { Modal } from 'src/components/Modal/Modal';
+import { numToLargeMonth } from 'src/helpers/longDates';
+import ProgressBar from 'src/components/ProgressBar';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -22,15 +24,15 @@ import {
   TextOccupied,
   DivOccupied,
   FAQsText,
+  OpenModalButton,
 } from './styles';
 import { IEventDetailsProps } from './types';
-import { numToLargeMonth } from '../../helpers/longDates';
 import { ColumnContainer } from '../CreateEvent/styles';
 
 const EventDetails: FunctionComponent<IEventDetailsProps> = (
   props: IEventDetailsProps,
 ) => {
-  const { event } = props;
+  const { event, setScheduleModalOpen, scheduleModalOpen } = props;
   const navigate = useNavigate();
 
   const renderPictures = () => (
@@ -53,8 +55,25 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     return `${hours}:${minutes}`;
   };
 
+  const renderScheduleModal = () => (
+    <Modal
+      isOpen={scheduleModalOpen}
+      onClose={() => setScheduleModalOpen(false)}
+      title="Ver cronograma"
+    >
+      {event.schedule?.map((schedule) => (
+        <RowContainer key={schedule.description}>
+          <p>{handleTime(schedule.startTime)}hs</p>
+          <p>{handleTime(schedule.endTime)}hs</p>
+          <p>{schedule.description}</p>
+        </RowContainer>
+      ))}
+    </Modal>
+  );
+
   return (
     <>
+      {renderScheduleModal()}
       <RowContainer onClick={() => navigate('/')}>
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
@@ -69,21 +88,26 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <LocationAndTimeRowContainer>
           <ColumnContainer>
             <Subtitle>Ubicacion y horario</Subtitle>
-            <RowContainer>
+            <RowContainer hasMargin>
               <CalendarIcon />
               <Text>
                 <>
                   {numToLargeMonth(new Date(event.date).getMonth())}{' '}
                   {new Date(event.date).getDate()},{' '}
                   {new Date(event.date).getFullYear()},{' '}
-                  {event.startTime && handleTime(event.startTime)}hs -{' '}
-                  {event.endTime && handleTime(event.endTime)}hs
+                  {event.startTime && handleTime(event.startTime)}hs
+                  {event.endTime && `- ${handleTime(event.endTime)}hs`}
                 </>
               </Text>
+              {event.schedule && (
+                <OpenModalButton onClick={() => setScheduleModalOpen(true)}>
+                  <p>Ver cronograma</p>
+                </OpenModalButton>
+              )}
             </RowContainer>
             <RowContainer>
               <LocationIcon />
-              <Text>{event.location}</Text>
+              <Text>{event.location.label}</Text>
             </RowContainer>
           </ColumnContainer>
           <ColumnContainer>

@@ -9,10 +9,12 @@ import {
   PersonOutlineOutlined,
 } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
+import { IRowProps } from './types';
 
 export const Title = styled.p`
   font-size: 24px;
   margin: 1% 0 0 2%;
+  font-family: 'Poppins';
   font-weight: bold;
   color: ${COLORS.darkViolet};
 `;
@@ -54,16 +56,18 @@ export const BackArrowContainer = styled(ArrowBackIos)`
   cursor: pointer;
 `;
 
-export const RowContainer = styled.div`
+export const RowContainer = styled.div<IRowProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: ${(props) => (props.hasMargin ? '20px' : '0')};
 `;
 
 export const BackText = styled.p`
   font-size: 12px;
   margin: 5px 0 0 0;
   color: ${COLORS.greyMystic};
+  font-family: 'Poppins';
   cursor: pointer;
 `;
 
@@ -72,6 +76,7 @@ export const Subtitle = styled.p`
   margin: 15px 0 7px 0;
   font-weight: bold;
   color: ${COLORS.mineShaft};
+  font-family: 'Poppins';
 `;
 
 export const InfoContainer = styled.div`
@@ -123,6 +128,7 @@ export const TextOccupied = styled.p`
   font-size: 11px;
   margin: 0 5px 0 0;
   color: ${COLORS.mineShaft};
+  font-family: 'Poppins';
   align-items: center;
 `;
 
@@ -135,5 +141,21 @@ export const FAQsText = styled.p`
   font-size: 15px;
   margin: 0 5px 0 0;
   color: ${COLORS.mineShaft};
+  font-family: 'Poppins';
   white-space: pre-line;
+`;
+
+export const OpenModalButton = styled.div`
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid ${COLORS.lightViolet};
+  margin-left: 10px;
+  cursor: pointer;
+  
+  > p {
+    font-size: 14px;
+    font-family: 'Poppins';
+    color: ${COLORS.lightViolet};
+    margin: 0;
+  }
 `;
