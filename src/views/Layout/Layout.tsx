@@ -17,6 +17,7 @@ import { ILayoutProps } from './types';
 
 const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
   const { children } = props;
+
   const dispatch = useDispatch();
 
   const onClickLogout = () => {
@@ -37,7 +38,7 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
           <HeaderLink href='/profile'>Perfil</HeaderLink>
           <LogoutContainer>
             <HeaderLink type='button' onClick={() => onClickLogout()}>
-              Logout
+              Salir
             </HeaderLink>
           </LogoutContainer>
         </RightContainer>

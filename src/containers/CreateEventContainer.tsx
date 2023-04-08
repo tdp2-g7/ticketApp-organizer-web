@@ -5,18 +5,24 @@ import { onCreateEventRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
+import ScheduleComponent from '../views/CreateEvent/Schedule/Schedule';
 
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const [reserveDate, setReserveDate] = useState(new Date());
-  const [location, setLocation] = useState<any>({});
   // eslint-disable-next-line max-len
-  const [eventStartTime, setEventStartTime] = useState<Dayjs | null>(dayjs((new Date()).toDateString()));
+  const [eventStartTime, setEventStartTime] = useState<Dayjs | null>(
+    dayjs(new Date().toDateString()),
+  );
+  const [reserveDate, setReserveDate] = useState(new Date());
   const [eventEndTime, setEventEndTime] = useState<Dayjs | null>(null);
+  const [modalSchedule, setModalSchedule] = useState(false);
+  const [location, setLocation] = useState<any>({});
+  const [schedule, setSchedule] = useState<any>([]);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
+    // eslint-disable-next-line func-names
     reader.onload = function () {
       resolve(reader.result);
     };
@@ -32,8 +38,13 @@ const CreateEventContainer: FunctionComponent = () => {
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
-        startTime: eventStartTime && new Date(eventStartTime.format('YYYY-MM-DDTHH:mm:ss')),
-        endTime: eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
+        startTime:
+          eventStartTime
+          && new Date(eventStartTime.format('YYYY-MM-DDTHH:mm:ss')),
+        endTime:
+          eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
+        schedule,
+        // TODO: Change this for the real location
         location: {
           lat: location.y,
           lng: location.x,
@@ -45,6 +56,22 @@ const CreateEventContainer: FunctionComponent = () => {
       dispatch(onCreateEventRequested({ ...body, userId: '0' }));
     }
   };
+
+  const onSubmitSchedule = (formData: any) => {
+    const arr = Object.entries(formData)
+      .filter(([key]) => key.includes('description'))
+      .map(([key, value]) => {
+        const number = key.split('_')[1];
+        return {
+          description: value,
+          startTime: formData[`startTime_${number}`],
+          endTime: formData[`endTime_${number}`],
+        };
+      });
+    setSchedule(arr);
+    setModalSchedule(false);
+  };
+
   return (
     <Layout>
       <CreateEvent
@@ -57,6 +84,14 @@ const CreateEventContainer: FunctionComponent = () => {
         eventStartTime={eventStartTime}
         setEventEndTime={setEventEndTime}
         eventEndTime={eventEndTime}
+        setModalSchedule={setModalSchedule}
+        schedule={schedule}
+      />
+      <ScheduleComponent
+        onSubmit={onSubmitSchedule}
+        modalSchedule={modalSchedule}
+        onClose={() => setModalSchedule(false)}
+        schedule={schedule}
       />
     </Layout>
   );

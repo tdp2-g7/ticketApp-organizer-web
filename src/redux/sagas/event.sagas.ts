@@ -2,12 +2,14 @@ import { AnyAction } from 'redux';
 import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
-import { createEvent, getEventsByUserId } from '../../services/event.services';
+import { createEvent, getDetails, getEventsByUserId } from '../../services/event.services';
 import {
   onCreateEventFailed,
   onCreateEventSucceeded,
   onGetAllEventsByUserIdFailed,
   onGetAllEventsByUserIdSucceeded,
+  onGetDetailsFailed,
+  onGetDetailsSucceeded,
 } from '../actions/event.actions';
 import * as constants from '../constants/event.constants';
 
@@ -29,9 +31,19 @@ export function* getAllEventsByUserId(action: AnyAction): Generator {
   }
 }
 
+export function* getEventDetails(action: AnyAction): Generator {
+  try {
+    const data: any = yield call(getDetails, action.eventId);
+    yield put(onGetDetailsSucceeded(data));
+  } catch (error) {
+    yield put(onGetDetailsFailed(error));
+  }
+}
+
 export function* watchEvents(): Generator {
   yield all([
-    takeLatest(constants.EVENT_ON_CREATE_REQUESTED, eventCreate),
-    takeLatest(constants.EVENT_ON_GET_ALL_BY_USER_ID_REQUESTED, getAllEventsByUserId),
+    takeLatest(constants.ON_CREATE_REQUESTED, eventCreate),
+    takeLatest(constants.ON_GET_ALL_BY_USER_ID_REQUESTED, getAllEventsByUserId),
+    takeLatest(constants.ON_GET_DETAILS_REQUESTED, getEventDetails),
   ]);
 }

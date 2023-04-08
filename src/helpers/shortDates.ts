@@ -1,9 +1,9 @@
-const numToMonth = (num: number) => {
+export const numToMonth = (num: number) => {
   const months = [
-    'JAN',
+    'ENE',
     'FEB',
     'MAR',
-    'APR',
+    'ABR',
     'MAY',
     'JUN',
     'JUL',
@@ -11,9 +11,8 @@ const numToMonth = (num: number) => {
     'SEP',
     'OCT',
     'NOV',
-    'DEC',
+    'DIC',
   ];
+
   return months[num - 1];
 };
-
-export default numToMonth;

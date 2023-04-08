@@ -23,14 +23,14 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   padding: 8px;
   font-size: 20px;
-  font-weight: bold;
   width: 250px;
-  border: none;
   border-radius: 30px;
   margin-top: 10px;
+  font-family: 'Poppins';
   cursor: pointer;
-  background-color: ${COLORS.violet};
-  color: ${COLORS.white};
+  border: 1px solid ${COLORS.violet};
+  color: ${COLORS.violet};
+  background-color: ${COLORS.white};
 `;
 
 export const Container = styled.div`
@@ -45,6 +45,7 @@ export const Title = styled.p`
   margin-left: 10%;
   font-weight: bold;
   flex: 1;
+  font-family: 'Poppins';
 `;
 
 export const CustomCalendarForm = styled.div`
@@ -61,6 +62,7 @@ export const RowContainer = styled.div`
 
 export const Label = styled.p`
   font-size: 20px;
+  font-family: 'Poppins';
   margin: 0;
 `;
 
@@ -77,4 +79,18 @@ export const TicketsPerUserContainer = styled.div`
 
 export const ColumnContainer = styled.div`
   flex-direction: column;
+`;
+
+export const ActionButton = styled.div`
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 20px;
+  cursor: pointer;
+  border: 1px solid ${COLORS.violet};
+  color: ${COLORS.violet};
+  border-radius: 8px;
+  width: 35%;
+  background: ${COLORS.greyMischka};
 `;
