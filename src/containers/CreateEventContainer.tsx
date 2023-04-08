@@ -25,7 +25,7 @@ const CreateEventContainer: FunctionComponent = () => {
     const imagesBase64: any = [];
     Array.from(formData.images).forEach(async (image: any) => {
       const imageBase64: any = await getBase64Picture(image);
-      imagesBase64.concat(imageBase64.split(',')[1]);
+      await imagesBase64.push(imageBase64.split(',')[1]);
     });
 
     if (imagesBase64) {

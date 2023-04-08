@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
 import useTypedSelector from '../hooks/useTypedSelector';
 import { onEditRequested, onEventDeleteImage, onGetDetailsRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
@@ -11,6 +12,8 @@ const EditEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const [reserveDate, setReserveDate] = useState(new Date());
   const { eventData } = useTypedSelector((state) => state.event);
+  const [modalSchedule, setModalSchedule] = useState(false);
+  const [schedule, setSchedule] = useState<any>([]);
 
   const params = useParams();
   const eventId = params.id;
@@ -68,6 +71,21 @@ const EditEventContainer: FunctionComponent = () => {
     }
   };
 
+  const onSubmitSchedule = (formData: any) => {
+    const arr = Object.entries(formData)
+      .filter(([key]) => key.includes('description'))
+      .map(([key, value]) => {
+        const number = key.split('_')[1];
+        return {
+          description: value,
+          startTime: formData[`startTime_${number}`],
+          endTime: formData[`endTime_${number}`],
+        };
+      });
+    setSchedule(arr);
+    setModalSchedule(false);
+  };
+
   return (
     <Layout>
       <CreateEvent
@@ -77,6 +95,14 @@ const EditEventContainer: FunctionComponent = () => {
         eventInitialValues={eventData}
         isEdit
         deleteImage={deleteImage}
+        setModalSchedule={setModalSchedule}
+        schedule={schedule}
+      />
+      <ScheduleComponent
+        onSubmit={onSubmitSchedule}
+        modalSchedule={modalSchedule}
+        onClose={() => setModalSchedule(false)}
+        schedule={schedule}
       />
     </Layout>
   );
