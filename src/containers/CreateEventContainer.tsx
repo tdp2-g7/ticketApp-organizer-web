@@ -42,6 +42,12 @@ const CreateEventContainer: FunctionComponent = () => {
         endTime:
           eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
         schedule,
+        // TODO: Change this for the real location
+        location: {
+          lat: 10,
+          lng: 10,
+          label: 'Paseo Colon',
+        },
       };
 
       // TODO Change userID for organizerId
@@ -56,8 +62,8 @@ const CreateEventContainer: FunctionComponent = () => {
         const number = key.split('_')[1];
         return {
           description: value,
-          starttime: formData[`startTime_${number}`],
-          endtime: formData[`endTime_${number}`],
+          startTime: formData[`startTime_${number}`],
+          endTime: formData[`endTime_${number}`],
         };
       });
     setSchedule(arr);

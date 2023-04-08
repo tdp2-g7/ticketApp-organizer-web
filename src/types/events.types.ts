@@ -1,7 +1,8 @@
 export interface IEvent {
   title: string;
   description: string;
-  location: string;
+  // TODO: Change to a more specific type
+  location: any;
   type: string;
   date: Date;
   time: string;
