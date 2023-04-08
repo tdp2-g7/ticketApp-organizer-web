@@ -48,7 +48,7 @@ const EventCard = (props: any) => {
           <EventTitle>{event.title}</EventTitle>
           <RowContainer>
             <PlaceOutlinedIcon />
-            <LocationText>{event.location}</LocationText>
+            <LocationText>{event.location.label}</LocationText>
           </RowContainer>
         </TextContainer>
       </InfoContainer>

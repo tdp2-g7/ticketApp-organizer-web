@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import useTypedSelector from '../hooks/useTypedSelector';
@@ -8,6 +8,7 @@ import Layout from '../views/Layout/Layout';
 
 const EventDetailsContainer: FunctionComponent = () => {
   const { eventData } = useTypedSelector((state) => state.event);
+  const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
   const eventId = params.id;
@@ -16,16 +17,17 @@ const EventDetailsContainer: FunctionComponent = () => {
     if (eventId) {
       dispatch(onGetDetailsRequested(eventId));
     }
-  }, [dispatch]);
+  }, [dispatch, eventId]);
 
   return (
     <Layout>
-      {eventData && (
-        <EventDetails
-          event={eventData}
+      {eventData
+        && <EventDetails event={eventData}
+          scheduleModalOpen={scheduleModalOpen}
+          setScheduleModalOpen={setScheduleModalOpen}
         />
-      )}
-    </Layout>
+      }
+      </Layout>
   );
 };
 export default EventDetailsContainer;

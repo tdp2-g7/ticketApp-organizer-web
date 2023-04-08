@@ -25,6 +25,7 @@ import {
   ImageCard,
   RemoveIcon,
   RowImage,
+  ActionButton,
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
@@ -34,7 +35,14 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
 ) => {
   const {
-    onSubmit, reserveDate, setReserveDate, eventInitialValues, isEdit, deleteImage,
+    onSubmit,
+    reserveDate,
+    setReserveDate,
+    eventInitialValues,
+    isEdit,
+    deleteImage,
+    setModalSchedule,
+    schedule,
   } = props;
 
   const [imagesFile, setImagesFile] = useState<any>([]);
@@ -47,19 +55,18 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
           onSubmit={onSubmit}
           initialValues={eventInitialValues}
           render={({ handleSubmit }) => (
-            <>
-              <CustomForm onSubmit={handleSubmit}>
-                <Container>
-                  <div>
-                    <Label>Título</Label>
-                    <Field
-                      render={Input}
-                      name='title'
-                      label='Título del evento'
-                      validate={requiredValidation}
-                      type='text'
-                    />
-                  </div>
+            <CustomForm onSubmit={handleSubmit}>
+              <Container>
+                <div>
+                  <Label>Título</Label>
+                  <Field
+                    render={Input}
+                    name="title"
+                    label="Título del evento"
+                    validate={requiredValidation}
+                    type="text"
+                  />
+                </div>
                   <RowContainer>
                     <CustomCalendarForm>
                       <Label>Fecha</Label>
@@ -123,6 +130,12 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                       type='textarea'
                     />
                   </div>
+                  <div>
+                  <Label>Cronograma</Label>
+                  <ActionButton onClick={() => setModalSchedule(true)}>
+                    {schedule.length ? 'Editar' : 'Agregar'} cronograma
+                  </ActionButton>
+                </div>
                   <div>
                     <Label>Tipo de evento</Label>
                     <Field
@@ -225,7 +238,6 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   </Button>
                 </ButtonContainer>
               </CustomForm>
-            </>
           )}
         />
       </FormContainer>

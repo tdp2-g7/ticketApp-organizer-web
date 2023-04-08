@@ -1,4 +1,4 @@
-import { IEvent } from '../../types/events.types';
+import { ISchedule, IEvent } from 'src/types/events.types';
 
 export interface ICreateEventProps {
   onSubmit: (formData: any) => void;
@@ -7,6 +7,8 @@ export interface ICreateEventProps {
   setReserveDate: (date: Date) => void;
   eventInitialValues?: IEvent | null;
   deleteImage?: (image: any) => void;
+  setModalSchedule: (modalSchedule: boolean) => void;
+  schedule: ISchedule[];
 }
 export interface ICreateEventFormData {
   title: string;

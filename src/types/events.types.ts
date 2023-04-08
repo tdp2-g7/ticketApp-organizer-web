@@ -1,7 +1,8 @@
 export interface IEvent {
   title: string;
   description: string;
-  location: string;
+  // TODO: Change to a more specific type
+  location: any;
   type: string;
   date: Date;
   startTime: Date | null;
@@ -10,6 +11,7 @@ export interface IEvent {
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;
+  schedule?: ISchedule[];
   userId?: string;
   eventId?: string;
 }
@@ -20,4 +22,10 @@ export interface IEventDefaultState {
   data: any;
   maxPage: number;
   eventData: IEvent | null;
+}
+
+export interface ISchedule {
+  startTime: Date;
+  endTime: Date;
+  description: string;
 }
