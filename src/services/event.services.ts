@@ -11,3 +11,8 @@ export async function getEventsByUserId(data: any): Promise<any> {
   const response = await get(`/events/organizer/${data.userId}?page=${data.page}&offset=${data.offset}`);
   return response;
 }
+
+export async function getDetails(eventId: string): Promise<any> {
+  const response = await get(`/events/${eventId}`);
+  return response;
+}

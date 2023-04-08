@@ -5,7 +5,8 @@ export interface IEvent {
   location: any;
   type: string;
   date: Date;
-  time: string;
+  startTime: Date | null;
+  endTime: Date | null;
   image: any;
   vacancies: number;
   ticketsPerPerson: number;
@@ -19,4 +20,5 @@ export interface IEventDefaultState {
   events: IEvent[];
   data: any;
   maxPage: number;
+  eventData: IEvent | null;
 }
