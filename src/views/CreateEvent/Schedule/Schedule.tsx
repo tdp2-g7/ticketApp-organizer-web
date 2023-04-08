@@ -101,36 +101,32 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
       <Form
         onSubmit={onSubmit}
         initialValues={scheduleData}
-        render={({ handleSubmit, form, values }) => {
-          console.log('🚀 ~ values:', values);
-
-          return (
-            <CustomForm onSubmit={handleSubmit} id="myform">
-              <RowDiv>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
-                  }}
-                >
-                  {numbers.map((item: any) => renderRow(item, form))}
-                </div>
-              </RowDiv>
-              <SubmitButtonContainer>
-                <SubmitButton
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setNumber(number + 1);
-                    setNumbers([...numbers, { id: number }]);
-                  }}
-                >
-                  Agregar
-                </SubmitButton>
-              </SubmitButtonContainer>
-            </CustomForm>
-          );
-        }}
+        render={({ handleSubmit, form }) => (
+          <CustomForm onSubmit={handleSubmit} id="myform">
+            <RowDiv>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
+                }}
+              >
+                {numbers.map((item: any) => renderRow(item, form))}
+              </div>
+            </RowDiv>
+            <SubmitButtonContainer>
+              <SubmitButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  setNumber(number + 1);
+                  setNumbers([...numbers, { id: number }]);
+                } }
+              >
+                Agregar
+              </SubmitButton>
+            </SubmitButtonContainer>
+          </CustomForm>
+        )}
       />
       <SubmitButtonContainer>
         <SubmitButton type="submit" form="myform">
