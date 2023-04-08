@@ -1,4 +1,5 @@
 import { Dayjs } from 'dayjs';
+import { ISchedule } from 'src/types/events.types';
 
 export interface ICreateEventProps {
   onCreateEvent: (formData: ICreateEventFormData) => void;
@@ -8,6 +9,8 @@ export interface ICreateEventProps {
   eventStartTime: Dayjs | null;
   setEventEndTime: (endTime: any) => void;
   eventEndTime: Dayjs | null;
+  setModalSchedule: (modalSchedule: boolean) => void;
+  schedule: ISchedule[];
 }
 export interface ICreateEventFormData {
   title: string;

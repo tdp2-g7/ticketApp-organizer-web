@@ -18,6 +18,7 @@ export const CustomInput = styled(TextField)`
   label {
     display: flex;
     font-size: 14px;
+    font-family: 'Poppins';
     span {
       display: none;
     }
@@ -27,6 +28,7 @@ export const CustomInput = styled(TextField)`
   }
   .MuiInputBase-input {
     font-size: 14px;
+    font-family: 'Poppins';
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill::first-line,
