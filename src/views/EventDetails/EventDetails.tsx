@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 
 import ProgressBar from '../../components/ProgressBar';
 import {
@@ -41,8 +41,10 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
   } = props;
   const navigate = useNavigate();
 
+  const [currentImage, setCurrentImage] = useState(0);
+
   const renderPictures = () => (
-    <CustomImg src={`data:image/jpeg;base64,${event.image}`} />
+    <CustomImg src={`data:image/jpeg;base64,${event.images[currentImage]}`} />
   );
 
   const handleTime = (time: Date) => {
@@ -61,6 +63,22 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     return `${hours}:${minutes}`;
   };
 
+  const prevHandler = () => {
+    if (currentImage - 1 < 0) {
+      setCurrentImage(event.images.length - 1);
+    } else {
+      setCurrentImage(currentImage - 1);
+    }
+  };
+
+  const nextHandler = () => {
+    if (currentImage + 1 === event.images.length) {
+      setCurrentImage(0);
+    } else {
+      setCurrentImage(currentImage + 1);
+    }
+  };
+
   return (
     <>
       <RowContainer onClick={() => navigate('/')}>
@@ -75,9 +93,9 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         </ButtonContainer>
       </RowContainerTitleEdit>
       <ImagesContainer>
-        <ArrowLeftIcon />
+        <ArrowLeftIcon onClick={() => prevHandler()}/>
         {renderPictures()}
-        <ArrowRightIcon />
+        <ArrowRightIcon onClick={() => nextHandler()} />
       </ImagesContainer>
       <InfoContainer>
         <LocationAndTimeRowContainer>
@@ -115,10 +133,10 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
                 {event.vacancies / 5}/{event.vacancies} ocupado
               </TextOccupied>
             </DivOccupied>
-            <RowContainer>
+            <RowContainerVacancies>
               <Text>{event.ticketsPerPerson} entradas por persona max</Text>
               <PersonIcon />
-            </RowContainer>
+            </RowContainerVacancies>
           </ColumnContainer>
         </LocationAndTimeRowContainer>
         <Subtitle>Descripcion e informacion</Subtitle>

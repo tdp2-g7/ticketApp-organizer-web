@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
 import Input from '../../components/Input/Input';
@@ -19,6 +19,12 @@ import {
   TicketsPerUserContainer,
   ColumnContainer,
   TimeContainer,
+  CustomImg,
+  ImagesRowContainer,
+  ImagesToEditContainer,
+  ImageCard,
+  RemoveIcon,
+  RowImage,
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
@@ -28,12 +34,14 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
 ) => {
   const {
-    onSubmit, reserveDate, setReserveDate, eventInitialValues, isEdit,
+    onSubmit, reserveDate, setReserveDate, eventInitialValues, isEdit, deleteImage,
   } = props;
+
+  const [imagesFile, setImagesFile] = useState<any>([]);
 
   return (
     <>
-      <Title>{ isEdit ? 'Editar evento' : 'Crear evento' }</Title>
+      <Title>{isEdit ? 'Editar evento' : 'Crear evento'}</Title>
       <FormContainer>
         <Form
           onSubmit={onSubmit}
@@ -171,21 +179,50 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   </div>
                   <ColumnContainer>
                     <Label>Imagenes</Label>
-                    {/* <Field name='image' validate={requiredValidation}>
+                    <Field name='images' validate={requiredValidation}>
                       {({ input: { value, onChange, ...input } }) => (
                         <input
                           {...input}
+                          multiple
                           type='file'
-                          onChange={({ target }) => onChange(target.files)}
+                          onChange={({ target }) => {
+                            if (target.files) {
+                              const urls = Array.from(target.files).map(
+                                (file) => URL.createObjectURL(file),
+                              );
+                              setImagesFile([...imagesFile, ...urls]);
+                            }
+                            onChange(target.files);
+                          }}
                           // instead of the default target.value
                           {...props}
                         />
                       )}
-                    </Field> */}
+                    </Field>
+                    <ImagesRowContainer>
+                      {imagesFile.map((image: any) => (
+                        <CustomImg src={image} />
+                      ))}
+                    </ImagesRowContainer>
+                    <ImagesToEditContainer>
+                      {eventInitialValues
+                        && eventInitialValues.images.map((image: any) => (
+                          <RowImage>
+                            <ImageCard src={`data:image/jpeg;base64,${image}`} />
+                            <RemoveIcon onClick={() => {
+                              if (deleteImage) {
+                                deleteImage(image);
+                              }
+                            }}/>
+                          </RowImage>
+                        ))}
+                    </ImagesToEditContainer>
                   </ColumnContainer>
                 </Container>
                 <ButtonContainer>
-                  <Button type='submit'>{ isEdit ? 'Editar evento' : 'Crear evento' }</Button>
+                  <Button type='submit'>
+                    {isEdit ? 'Editar evento' : 'Crear evento'}
+                  </Button>
                 </ButtonContainer>
               </CustomForm>
             </>

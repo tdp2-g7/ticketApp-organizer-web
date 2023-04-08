@@ -19,11 +19,16 @@ const CreateEventContainer: FunctionComponent = () => {
   });
 
   const onCreateEvent = async (formData: ICreateEventFormData) => {
-    const image: any = await getBase64Picture(formData.image[0]);
-    if (image) {
+    const imagesBase64: any = [];
+    Array.from(formData.images).forEach(async (image: any) => {
+      const imageBase64: any = await getBase64Picture(image);
+      imagesBase64.concat(imageBase64.split(',')[1]);
+    });
+
+    if (imagesBase64) {
       const body = {
         ...formData,
-        image: image.split(',')[1],
+        images: imagesBase64,
         type: formData.type.toLowerCase(),
         date: reserveDate,
         vacancies: Number(formData.vacancies),
@@ -34,6 +39,7 @@ const CreateEventContainer: FunctionComponent = () => {
       dispatch(onCreateEventRequested({ ...body, userId: '0' }));
     }
   };
+
   return (
     <Layout>
       <CreateEvent

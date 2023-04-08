@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import useTypedSelector from '../hooks/useTypedSelector';
-import { onEditRequested } from '../redux/actions/event.actions';
+import { onEditRequested, onEventDeleteImage, onGetDetailsRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
@@ -10,6 +11,15 @@ const EditEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const [reserveDate, setReserveDate] = useState(new Date());
   const { eventData } = useTypedSelector((state) => state.event);
+
+  const params = useParams();
+  const eventId = params.id;
+
+  useEffect(() => {
+    if (eventId) {
+      dispatch(onGetDetailsRequested(eventId));
+    }
+  }, [dispatch]);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -21,11 +31,19 @@ const EditEventContainer: FunctionComponent = () => {
   });
 
   const onSubmit = async (formData: ICreateEventFormData) => {
-    const image: any = await getBase64Picture(formData.image[0]);
-    if (image) {
+    const imagesBase64: any = [];
+    Array.from(formData.images).forEach(async (image: any) => {
+      const imageBase64: any = await getBase64Picture(image);
+      imagesBase64.push(imageBase64.split(',')[1]);
+    });
+    eventData?.images.forEach((imageBase64: string) => {
+      imagesBase64.push(imageBase64);
+    });
+
+    if (imagesBase64) {
       const body = {
         ...formData,
-        image: image.split(',')[1],
+        images: imagesBase64,
         type: formData.type.toLowerCase(),
         date: reserveDate,
         vacancies: Number(formData.vacancies),
@@ -36,6 +54,20 @@ const EditEventContainer: FunctionComponent = () => {
       dispatch(onEditRequested({ ...body, userId: '0' }));
     }
   };
+
+  const deleteImage = (imageToDelete: any) => {
+    if (eventData) {
+      const newImages = eventData.images.filter(
+        (imageToCompare: any) => imageToCompare !== imageToDelete,
+      );
+      const data = {
+        ...eventData,
+        images: newImages,
+      };
+      dispatch(onEventDeleteImage(data));
+    }
+  };
+
   return (
     <Layout>
       <CreateEvent
@@ -43,7 +75,8 @@ const EditEventContainer: FunctionComponent = () => {
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
         eventInitialValues={eventData}
-        isEdit={true}
+        isEdit
+        deleteImage={deleteImage}
       />
     </Layout>
   );

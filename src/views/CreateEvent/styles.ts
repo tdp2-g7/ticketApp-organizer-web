@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Clear } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 
 export const FormContainer = styled.div`
@@ -77,9 +78,51 @@ export const TicketsPerUserContainer = styled.div`
 
 export const ColumnContainer = styled.div`
   flex-direction: column;
+  width: 100%;
 `;
 
 export const TimeContainer = styled.div`
   padding-right: 10px;
   width: 40%;
+`;
+
+export const CustomImg = styled.img`
+  width: 150px;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 5px;
+  object-fit: cover;
+`;
+
+export const ImagesRowContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  overflow-x: scroll;
+`;
+
+export const ImagesToEditContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
+
+export const ImageCard = styled.img`
+  width: 150px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+`;
+
+export const RemoveIcon = styled(Clear)`
+  background: ${COLORS.warningRed};
+  border-radius: 100px;
+  transform: scale(0.6);
+  margin: 0;
+  color: ${COLORS.white};
+  cursor: pointer;
+`;
+
+export const RowImage = styled.div`
+  display: flex;
+  flex-direction: row;
 `;

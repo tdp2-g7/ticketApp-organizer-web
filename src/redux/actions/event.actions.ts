@@ -85,3 +85,10 @@ export function onEditFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onEventDeleteImage(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_DELETE_IMAGE,
+    data,
+  };
+}

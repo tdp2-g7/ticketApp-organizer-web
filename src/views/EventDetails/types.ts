@@ -12,7 +12,7 @@ export interface IEditEventFormData {
   date: Date;
   startTime: Date;
   endTime: Date;
-  image: any;
+  images: any;
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;

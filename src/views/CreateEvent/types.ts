@@ -1,11 +1,12 @@
 import { IEvent } from '../../types/events.types';
 
 export interface ICreateEventProps {
-  onSubmit: (formData: ICreateEventFormData) => void;
+  onSubmit: (formData: any) => void;
   reserveDate: Date;
   isEdit: boolean;
   setReserveDate: (date: Date) => void;
   eventInitialValues?: IEvent | null;
+  deleteImage?: (image: any) => void;
 }
 export interface ICreateEventFormData {
   title: string;
@@ -15,7 +16,7 @@ export interface ICreateEventFormData {
   date: Date;
   startTime: Date | null;
   endTime: Date | null;
-  image: any;
+  images: any;
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;
