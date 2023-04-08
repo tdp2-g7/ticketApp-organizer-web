@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   ChevronLeft,
   ChevronRight,
@@ -7,9 +7,10 @@ import {
   PlaceOutlined,
   GroupsOutlined,
   PersonOutlineOutlined,
+  AccessTime,
 } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
-import { IRowProps } from './types';
+import { IRowProps, ITextProps } from './types';
 
 export const Title = styled.p`
   font-size: 24px;
@@ -84,10 +85,16 @@ export const InfoContainer = styled.div`
   margin: 0 0 3% 2%;
 `;
 
-export const Text = styled.p`
+export const Text = styled.p<ITextProps>`
   font-size: 15px;
   margin: 0 5px 0 0;
   color: ${COLORS.mineShaft};
+  font-family: 'Poppins';
+
+  ${({ isBold }) => isBold && css`
+    font-weight: bold;
+    margin-left: 14px;
+  `}
 `;
 
 export const CalendarIcon = styled(CalendarMonth)`
@@ -158,4 +165,9 @@ export const OpenModalButton = styled.div`
     color: ${COLORS.lightViolet};
     margin: 0;
   }
+`;
+
+export const ClockIcon = styled(AccessTime)`
+  margin-right: 20px;
+  margin-left: 30px;
 `;

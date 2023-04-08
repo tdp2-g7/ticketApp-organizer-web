@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Modal from 'react-modal';
 import CloseIcon from '@mui/icons-material/Close';
+import { Sizes } from 'src/helpers/sizes';
 import COLORS from '../../helpers/colors';
+import { IModalStyledProps } from './types';
 
-export const CustomModal = styled(Modal)`
+export const CustomModal = styled(Modal)<IModalStyledProps>`
     position: absolute;
     top: 50%;
     left: 50%;
@@ -18,6 +20,21 @@ export const CustomModal = styled(Modal)`
     min-height: 800px;
     display: flex;
     flex-direction: column;
+
+    ${({ size }) => size === Sizes.small && css`
+        min-width: 400px;
+        min-height: auto;
+    `}
+
+    ${({ size }) => size === Sizes.medium && css`
+        min-width: 600px;
+        min-height: auto;
+    `}
+
+    ${({ size }) => size === Sizes.large && css`
+        min-width: 800px;
+        min-height: 800px;
+    `}
 `;
 
 export const CustomCloseIcon = styled(CloseIcon)`

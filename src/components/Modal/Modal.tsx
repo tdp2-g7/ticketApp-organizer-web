@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Sizes } from 'src/helpers/sizes';
 import { ModalProps } from './types';
 import {
   CustomModal, CustomCloseIcon, ModalHeader, Title,
@@ -6,7 +7,7 @@ import {
 
 export const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
   const {
-    children, title, onClose, isOpen,
+    children, title, onClose, isOpen, size = Sizes.medium,
   } = props;
 
   const customStyles = {
@@ -18,6 +19,7 @@ export const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
             isOpen={isOpen}
             ariaHideApp={false}
             style={customStyles}
+            size={size}
         >
             <ModalHeader>
                 <Title>{title}</Title>

@@ -39,6 +39,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     setEventEndTime,
     eventEndTime,
     setModalSchedule,
+    schedule,
   } = props;
 
   return (
@@ -122,7 +123,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 <div>
                   <Label>Cronograma</Label>
                   <ActionButton onClick={() => setModalSchedule(true)}>
-                    Agregar cronograma
+                    {schedule.length ? 'Editar' : 'Agregar'} cronograma
                   </ActionButton>
                 </div>
                 <div />

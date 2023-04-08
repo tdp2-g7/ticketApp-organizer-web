@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Modal } from 'src/components/Modal/Modal';
 import { numToLargeMonth } from 'src/helpers/longDates';
+import { Sizes } from 'src/helpers/sizes';
 import ProgressBar from 'src/components/ProgressBar';
 import {
   ArrowLeftIcon,
@@ -25,6 +26,7 @@ import {
   DivOccupied,
   FAQsText,
   OpenModalButton,
+  ClockIcon,
 } from './styles';
 import { IEventDetailsProps } from './types';
 import { ColumnContainer } from '../CreateEvent/styles';
@@ -60,12 +62,13 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
       isOpen={scheduleModalOpen}
       onClose={() => setScheduleModalOpen(false)}
       title="Ver cronograma"
+      size={Sizes.small}
     >
       {event.schedule?.map((schedule) => (
-        <RowContainer key={schedule.description}>
-          <p>{handleTime(schedule.startTime)}hs</p>
-          <p>{handleTime(schedule.endTime)}hs</p>
-          <p>{schedule.description}</p>
+        <RowContainer key={schedule.description} hasMargin>
+          <ClockIcon />
+          <Text>{handleTime(schedule.startTime)}hs - {handleTime(schedule.endTime)}hs</Text>
+          <Text isBold>{schedule.description}</Text>
         </RowContainer>
       ))}
     </Modal>

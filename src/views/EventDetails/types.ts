@@ -9,3 +9,7 @@ export interface IEventDetailsProps {
 export interface IRowProps {
   hasMargin?: boolean;
 }
+
+export interface ITextProps {
+  isBold?: boolean;
+}

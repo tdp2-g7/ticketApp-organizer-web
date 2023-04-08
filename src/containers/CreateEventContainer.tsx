@@ -68,6 +68,7 @@ const CreateEventContainer: FunctionComponent = () => {
         };
       });
     setSchedule(arr);
+    setModalSchedule(false);
   };
 
   return (
@@ -81,11 +82,13 @@ const CreateEventContainer: FunctionComponent = () => {
         setEventEndTime={setEventEndTime}
         eventEndTime={eventEndTime}
         setModalSchedule={setModalSchedule}
+        schedule={schedule}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}
         modalSchedule={modalSchedule}
         onClose={() => setModalSchedule(false)}
+        schedule={schedule}
       />
     </Layout>
   );
