@@ -6,6 +6,7 @@ import TwitterImg from 'src/assets/twitter.png';
 import LinkeInImg from 'src/assets/linkedIn.png';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import GoogleLogin from 'react-google-login';
+import { GOOGLE_CLIENT_ID } from 'src/configs/configs';
 import {
   CenterContainer,
   Google,
@@ -44,7 +45,7 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
             Iniciar sesion con Google
           </LoginButton>
           <InfoText>o</InfoText>
-          <GoogleOAuthProvider clientId='391050283783-gfmsthbi7j78ac4ulc1okug7o1p225ih.apps.googleusercontent.com'>
+          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             <GoogleLogin
               render={(renderProps) => (
                 <RegisterButton onClick={renderProps.onClick}>
@@ -52,7 +53,7 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
                   Registrarse con Google
                 </RegisterButton>
               )}
-              clientId='391050283783-gfmsthbi7j78ac4ulc1okug7o1p225ih.apps.googleusercontent.com'
+              clientId={GOOGLE_CLIENT_ID}
               buttonText='Registrarse con Google'
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
