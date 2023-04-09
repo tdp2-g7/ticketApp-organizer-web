@@ -1,11 +1,15 @@
 import { globalNavigate } from '../../helpers/history';
 import * as eventConstants from '../constants/event.constants';
+import * as userConstants from '../constants/user.constants';
 
 const redirectMiddleware = () => (next: any) => (action: any) => {
   const { type } = action;
   switch (type) {
     case eventConstants.ON_CREATE_SUCCEEDED:
-      globalNavigate('/');
+      globalNavigate('/home');
+      break;
+    case userConstants.USER_ON_LOGIN_SUCCEEDED:
+      globalNavigate('/home');
       break;
     default:
       break;
