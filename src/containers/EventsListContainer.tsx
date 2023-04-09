@@ -11,6 +11,9 @@ const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { events, maxPage } = useTypedSelector((state) => state.event);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState({
+    title: '', type: '', orderBy: '', sortBy: 'asc',
+  });
 
   useEffect(() => {
     // TODO change userId
@@ -23,6 +26,32 @@ const CreateEventContainer: FunctionComponent = () => {
     dispatch(onGetAllEventsByUserIdRequested(data));
   }, [dispatch, currentPage]);
 
+  const handleFilters = () => {
+    const userId = '0';
+    const data = {
+      userId,
+      page: currentPage,
+      offset: ITEMS_PER_PAGE,
+      title: filters.title,
+      type: filters.type,
+      [filters.orderBy]: filters.sortBy,
+    };
+    dispatch(onGetAllEventsByUserIdRequested(data));
+  };
+
+  useEffect(() => {
+    const userId = '0';
+    const data = {
+      userId,
+      page: currentPage,
+      offset: ITEMS_PER_PAGE,
+      title: filters.title,
+      type: filters.type,
+      [filters.orderBy]: filters.sortBy,
+    };
+    dispatch(onGetAllEventsByUserIdRequested(data));
+  }, [filters.orderBy, filters.sortBy]);
+
   return (
     <Layout>
       {events && (
@@ -31,6 +60,9 @@ const CreateEventContainer: FunctionComponent = () => {
           maxPage={maxPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          filters={filters}
+          setFilters={setFilters}
+          handleFilters={handleFilters}
         />
       )}
     </Layout>
