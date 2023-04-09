@@ -46,7 +46,7 @@ export function* getEventDetails(action: AnyAction): Generator {
 
 export function* editEvent(action: AnyAction): Generator {
   try {
-    const { data }: any = yield call(onEditEvent, action.data);
+    const data: any = yield call(onEditEvent, action.data);
     yield put(onEditSucceeded(data));
   } catch (error) {
     yield put(onEditFailed(error));

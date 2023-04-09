@@ -3,15 +3,21 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
 import useTypedSelector from '../hooks/useTypedSelector';
-import { onEditRequested, onEventDeleteImage, onGetDetailsRequested } from '../redux/actions/event.actions';
+import {
+  onEditRequested,
+  onEventDeleteImage,
+  onGetDetailsRequested,
+} from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
 
 const EditEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const [reserveDate, setReserveDate] = useState(new Date());
+  const { user } = useTypedSelector((state) => state.user);
   const { eventData } = useTypedSelector((state) => state.event);
+
+  const [reserveDate, setReserveDate] = useState(new Date());
   const [modalSchedule, setModalSchedule] = useState(false);
   const [schedule, setSchedule] = useState<any>([]);
 
@@ -35,26 +41,28 @@ const EditEventContainer: FunctionComponent = () => {
 
   const onSubmit = async (formData: ICreateEventFormData) => {
     const imagesBase64: any = [];
-    Array.from(formData.images).forEach(async (image: any) => {
-      const imageBase64: any = await getBase64Picture(image);
-      imagesBase64.push(imageBase64.split(',')[1]);
-    });
+    await Promise.all(
+      Array.from(formData.images).map(async (image: any) => {
+        const imageBase64: any = await getBase64Picture(image);
+        imagesBase64.push(imageBase64.split(',')[1]);
+      }),
+    );
+
     eventData?.images.forEach((imageBase64: string) => {
       imagesBase64.push(imageBase64);
     });
 
-    if (imagesBase64) {
+    if (imagesBase64 && user) {
       const body = {
         ...formData,
+        userId: user.userId,
         images: imagesBase64,
         type: formData.type.toLowerCase(),
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
       };
-
-      // TODO Change userID for organizerId
-      dispatch(onEditRequested({ ...body, userId: '0' }));
+      dispatch(onEditRequested(body));
     }
   };
 

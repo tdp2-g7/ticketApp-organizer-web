@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import useTypedSelector from 'src/hooks/useTypedSelector';
 import { onCreateEventRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
@@ -8,6 +9,8 @@ import ScheduleComponent from '../views/CreateEvent/Schedule/Schedule';
 
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
+  const { user } = useTypedSelector((state) => state.user);
+
   const [reserveDate, setReserveDate] = useState(new Date());
   const [modalSchedule, setModalSchedule] = useState(false);
   const [schedule, setSchedule] = useState<any>([]);
@@ -28,25 +31,24 @@ const CreateEventContainer: FunctionComponent = () => {
       imagesBase64.push(imageBase64.split(',')[1]);
     }));
 
-    if (imagesBase64) {
+    if (imagesBase64 && user) {
       const body = {
         ...formData,
+        userId: user.userId,
         images: imagesBase64,
-        type: formData.type.toLowerCase(),
+        type: formData.type,
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
         schedule,
         // TODO: Change this for the real location
         location: {
-          lat: 10,
-          lng: 10,
+          lat: '10',
+          lng: '10',
           label: 'Paseo Colon',
         },
       };
-
-      // TODO Change userID for organizerId
-      dispatch(onCreateEventRequested({ ...body, userId: '0' }));
+      dispatch(onCreateEventRequested(body));
     }
   };
 

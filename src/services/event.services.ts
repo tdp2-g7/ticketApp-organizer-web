@@ -30,7 +30,6 @@ export async function getDetails(eventId: string): Promise<any> {
 }
 
 export async function onEditEvent(data: IEvent): Promise<AxiosResponse> {
-  const response = await patch(`/events/${data.eventId}}`, data);
-
+  const response = await patch(`${EVENTS_API_URL}/events/${data.eventId}`, data);
   return response;
 }
