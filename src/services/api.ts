@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { USERS_API_URL } from '../configs/configs';
 
 const api = axios.create({
-  baseURL: USERS_API_URL,
+  baseURL: '/',
 });
 
 async function getOptions() {
