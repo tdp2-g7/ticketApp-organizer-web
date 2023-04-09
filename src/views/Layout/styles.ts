@@ -84,6 +84,7 @@ export const RightContainer = styled.div`
   flex-direction: row;
   width: 50%;
   justify-content: space-between;
+  align-items: center;
 
   @media (max-width: 1500px) {
     width: 50%;
@@ -94,12 +95,11 @@ export const RightContainer = styled.div`
   }
 `;
 
-export const HeaderLink = styled.a`
+export const HeaderLink = styled.div`
   text-decoration: none;
   width: 200px;
   font-size: 18px;
   border: none;
-  margin-top: 10px;
   cursor: pointer;
   background-color: transparent;
   color: ${COLORS.white};
@@ -114,5 +114,4 @@ export const LogoutContainer = styled.div`
 export const Title = styled.p`
   font-size: 24px;
   font-weight: bold;
-  flex: 1;
 `;

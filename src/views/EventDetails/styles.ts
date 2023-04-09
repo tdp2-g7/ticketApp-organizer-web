@@ -7,6 +7,7 @@ import {
   PlaceOutlined,
   GroupsOutlined,
   PersonOutlineOutlined,
+  EditOutlined,
   AccessTime,
 } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
@@ -81,7 +82,7 @@ export const Subtitle = styled.p`
 `;
 
 export const InfoContainer = styled.div`
-  width: 90%;
+  width: 95%;
   margin: 0 0 3% 2%;
 `;
 
@@ -91,10 +92,11 @@ export const Text = styled.p<ITextProps>`
   color: ${COLORS.mineShaft};
   font-family: 'Poppins';
 
-  ${({ isBold }) => isBold && css`
-    font-weight: bold;
-    margin-left: 14px;
-  `}
+  ${({ isBold }) => isBold
+    && css`
+      font-weight: bold;
+      margin-left: 14px;
+    `}
 `;
 
 export const CalendarIcon = styled(CalendarMonth)`
@@ -152,13 +154,45 @@ export const FAQsText = styled.p`
   white-space: pre-line;
 `;
 
+export const EditOutlinedIcon = styled(EditOutlined)`
+  color: ${COLORS.lightViolet};
+  transform: scale(0.8);
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin: 0 10px 10px 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: ${COLORS.lightViolet};
+  width: 80px;
+  cursor: pointer;
+`;
+
+export const Button = styled.div`
+  margin-top: 3px;
+  font-size: 15px;
+  background-color: transparent;
+  color: ${COLORS.lightViolet};
+`;
+
+export const RowContainerTitleEdit = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const OpenModalButton = styled.div`
   padding: 6px 16px;
   border-radius: 20px;
   border: 1px solid ${COLORS.lightViolet};
   margin-left: 10px;
   cursor: pointer;
-  
+
   > p {
     font-size: 14px;
     font-family: 'Poppins';

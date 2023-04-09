@@ -1,10 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { USERS_API_URL } from 'src/configs/configs';
 import { IUser } from 'src/types/users.types';
+import { ILoginFormData } from 'src/views/Login/types';
 import { post } from './api';
 
-export async function login(data: any): Promise<AxiosResponse> {
-  const response = await post('/user/login', data);
+export async function login(formData: ILoginFormData): Promise<AxiosResponse> {
+  const response = await post(`${USERS_API_URL}/users/login`, formData);
   return response;
 }
 

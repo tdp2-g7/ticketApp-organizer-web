@@ -17,6 +17,7 @@ import {
   EventsContainer,
   FiltersBox,
   HeaderLink,
+  MainContainer,
   MakeEventText,
   MakeEventTitle,
   OrderBySelect,
@@ -30,7 +31,13 @@ import CreateEventImg from '../../assets/createEventImage.png';
 
 const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   const {
-    events, maxPage, currentPage, setCurrentPage, filters, setFilters, handleFilters,
+    events,
+    maxPage,
+    currentPage,
+    setCurrentPage,
+    filters,
+    setFilters,
+    handleFilters,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,11 +52,11 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   };
 
   const filtersView = (
-    <Modal title="Filters" onClose={() => setIsOpen(false)} isOpen={isOpen}>
+    <Modal title='Filters' onClose={() => setIsOpen(false)} isOpen={isOpen}>
       <div>
         <CustomInput
-          type="text"
-          placeholder="Buscar por Titulo"
+          type='text'
+          placeholder='Buscar por Titulo'
           value={filters.title}
           onInput={(e) => setFilters({ ...filters, title: e.currentTarget.value })
           }
@@ -62,7 +69,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           onChange={(e) => setFilters({ ...filters, type: e.currentTarget.value })
           }
         >
-          <option value="">Buscar por Tipo de evento</option>
+          <option value=''>Buscar por Tipo de evento</option>
           {typesOfEvents.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
@@ -94,7 +101,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   );
 
   return (
-    <div>
+    <MainContainer>
       {isOpen && filtersView}
       <RowDiv>
         <FiltersBox onClick={() => setIsOpen(true)}>
@@ -106,21 +113,24 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
             setFilters({ ...filters, orderBy: e.currentTarget.value });
           }}
         >
-          <option value="" disabled>Ordenar por</option>
+          <option value='' disabled>
+            Ordenar por
+          </option>
           {soryByOptions.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
         </OrderBySelect>
-        <SortBy onClick={() => {
-          setFilters({ ...filters, sortBy: filters.sortBy === 'asc' ? 'desc' : 'asc' });
-        }}>
-          {filters.sortBy === 'asc' ? (
-            <ArrowUpward />
-          ) : (
-            <ArrowDownward />
-          )}
+        <SortBy
+          onClick={() => {
+            setFilters({
+              ...filters,
+              sortBy: filters.sortBy === 'asc' ? 'desc' : 'asc',
+            });
+          }}
+        >
+          {filters.sortBy === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
         </SortBy>
       </RowDiv>
       {!(events.length > 0) ? (
@@ -149,18 +159,18 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
         </>
       )}
       <div>
-      <RectangleContainer>
-        <CreateEventImage src={CreateEventImg} alt="logo" />
-        <ColumnContainer>
-          <MakeEventTitle>Crea tu propio evento</MakeEventTitle>
-          <MakeEventText>
-            Ahora puedes crear tu evento muy fácilmente
-          </MakeEventText>
-          <HeaderLink href="/createEvent">Crear eventos</HeaderLink>
-        </ColumnContainer>
-      </RectangleContainer>
+        <RectangleContainer>
+          <CreateEventImage src={CreateEventImg} alt='logo' />
+          <ColumnContainer>
+            <MakeEventTitle>Crea tu propio evento</MakeEventTitle>
+            <MakeEventText>
+              Ahora puedes crear tu evento muy fácilmente
+            </MakeEventText>
+            <HeaderLink href='/createEvent'>Crear eventos</HeaderLink>
+          </ColumnContainer>
+        </RectangleContainer>
       </div>
-    </div>
+    </MainContainer>
   );
 };
 

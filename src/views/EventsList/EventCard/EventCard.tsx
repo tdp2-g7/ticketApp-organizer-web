@@ -31,8 +31,8 @@ const EventCard = (props: any) => {
       key={event.eventId}
       onClick={() => globalNavigate(`/events/${event.eventId}`)}
     >
-      {event.image ? (
-        <CustomImg src={`data:image/jpeg;base64,${event.image}`} />
+      {event.images ? (
+        <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
       ) : (
         <CustomImg src={NoImage} />
       )}

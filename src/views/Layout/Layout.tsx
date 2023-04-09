@@ -27,19 +27,25 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
   return (
     <>
       <TopNav>
-        <RowDiv onClick={() => globalNavigate('/')}>
+        <RowDiv onClick={() => globalNavigate('/home')}>
           <Logo src={LogoImg} alt='logo' />
           <Title>TicketApp</Title>
         </RowDiv>
         <RightContainer>
-          <HeaderLink href='/createEvent'>Crear evento</HeaderLink>
-          <HeaderLink href='/agenda'>Agenda</HeaderLink>
-          <HeaderLink href='/metrics'>Metricas</HeaderLink>
-          <HeaderLink href='/profile'>Perfil</HeaderLink>
+          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+            Crear evento
+          </HeaderLink>
+          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+            Agenda
+          </HeaderLink>
+          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+            Metricas
+          </HeaderLink>
+          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+            Perfil
+          </HeaderLink>
           <LogoutContainer>
-            <HeaderLink type='button' onClick={() => onClickLogout()}>
-              Salir
-            </HeaderLink>
+            <HeaderLink onClick={() => onClickLogout()}>Salir</HeaderLink>
           </LogoutContainer>
         </RightContainer>
       </TopNav>

@@ -15,3 +15,17 @@ export interface IRowProps {
 export interface ITextProps {
   isBold?: boolean;
 }
+
+export interface IEditEventFormData {
+  title: string;
+  description: string;
+  location: string;
+  type: string;
+  date: Date;
+  startTime: Date;
+  endTime: Date;
+  images: any;
+  vacancies: number;
+  ticketsPerPerson: number;
+  faqs: string;
+}

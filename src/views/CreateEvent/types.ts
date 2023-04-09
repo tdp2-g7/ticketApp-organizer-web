@@ -1,18 +1,16 @@
-import { Dayjs } from 'dayjs';
-import { ILocation, ISchedule } from 'src/types/events.types';
+import { ILocation, ISchedule, IEvent } from 'src/types/events.types';
 
 export interface ICreateEventProps {
-  onCreateEvent: (formData: ICreateEventFormData) => void;
+  onSubmit: (formData: any) => void;
   reserveDate: Date;
+  isEdit: boolean;
   setReserveDate: (date: Date) => void;
-  location: any;
-  setLocation: (location: any) => void;
-  setEventStartTime: (startTime: any) => void;
-  eventStartTime: Dayjs | null;
-  setEventEndTime: (endTime: any) => void;
-  eventEndTime: Dayjs | null;
+  eventInitialValues?: IEvent | null;
+  deleteImage?: (image: any) => void;
   setModalSchedule: (modalSchedule: boolean) => void;
   schedule: ISchedule[];
+  location: any;
+  setLocation: (location: any) => void;
 }
 export interface ICreateEventFormData {
   title: string;
@@ -20,8 +18,9 @@ export interface ICreateEventFormData {
   location: ILocation;
   type: string;
   date: Date;
-  time: string;
-  image: any;
+  startTime: Date | null;
+  endTime: Date | null;
+  images: any;
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;

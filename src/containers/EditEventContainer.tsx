@@ -1,20 +1,34 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import useTypedSelector from 'src/hooks/useTypedSelector';
-import { onCreateEventRequested } from '../redux/actions/event.actions';
+import { useParams } from 'react-router-dom';
+import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
+import useTypedSelector from '../hooks/useTypedSelector';
+import {
+  onEditRequested,
+  onEventDeleteImage,
+  onGetDetailsRequested,
+} from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
-import ScheduleComponent from '../views/CreateEvent/Schedule/Schedule';
 
-const CreateEventContainer: FunctionComponent = () => {
+const EditEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { user } = useTypedSelector((state) => state.user);
+  const { eventData } = useTypedSelector((state) => state.event);
 
   const [reserveDate, setReserveDate] = useState(new Date());
   const [modalSchedule, setModalSchedule] = useState(false);
-  const [location, setLocation] = useState<any>({});
   const [schedule, setSchedule] = useState<any>([]);
+
+  const params = useParams();
+  const eventId = params.id;
+
+  useEffect(() => {
+    if (eventId) {
+      dispatch(onGetDetailsRequested(eventId));
+    }
+  }, [dispatch]);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -25,30 +39,43 @@ const CreateEventContainer: FunctionComponent = () => {
     };
   });
 
-  const onCreateEvent = async (formData: ICreateEventFormData) => {
+  const onSubmit = async (formData: ICreateEventFormData) => {
     const imagesBase64: any = [];
-    await Promise.all(Array.from(formData.images).map(async (image: any) => {
-      const imageBase64: any = await getBase64Picture(image);
-      imagesBase64.push(imageBase64.split(',')[1]);
-    }));
+    await Promise.all(
+      Array.from(formData.images).map(async (image: any) => {
+        const imageBase64: any = await getBase64Picture(image);
+        imagesBase64.push(imageBase64.split(',')[1]);
+      }),
+    );
+
+    eventData?.images.forEach((imageBase64: string) => {
+      imagesBase64.push(imageBase64);
+    });
 
     if (imagesBase64 && user) {
       const body = {
         ...formData,
         userId: user.userId,
         images: imagesBase64,
-        type: formData.type,
+        type: formData.type.toLowerCase(),
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
-        schedule,
-        location: {
-          lat: location.y.toString(),
-          lng: location.x.toString(),
-          label: location.label,
-        },
       };
-      dispatch(onCreateEventRequested(body));
+      dispatch(onEditRequested(body));
+    }
+  };
+
+  const deleteImage = (imageToDelete: any) => {
+    if (eventData) {
+      const newImages = eventData.images.filter(
+        (imageToCompare: any) => imageToCompare !== imageToDelete,
+      );
+      const data = {
+        ...eventData,
+        images: newImages,
+      };
+      dispatch(onEventDeleteImage(data));
     }
   };
 
@@ -70,12 +97,12 @@ const CreateEventContainer: FunctionComponent = () => {
   return (
     <Layout>
       <CreateEvent
-        onSubmit={onCreateEvent}
+        onSubmit={onSubmit}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
-        isEdit={false}
-        location={location}
-        setLocation={setLocation}
+        eventInitialValues={eventData}
+        isEdit
+        deleteImage={deleteImage}
         setModalSchedule={setModalSchedule}
         schedule={schedule}
       />
@@ -88,4 +115,4 @@ const CreateEventContainer: FunctionComponent = () => {
     </Layout>
   );
 };
-export default CreateEventContainer;
+export default EditEventContainer;

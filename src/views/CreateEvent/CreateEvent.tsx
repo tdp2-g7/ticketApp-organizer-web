@@ -1,10 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
-import { TimeField } from '@mui/x-date-pickers/TimeField';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Input from '../../components/Input/Input';
 import { typesOfEvents } from '../../helpers/options';
 import { requiredValidation } from '../../helpers/validations';
@@ -22,34 +18,44 @@ import {
   VacanciesContainer,
   TicketsPerUserContainer,
   ColumnContainer,
+  TimeContainer,
+  CustomImg,
+  ImagesRowContainer,
+  ImagesToEditContainer,
+  ImageCard,
+  RemoveIcon,
+  RowImage,
   ActionButton,
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
+import TimePicker from '../../components/TimePicker/TimePicker';
 import Map from '../../components/Map/Map';
 
 const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
 ) => {
   const {
-    onCreateEvent,
+    onSubmit,
     reserveDate,
     setReserveDate,
-    setEventStartTime,
-    eventStartTime,
-    setEventEndTime,
-    eventEndTime,
-    setLocation,
+    eventInitialValues,
+    isEdit,
+    deleteImage,
     setModalSchedule,
+    setLocation,
     schedule,
   } = props;
 
+  const [imagesFile, setImagesFile] = useState<any>([]);
+
   return (
     <>
-      <Title>Crear evento</Title>
+      <Title>{isEdit ? 'Editar evento' : 'Crear evento'}</Title>
       <FormContainer>
         <Form
-          onSubmit={onCreateEvent}
+          onSubmit={onSubmit}
+          initialValues={eventInitialValues}
           render={({ handleSubmit }) => (
             <CustomForm onSubmit={handleSubmit}>
               <Container>
@@ -57,10 +63,10 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   <Label>Título</Label>
                   <Field
                     render={Input}
-                    name="title"
-                    label="Título del evento"
+                    name='title'
+                    label='Título del evento'
                     validate={requiredValidation}
-                    type="text"
+                    type='text'
                   />
                 </div>
                 <RowContainer>
@@ -69,34 +75,38 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     <ReactDatePicker
                       selected={reserveDate}
                       onChange={(date: any) => setReserveDate(date)}
-                      dateFormat="dd/MM/yyyy"
-                      placeholderText="Seleccionar fecha"
+                      dateFormat='dd/MM/yyyy'
+                      placeholderText='Seleccionar fecha'
                       isClearable={true}
-                      className="datePicker"
+                      className='datePicker'
                     />
                   </CustomCalendarForm>
                   <ColumnContainer>
                     <Label>Horario</Label>
                     <RowContainer>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['TimeField', 'TimeField']}>
-                          <div style={{ width: '80%' }}>
-                            <TimeField
-                              label="Hora inicio"
-                              value={eventStartTime}
-                              onChange={(newValue) => setEventStartTime(newValue)
-                              }
+                      <TimeContainer>
+                        <Field
+                          validate={requiredValidation}
+                          name={'startTime'}
+                          render={(fieldRenderProps) => (
+                            <TimePicker
+                              label='Hora de inicio'
+                              {...fieldRenderProps}
                             />
-                          </div>
-                          <div style={{ width: '80%' }}>
-                            <TimeField
-                              label="Hora fin"
-                              value={eventEndTime}
-                              onChange={(newValue) => setEventEndTime(newValue)}
+                          )}
+                        />
+                      </TimeContainer>
+                      <TimeContainer>
+                        <Field
+                          name={'endTime'}
+                          render={(fieldRenderProps) => (
+                            <TimePicker
+                              label='Hora de fin'
+                              {...fieldRenderProps}
                             />
-                          </div>
-                        </DemoContainer>
-                      </LocalizationProvider>
+                          )}
+                        />
+                      </TimeContainer>
                     </RowContainer>
                   </ColumnContainer>
                 </RowContainer>
@@ -105,10 +115,10 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   <Field
                     render={Input}
                     multiline
-                    label="Descripcion"
-                    name="description"
+                    label='Descripcion'
+                    name='description'
                     validate={requiredValidation}
-                    type="textarea"
+                    type='textarea'
                   />
                 </div>
                 <div>
@@ -116,10 +126,10 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   <Field
                     render={Input}
                     multiline
-                    label="Preguntas frecuentes"
-                    name="faqs"
+                    label='Preguntas frecuentes'
+                    name='faqs'
                     validate={requiredValidation}
-                    type="textarea"
+                    type='textarea'
                   />
                 </div>
                 <div>
@@ -128,13 +138,13 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     {schedule.length ? 'Editar' : 'Agregar'} cronograma
                   </ActionButton>
                 </div>
-                <div />
+                <div/>
                 <div>
                   <Label>Tipo de evento</Label>
                   <Field
-                    label="type"
-                    placeholder="Tipo de evento"
-                    name="type"
+                    label='type'
+                    placeholder='Tipo de evento'
+                    name='type'
                     validate={requiredValidation}
                   >
                     {({ input, meta }) => (
@@ -145,7 +155,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                           showError={false}
                           input={input}
                           meta={meta}
-                          label="Type of Event"
+                          label='Type of Event'
                         />
                       </div>
                     )}
@@ -156,20 +166,20 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     <Label>Vacantes totales</Label>
                     <Field
                       render={Input}
-                      label="Vacantes totales"
-                      name="vacancies"
+                      label='Vacantes totales'
+                      name='vacancies'
                       validate={requiredValidation}
-                      type="number"
+                      type='number'
                     />
                   </VacanciesContainer>
                   <TicketsPerUserContainer>
                     <Label>Entradas por persona</Label>
                     <Field
                       render={Input}
-                      label="Entradas por persona"
-                      name="ticketsPerPerson"
+                      label='Entradas por persona'
+                      name='ticketsPerPerson'
                       validate={requiredValidation}
-                      type="number"
+                      type='number'
                     />
                   </TicketsPerUserContainer>
                 </RowContainer>
@@ -179,21 +189,51 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 </div>
                 <ColumnContainer>
                   <Label>Imagenes</Label>
-                  <Field name="image" validate={requiredValidation}>
+                  <Field name='images' validate={requiredValidation}>
                     {({ input: { value, onChange, ...input } }) => (
                       <input
                         {...input}
-                        type="file"
-                        onChange={({ target }) => onChange(target.files)}
+                        multiple
+                        type='file'
+                        onChange={({ target }) => {
+                          if (target.files) {
+                            const urls = Array.from(target.files)
+                              .map((file) => URL.createObjectURL(file));
+                            setImagesFile([...imagesFile, ...urls]);
+                          }
+                          onChange(target.files);
+                        }}
                         // instead of the default target.value
                         {...props}
                       />
                     )}
                   </Field>
+                  <ImagesRowContainer>
+                    {imagesFile.map((image: any) => (
+                      <CustomImg src={image} />
+                    ))}
+                  </ImagesRowContainer>
+                  <ImagesToEditContainer>
+                    {eventInitialValues
+                      && eventInitialValues.images.map((image: any) => (
+                        <RowImage>
+                          <ImageCard src={`data:image/jpeg;base64,${image}`} />
+                          <RemoveIcon
+                            onClick={() => {
+                              if (deleteImage) {
+                                deleteImage(image);
+                              }
+                            }}
+                          />
+                        </RowImage>
+                      ))}
+                  </ImagesToEditContainer>
                 </ColumnContainer>
               </Container>
               <ButtonContainer>
-                <Button type="submit">Crear evento</Button>
+                <Button type='submit'>
+                  {isEdit ? 'Editar evento' : 'Crear evento'}
+                </Button>
               </ButtonContainer>
             </CustomForm>
           )}

@@ -113,86 +113,90 @@ export const EventBusyIcon = styled(EventBusy)`
   transform: scale(3);
 `;
 
+export const MainContainer = styled.div`
+  height: 65vh;
+`;
+
 export const CustomInput = styled.input`
-    width: 96%;
-    height: 30px;
-    background-color: ${COLORS.white};
-    border-radius: 3px;
-    border: 1px solid ${COLORS.greyMystic};
-    padding: 5px 10px;
-    font-size: 16px;
-    font-family: 'Poppins';
-    margin-bottom: 10px;
+  width: 96%;
+  height: 30px;
+  background-color: ${COLORS.white};
+  border-radius: 3px;
+  border: 1px solid ${COLORS.greyMystic};
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  margin-bottom: 10px;
 `;
 
 export const CustomSelect = styled.select<ISelect>`
-    width: 100%;
-    height: 40px;
-    background-color: ${COLORS.white};
-    border-radius: 3px;
-    border: 1px solid ${COLORS.greyMystic};
-    padding: 5px 10px;
-    font-size: 16px;
-    font-family: 'Poppins';
-    cursor: pointer;
-    margin-bottom: 10px;
-    color: ${({ isPlaceholder }: ISelect) => (isPlaceholder ? COLORS.greyMystic : COLORS.black)};
+  width: 100%;
+  height: 40px;
+  background-color: ${COLORS.white};
+  border-radius: 3px;
+  border: 1px solid ${COLORS.greyMystic};
+  padding: 5px 10px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: ${({ isPlaceholder }: ISelect) => (isPlaceholder ? COLORS.greyMystic : COLORS.black)};
 
-    > option {
-      color: black;
-    }
+  > option {
+    color: black;
+  }
 `;
 
 export const OrderBySelect = styled.select`
-    background-color: ${COLORS.greyZyrcon};
-    border-radius: 25px;
-    border: 1px solid ${COLORS.greyZyrcon};
-    padding: 4px 0 4px 10px;
-    font-size: 16px;
-    font-family: 'Poppins';
-    margin-right: 2px;
-    cursor: pointer;
-    color: #1D275F;
+  background-color: ${COLORS.greyZyrcon};
+  border-radius: 25px;
+  border: 1px solid ${COLORS.greyZyrcon};
+  padding: 4px 0 4px 10px;
+  font-size: 16px;
+  font-family: 'Poppins';
+  margin-right: 2px;
+  cursor: pointer;
+  color: #1d275f;
 
-    > option {
-      color: black;
-    }
+  > option {
+    color: black;
+  }
 `;
 
 export const CustomButton = styled.div`
-    font-size: 20px;
-    font-family: 'Poppins';
-    margin: 10px 0;
-    padding: 10px 20px;
-    border-radius: 6px;
-    background-color: ${COLORS.lightViolet};
-    color: white;
-    text-align: center;
-    cursor: pointer;
+  font-size: 20px;
+  font-family: 'Poppins';
+  margin: 10px 0;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: ${COLORS.lightViolet};
+  color: white;
+  text-align: center;
+  cursor: pointer;
 
-    ${({ isInverted }: { isInverted?: boolean }) => isInverted
-        && css`
-        background-color: white;
-        color: ${COLORS.lightViolet};
-        border: 1px solid ${COLORS.lightViolet};
+  ${({ isInverted }: { isInverted?: boolean }) => isInverted
+    && css`
+      background-color: white;
+      color: ${COLORS.lightViolet};
+      border: 1px solid ${COLORS.lightViolet};
     `};
 `;
 
 export const FiltersBox = styled.div`
-    padding: 4px 30px;
-    border-radius: 25px;
-    border: 1px solid ${COLORS.lightViolet};
-    align-items: center;
-    cursor: pointer;
-    margin-right: 10px;
-    
-    & > p {
-        font-size: 16px;
-        font-family: 'Poppins';
-        font-style: bold;
-        color: ${COLORS.lightViolet};
-        margin: 0;
-    }
+  padding: 4px 30px;
+  border-radius: 25px;
+  border: 1px solid ${COLORS.lightViolet};
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+
+  & > p {
+    font-size: 16px;
+    font-family: 'Poppins';
+    font-style: bold;
+    color: ${COLORS.lightViolet};
+    margin: 0;
+  }
 `;
 
 export const RowDiv = styled.div`
