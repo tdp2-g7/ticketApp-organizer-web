@@ -13,6 +13,7 @@ const CreateEventContainer: FunctionComponent = () => {
 
   const [reserveDate, setReserveDate] = useState(new Date());
   const [modalSchedule, setModalSchedule] = useState(false);
+  const [location, setLocation] = useState<any>({});
   const [schedule, setSchedule] = useState<any>([]);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
@@ -41,11 +42,10 @@ const CreateEventContainer: FunctionComponent = () => {
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
         schedule,
-        // TODO: Change this for the real location
         location: {
-          lat: '10',
-          lng: '10',
-          label: 'Paseo Colon',
+          lat: location.y.toString(),
+          lng: location.x.toString(),
+          label: location.label,
         },
       };
       dispatch(onCreateEventRequested(body));
@@ -74,6 +74,8 @@ const CreateEventContainer: FunctionComponent = () => {
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
         isEdit={false}
+        location={location}
+        setLocation={setLocation}
         setModalSchedule={setModalSchedule}
         schedule={schedule}
       />

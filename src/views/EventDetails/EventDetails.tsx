@@ -3,7 +3,8 @@ import { FunctionComponent, useState } from 'react';
 import { Modal } from 'src/components/Modal/Modal';
 import { numToLargeMonth } from 'src/helpers/longDates';
 import { Sizes } from 'src/helpers/sizes';
-import ProgressBar from '../../components/ProgressBar';
+import Map from 'src/components/Map/Map';
+import ProgressBar from 'src/components/ProgressBar';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -39,7 +40,9 @@ import { globalNavigate } from '../../helpers/history';
 const EventDetails: FunctionComponent<IEventDetailsProps> = (
   props: IEventDetailsProps,
 ) => {
-  const { event, setScheduleModalOpen, scheduleModalOpen } = props;
+  const {
+    event, setScheduleModalOpen, scheduleModalOpen, mapsModalOpen, setMapsModalOpen,
+  } = props;
   const navigate = useNavigate();
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -89,16 +92,36 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
       {event.schedule?.map((schedule) => (
         <RowContainer key={schedule.description} hasMargin>
           <ClockIcon />
-          <Text>{handleTime(schedule.startTime)}hs - {handleTime(schedule.endTime)}hs</Text>
+          <Text>
+            {handleTime(schedule.startTime)}hs - {handleTime(schedule.endTime)}
+            hs
+          </Text>
           <Text isBold>{schedule.description}</Text>
         </RowContainer>
       ))}
     </Modal>
   );
 
+  const renderMapsModal = () => (
+    <Modal
+      isOpen={mapsModalOpen}
+      onClose={() => setMapsModalOpen(false)}
+      title="Ver mapa"
+      size={Sizes.medium}
+    >
+      <Text>{event.location.label}</Text>
+      <Map
+        lat={Number(event.location.lat)}
+        lng={Number(event.location.lng)}
+        isPreview
+      />
+    </Modal>
+  );
+
   return (
     <>
       {renderScheduleModal()}
+      {renderMapsModal()}
       <RowContainer onClick={() => navigate('/')}>
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
@@ -139,6 +162,9 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
             <RowContainer>
               <LocationIcon />
               <Text>{event.location.label}</Text>
+              <OpenModalButton onClick={() => setMapsModalOpen(true)}>
+                <p>Ver mapa</p>
+              </OpenModalButton>
             </RowContainer>
           </ColumnContainer>
           <ColumnContainer>

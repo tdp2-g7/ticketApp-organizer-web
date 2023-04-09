@@ -30,6 +30,7 @@ import {
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
 import TimePicker from '../../components/TimePicker/TimePicker';
+import Map from '../../components/Map/Map';
 
 const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
@@ -42,6 +43,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     isEdit,
     deleteImage,
     setModalSchedule,
+    setLocation,
     schedule,
   } = props;
 
@@ -183,13 +185,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 </RowContainer>
                 <div>
                   <Label>Ubicacion</Label>
-                  <Field
-                    render={Input}
-                    label='Ubicacion'
-                    name='location'
-                    validate={requiredValidation}
-                    type='text'
-                  />
+                  <Map onSearch={setLocation} />
                 </div>
                 <ColumnContainer>
                   <Label>Imagenes</Label>
