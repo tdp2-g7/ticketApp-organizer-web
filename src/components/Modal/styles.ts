@@ -16,8 +16,6 @@ export const CustomModal = styled(Modal)<IModalStyledProps>`
     outline: none;
     border: 1px solid ${COLORS.greyMischka};
     box-shadow: 0 2px 4px rgba(0,0,0,0.18);
-    min-width: 800px;
-    min-height: 800px;
     display: flex;
     flex-direction: column;
 
@@ -33,7 +31,7 @@ export const CustomModal = styled(Modal)<IModalStyledProps>`
 
     ${({ size }) => size === Sizes.large && css`
         min-width: 800px;
-        min-height: 800px;
+        min-height: 70%;
     `}
 `;
 

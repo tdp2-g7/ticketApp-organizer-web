@@ -7,7 +7,7 @@ export interface IEvent {
   date: Date;
   startTime: Date | null;
   endTime: Date | null;
-  image: any;
+  images: any;
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;

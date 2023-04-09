@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Modal } from 'src/components/Modal/Modal';
 import { numToLargeMonth } from 'src/helpers/longDates';
 import { Sizes } from 'src/helpers/sizes';
-import ProgressBar from 'src/components/ProgressBar';
+import ProgressBar from '../../components/ProgressBar';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -25,11 +25,16 @@ import {
   TextOccupied,
   DivOccupied,
   FAQsText,
+  EditOutlinedIcon,
+  ButtonContainer,
+  Button,
+  RowContainerTitleEdit,
   OpenModalButton,
   ClockIcon,
 } from './styles';
 import { IEventDetailsProps } from './types';
 import { ColumnContainer } from '../CreateEvent/styles';
+import { globalNavigate } from '../../helpers/history';
 
 const EventDetails: FunctionComponent<IEventDetailsProps> = (
   props: IEventDetailsProps,
@@ -37,8 +42,10 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
   const { event, setScheduleModalOpen, scheduleModalOpen } = props;
   const navigate = useNavigate();
 
+  const [currentImage, setCurrentImage] = useState(0);
+
   const renderPictures = () => (
-    <CustomImg src={`data:image/jpeg;base64,${event.image}`} />
+    <CustomImg src={`data:image/jpeg;base64,${event.images[currentImage]}`} />
   );
 
   const handleTime = (time: Date) => {
@@ -57,6 +64,21 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     return `${hours}:${minutes}`;
   };
 
+  const prevHandler = () => {
+    if (currentImage - 1 < 0) {
+      setCurrentImage(event.images.length - 1);
+    } else {
+      setCurrentImage(currentImage - 1);
+    }
+  };
+
+  const nextHandler = () => {
+    if (currentImage + 1 === event.images.length) {
+      setCurrentImage(0);
+    } else {
+      setCurrentImage(currentImage + 1);
+    }
+  };
   const renderScheduleModal = () => (
     <Modal
       isOpen={scheduleModalOpen}
@@ -81,11 +103,17 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
       </RowContainer>
-      <Title>{event.title}</Title>
+      <RowContainerTitleEdit>
+        <Title>{event.title}</Title>
+        <ButtonContainer>
+          <EditOutlinedIcon />
+          <Button onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}>Editar</Button>
+        </ButtonContainer>
+      </RowContainerTitleEdit>
       <ImagesContainer>
-        <ArrowLeftIcon />
+        <ArrowLeftIcon onClick={() => prevHandler()}/>
         {renderPictures()}
-        <ArrowRightIcon />
+        <ArrowRightIcon onClick={() => nextHandler()} />
       </ImagesContainer>
       <InfoContainer>
         <LocationAndTimeRowContainer>
@@ -128,10 +156,10 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
                 {event.vacancies / 5}/{event.vacancies} ocupado
               </TextOccupied>
             </DivOccupied>
-            <RowContainer>
+            <RowContainerVacancies>
               <Text>{event.ticketsPerPerson} entradas por persona max</Text>
               <PersonIcon />
-            </RowContainer>
+            </RowContainerVacancies>
           </ColumnContainer>
         </LocationAndTimeRowContainer>
         <Subtitle>Descripcion e informacion</Subtitle>
