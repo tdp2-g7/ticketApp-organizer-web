@@ -26,6 +26,7 @@ import {
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
+import Map from '../../components/Map/Map';
 
 const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
@@ -38,6 +39,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     eventStartTime,
     setEventEndTime,
     eventEndTime,
+    setLocation,
     setModalSchedule,
     schedule,
   } = props;
@@ -173,13 +175,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 </RowContainer>
                 <div>
                   <Label>Ubicacion</Label>
-                  <Field
-                    render={Input}
-                    label="Ubicacion"
-                    name="location"
-                    validate={requiredValidation}
-                    type="text"
-                  />
+                  <Map onSearch={setLocation} />
                 </div>
                 <ColumnContainer>
                   <Label>Imagenes</Label>

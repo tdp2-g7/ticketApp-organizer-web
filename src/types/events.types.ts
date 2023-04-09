@@ -1,8 +1,7 @@
 export interface IEvent {
   title: string;
   description: string;
-  // TODO: Change to a more specific type
-  location: any;
+  location: ILocation;
   type: string;
   date: Date;
   startTime: Date | null;
@@ -28,4 +27,10 @@ export interface ISchedule {
   startTime: Date;
   endTime: Date;
   description: string;
+}
+
+export interface ILocation {
+  lat: number | string;
+  lng: number | string;
+  label: string;
 }

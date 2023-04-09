@@ -9,6 +9,7 @@ import Layout from '../views/Layout/Layout';
 const EventDetailsContainer: FunctionComponent = () => {
   const { eventData } = useTypedSelector((state) => state.event);
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
+  const [mapsModalOpen, setMapsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const params = useParams();
   const eventId = params.id;
@@ -25,6 +26,8 @@ const EventDetailsContainer: FunctionComponent = () => {
         && <EventDetails event={eventData}
           scheduleModalOpen={scheduleModalOpen}
           setScheduleModalOpen={setScheduleModalOpen}
+          mapsModalOpen={mapsModalOpen}
+          setMapsModalOpen={setMapsModalOpen}
         />
       }
       </Layout>

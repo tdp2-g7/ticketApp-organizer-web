@@ -1,10 +1,12 @@
 import { Dayjs } from 'dayjs';
-import { ISchedule } from 'src/types/events.types';
+import { ILocation, ISchedule } from 'src/types/events.types';
 
 export interface ICreateEventProps {
   onCreateEvent: (formData: ICreateEventFormData) => void;
   reserveDate: Date;
   setReserveDate: (date: Date) => void;
+  location: any;
+  setLocation: (location: any) => void;
   setEventStartTime: (startTime: any) => void;
   eventStartTime: Dayjs | null;
   setEventEndTime: (endTime: any) => void;
@@ -15,7 +17,7 @@ export interface ICreateEventProps {
 export interface ICreateEventFormData {
   title: string;
   description: string;
-  location: string;
+  location: ILocation;
   type: string;
   date: Date;
   time: string;

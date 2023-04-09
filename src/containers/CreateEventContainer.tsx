@@ -16,6 +16,7 @@ const CreateEventContainer: FunctionComponent = () => {
   const [reserveDate, setReserveDate] = useState(new Date());
   const [eventEndTime, setEventEndTime] = useState<Dayjs | null>(null);
   const [modalSchedule, setModalSchedule] = useState(false);
+  const [location, setLocation] = useState<any>({});
   const [schedule, setSchedule] = useState<any>([]);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
@@ -43,11 +44,10 @@ const CreateEventContainer: FunctionComponent = () => {
         endTime:
           eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
         schedule,
-        // TODO: Change this for the real location
         location: {
-          lat: 10,
-          lng: 10,
-          label: 'Paseo Colon',
+          lat: location.y.toString(),
+          lng: location.x.toString(),
+          label: location.label,
         },
       };
 
@@ -77,6 +77,8 @@ const CreateEventContainer: FunctionComponent = () => {
         onCreateEvent={onCreateEvent}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
+        location={location}
+        setLocation={setLocation}
         setEventStartTime={setEventStartTime}
         eventStartTime={eventStartTime}
         setEventEndTime={setEventEndTime}
