@@ -8,7 +8,18 @@ export async function createEvent(data: IEvent): Promise<AxiosResponse> {
 }
 
 export async function getEventsByUserId(data: any): Promise<any> {
-  const response = await get(`/events/organizer/${data.userId}?page=${data.page}&offset=${data.offset}`);
+  let url = `/events/filteredBy?page=${data.page}&offset=${data.offset}`;
+
+  /* eslint-disable */
+  data.title && (url += `&title=${data.title}`); 
+  data.type && (url += `&type=${data.type}`);
+  data.userId && (url += `&userId=${data.userId}`);
+  data.orderByTitle && (url += `&orderByTitle=${data.orderByTitle}`);
+  data.orderByType && (url += `&orderByType=${data.orderByType}`);
+  data.orderByDate && (url += `&orderByDate=${data.orderByDate}`);
+  data.orderByVacancies && (url += `&orderByVacancies=${data.orderByVacancies}`);
+  /* eslint-enable */
+  const response = await get(url);
   return response;
 }
 
