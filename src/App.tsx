@@ -4,8 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CreateEventContainer from './containers/CreateEventContainer';
 import EventDetailsContainer from './containers/EventDetailsContainer';
 import EventsListContainer from './containers/EventsListContainer';
-import LoginContainer from './containers/LoginContainer';
-import RegisterContainer from './containers/RegisterContainer';
+import AuthContainer from './containers/AuthContainer';
 import { GlobalHistory } from './helpers/history';
 
 const App: FunctionComponent = () => {
@@ -21,11 +20,10 @@ const App: FunctionComponent = () => {
       <BrowserRouter>
         <GlobalHistory />
         <Routes>
-          <Route path='/login' element={<LoginContainer />} />
           <Route path='/createEvent' element={<CreateEventContainer />} />
-          <Route path='/' element={<EventsListContainer />} />
+          <Route path='/home' element={<EventsListContainer />} />
           <Route path='/events/:id' element={<EventDetailsContainer />} />
-          <Route path='/register' element={<RegisterContainer />} />
+          <Route path='/auth' element={<AuthContainer />} />
         </Routes>
       </BrowserRouter>
     </>
