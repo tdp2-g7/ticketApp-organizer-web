@@ -110,3 +110,7 @@ export const EventBusyIcon = styled(EventBusy)`
   margin-top: 100px;
   transform: scale(3);
 `;
+
+export const MainContainer = styled.div`
+  height: 65vh;
+`;

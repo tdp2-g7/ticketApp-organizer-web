@@ -5,7 +5,7 @@ import { ILoginFormData } from '../views/Login/types';
 import { post } from './api';
 
 export async function login(formData: ILoginFormData): Promise<AxiosResponse> {
-  const response = await post('/user/login', formData);
+  const response = await post(`${USERS_API_URL}/user/login`, formData);
   return response;
 }
 

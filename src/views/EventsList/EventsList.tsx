@@ -10,6 +10,7 @@ import {
   EventBusyIcon,
   EventsContainer,
   HeaderLink,
+  MainContainer,
   MakeEventText,
   MakeEventTitle,
   RectangleContainer,
@@ -33,7 +34,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
     setCurrentPage(currentPage - 1);
   };
   return (
-    <>
+    <MainContainer>
       {!(events.length > 0) ? (
         <EmptyContainer>
           <EventBusyIcon />
@@ -70,7 +71,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           <HeaderLink href='/createEvent'>Crear eventos</HeaderLink>
         </ColumnContainer>
       </RectangleContainer>
-    </>
+    </MainContainer>
   );
 };
 
