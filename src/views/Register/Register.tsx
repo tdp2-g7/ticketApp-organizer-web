@@ -4,8 +4,8 @@ import GoogleImg from 'src/assets/google-logo.png';
 import FacebookImg from 'src/assets/facebook.png';
 import TwitterImg from 'src/assets/twitter.png';
 import LinkeInImg from 'src/assets/linkedIn.png';
-import GoogleLogin from 'react-google-login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleLogin from 'react-google-login';
 import {
   CenterContainer,
   Google,
@@ -21,6 +21,8 @@ import {
   Icons,
   EndRowContainer,
   IconsContainer,
+  LoginButton,
+  GoogleSmall,
 } from './styles';
 import { IRegisterProps } from './types';
 
@@ -28,20 +30,35 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
   const { onRegister } = props;
 
   const responseGoogle = (response: any) => {
-    console.log(response);
+    onRegister(response);
   };
 
   return (
     <>
       <RegisterContainer>
         <Logo src={LogoImg} alt='logo' />
-
         <CenterContainer>
           <Title>¡Bienvenido de nuevo!</Title>
-          <RegisterButton onClick={() => onRegister()}>
+          <LoginButton onClick={() => onRegister('')}>
             <Google src={GoogleImg} alt='google' />
-            Continuar con Google
-          </RegisterButton>
+            Iniciar sesion con Google
+          </LoginButton>
+          <InfoText>o</InfoText>
+          <GoogleOAuthProvider clientId='391050283783-gfmsthbi7j78ac4ulc1okug7o1p225ih.apps.googleusercontent.com'>
+            <GoogleLogin
+              render={(renderProps) => (
+                <RegisterButton onClick={renderProps.onClick}>
+                  <GoogleSmall src={GoogleImg} alt='google' />
+                  Registrarse con Google
+                </RegisterButton>
+              )}
+              clientId='391050283783-gfmsthbi7j78ac4ulc1okug7o1p225ih.apps.googleusercontent.com'
+              buttonText='Registrarse con Google'
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
+          </GoogleOAuthProvider>
         </CenterContainer>
         <EndRowContainer>
           <InfoContainer>
@@ -63,16 +80,6 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
           </IconsContainer>
         </EndRowContainer>
       </RegisterContainer>
-      <br /> <br />
-      <GoogleOAuthProvider clientId='391050283783-gfmsthbi7j78ac4ulc1okug7o1p225ih.apps.googleusercontent.com'>
-        <GoogleLogin
-          clientId='391050283783-gfmsthbi7j78ac4ulc1okug7o1p225ih.apps.googleusercontent.com'
-          buttonText='Login'
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        />
-      </GoogleOAuthProvider>
     </>
   );
 };

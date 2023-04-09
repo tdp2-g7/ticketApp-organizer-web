@@ -1,3 +1,3 @@
 export interface IRegisterProps {
-  onRegister: () => void;
+  onRegister: (tokenResponse: any) => void;
 }
