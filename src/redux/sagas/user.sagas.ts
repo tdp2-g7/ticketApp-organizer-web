@@ -13,7 +13,7 @@ import * as constants from '../constants/user.constants';
 
 export function* userLogin(action: AnyAction): Generator {
   try {
-    const { data }: any = yield call(login, action.formData);
+    const { data }: any = yield call(login, action.data);
     yield put(onLoginSucceeded(data));
   } catch (error) {
     yield put(onLoginFailed(error));
@@ -22,7 +22,7 @@ export function* userLogin(action: AnyAction): Generator {
 
 export function* userRegister(action: AnyAction): Generator {
   try {
-    const { data }: any = yield call(register, action.formData);
+    const { data }: any = yield call(register, action.data);
     yield put(onRegisterSucceeded(data));
   } catch (error) {
     yield put(onRegisterFailed(error));

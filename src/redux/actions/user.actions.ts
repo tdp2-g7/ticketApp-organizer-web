@@ -1,13 +1,12 @@
 import { AnyAction } from 'redux';
 import { IUser } from 'src/types/users.types';
-import { ILoginFormData } from '../../views/Login/types';
 import * as constants from '../constants/user.constants';
 
 // OnLogin
-export function onLoginRequested(formData: ILoginFormData): AnyAction {
+export function onLoginRequested(data: any): AnyAction {
   return {
     type: constants.USER_ON_LOGIN_REQUESTED,
-    formData,
+    data,
   };
 }
 

@@ -3,7 +3,7 @@ import { Role } from 'src/helpers/roles';
 export interface IUser {
   userId: string;
   name: string;
-  lastname: string;
+  lastName: string;
   role: Role;
   email: string;
 }

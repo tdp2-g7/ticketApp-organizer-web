@@ -27,11 +27,15 @@ import {
 } from './styles';
 import { IRegisterProps } from './types';
 
-const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
-  const { onRegister } = props;
+const Auth: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
+  const { onRegister, onLogin } = props;
 
-  const responseGoogle = (response: any) => {
+  const responseRegisterGoogle = (response: any) => {
     onRegister(response);
+  };
+
+  const responseLoginGoogle = (response: any) => {
+    onLogin(response);
   };
 
   return (
@@ -40,10 +44,21 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
         <Logo src={LogoImg} alt='logo' />
         <CenterContainer>
           <Title>¡Bienvenido de nuevo!</Title>
-          <LoginButton onClick={() => onRegister('')}>
-            <Google src={GoogleImg} alt='google' />
-            Iniciar sesion con Google
-          </LoginButton>
+          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+            <GoogleLogin
+              render={(renderProps) => (
+                <LoginButton onClick={renderProps.onClick}>
+                  <Google src={GoogleImg} alt='google' />
+                  Iniciar sesion con Google
+                </LoginButton>
+              )}
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText='Iniciar sesion con Google'
+              onSuccess={responseLoginGoogle}
+              onFailure={responseLoginGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
+          </GoogleOAuthProvider>
           <InfoText>o</InfoText>
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
             <GoogleLogin
@@ -55,8 +70,8 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
               )}
               clientId={GOOGLE_CLIENT_ID}
               buttonText='Registrarse con Google'
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
+              onSuccess={responseRegisterGoogle}
+              onFailure={responseRegisterGoogle}
               cookiePolicy={'single_host_origin'}
             />
           </GoogleOAuthProvider>
@@ -85,4 +100,4 @@ const Register: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
   );
 };
 
-export default Register;
+export default Auth;
