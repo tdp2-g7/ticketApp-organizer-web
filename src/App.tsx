@@ -4,6 +4,7 @@ import CreateEventContainer from './containers/CreateEventContainer';
 import EventDetailsContainer from './containers/EventDetailsContainer';
 import EventsListContainer from './containers/EventsListContainer';
 import LoginContainer from './containers/LoginContainer';
+import RegisterContainer from './containers/RegisterContainer';
 import { GlobalHistory } from './helpers/history';
 
 const App: FunctionComponent = () => (
@@ -15,6 +16,7 @@ const App: FunctionComponent = () => (
         <Route path="/createEvent" element={<CreateEventContainer />} />
         <Route path="/" element={<EventsListContainer />} />
         <Route path="/events/:id" element={<EventDetailsContainer />} />
+        <Route path="/register" element={<RegisterContainer />} />
       </Routes>
     </BrowserRouter>
   </>
