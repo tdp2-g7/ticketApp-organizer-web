@@ -22,7 +22,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
       return {
         ...state,
         loading: false,
-        user: data.data,
+        user: data,
       };
 
     case constants.USER_ON_LOGIN_FAILED:
