@@ -89,8 +89,8 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     >
       <Text>{event.location.label}</Text>
       <Map
-        lat={event.location.lat}
-        lng={event.location.lng}
+        lat={Number(event.location.lat)}
+        lng={Number(event.location.lng)}
         isPreview
       />
     </Modal>

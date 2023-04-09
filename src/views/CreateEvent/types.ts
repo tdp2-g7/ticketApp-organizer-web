@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-import { ISchedule } from 'src/types/events.types';
+import { ILocation, ISchedule } from 'src/types/events.types';
 
 export interface ICreateEventProps {
   onCreateEvent: (formData: ICreateEventFormData) => void;
@@ -17,7 +17,7 @@ export interface ICreateEventProps {
 export interface ICreateEventFormData {
   title: string;
   description: string;
-  location: string;
+  location: ILocation;
   type: string;
   date: Date;
   time: string;

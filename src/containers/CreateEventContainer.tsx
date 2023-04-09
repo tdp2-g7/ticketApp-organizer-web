@@ -44,10 +44,9 @@ const CreateEventContainer: FunctionComponent = () => {
         endTime:
           eventEndTime && new Date(eventEndTime.format('YYYY-MM-DDTHH:mm:ss')),
         schedule,
-        // TODO: Change this for the real location
         location: {
-          lat: location.y,
-          lng: location.x,
+          lat: location.y.toString(),
+          lng: location.x.toString(),
           label: location.label,
         },
       };

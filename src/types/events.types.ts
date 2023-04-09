@@ -30,7 +30,7 @@ export interface ISchedule {
 }
 
 export interface ILocation {
-  lat: number;
-  lng: number;
+  lat: number | string;
+  lng: number | string;
   label: string;
 }
