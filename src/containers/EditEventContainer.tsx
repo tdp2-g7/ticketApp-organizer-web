@@ -18,9 +18,11 @@ const EditEventContainer: FunctionComponent = () => {
   const { eventData } = useTypedSelector((state) => state.event);
 
   const [reserveDate, setReserveDate] = useState(new Date());
+  const [location, setLocation] = useState<any>(eventData?.location);
   const [modalSchedule, setModalSchedule] = useState(false);
   const [location, setLocation] = useState<any>({});
   const [schedule, setSchedule] = useState<any>([]);
+  console.log('🚀 ~ location:', location);
 
   const params = useParams();
   const eventId = params.id;
@@ -118,7 +120,7 @@ const EditEventContainer: FunctionComponent = () => {
         onSubmit={onSubmitSchedule}
         modalSchedule={modalSchedule}
         onClose={() => setModalSchedule(false)}
-        schedule={schedule}
+        schedule={schedule.length ? schedule : eventData?.schedule}
       />
     </Layout>
   );

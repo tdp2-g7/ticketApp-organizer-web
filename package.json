@@ -30,7 +30,6 @@
     "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
     "react-final-form": "^6.5.9",
-    "react-google-login": "^5.2.2",
     "react-leaflet": "^4.2.1",
     "react-modal": "^3.16.1",
     "react-redux": "^8.0.4",
