@@ -1,18 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import LogoImg from 'src/assets/logo.png';
-import GoogleImg from 'src/assets/google-logo.png';
 import FacebookImg from 'src/assets/facebook.png';
 import TwitterImg from 'src/assets/twitter.png';
 import LinkeInImg from 'src/assets/linkedIn.png';
+import GoogleButton from 'src/components/GoogleButton/GoogleButton';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import GoogleLogin from 'react-google-login';
 import { GOOGLE_CLIENT_ID } from 'src/configs/configs';
 import {
   CenterContainer,
-  Google,
   InfoContainer,
   Logo,
-  RegisterButton,
   RegisterContainer,
   Subtitle,
   SubtitleBold,
@@ -22,8 +19,6 @@ import {
   Icons,
   EndRowContainer,
   IconsContainer,
-  LoginButton,
-  GoogleSmall,
 } from './styles';
 import { IRegisterProps } from './types';
 
@@ -45,35 +40,11 @@ const Auth: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
         <CenterContainer>
           <Title>¡Bienvenido de nuevo!</Title>
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <GoogleLogin
-              render={(renderProps) => (
-                <LoginButton onClick={renderProps.onClick}>
-                  <Google src={GoogleImg} alt='google' />
-                  Iniciar sesion con Google
-                </LoginButton>
-              )}
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText='Iniciar sesion con Google'
-              onSuccess={responseLoginGoogle}
-              onFailure={responseLoginGoogle}
-              cookiePolicy={'single_host_origin'}
-            />
+            <GoogleButton text='Registrarse con Google' onSuccess={responseRegisterGoogle} />
           </GoogleOAuthProvider>
           <InfoText>o</InfoText>
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <GoogleLogin
-              render={(renderProps) => (
-                <RegisterButton onClick={renderProps.onClick}>
-                  <GoogleSmall src={GoogleImg} alt='google' />
-                  Registrarse con Google
-                </RegisterButton>
-              )}
-              clientId={GOOGLE_CLIENT_ID}
-              buttonText='Registrarse con Google'
-              onSuccess={responseRegisterGoogle}
-              onFailure={responseRegisterGoogle}
-              cookiePolicy={'single_host_origin'}
-            />
+          <GoogleButton text='Iniciar sesión con Google' onSuccess={responseLoginGoogle} isSmall />
           </GoogleOAuthProvider>
         </CenterContainer>
         <EndRowContainer>

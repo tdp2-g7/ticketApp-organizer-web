@@ -185,7 +185,12 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 </RowContainer>
                 <div>
                   <Label>Ubicacion</Label>
-                  <Map onSearch={setLocation} />
+                  <Map
+                    onSearch={setLocation}
+                    lat={Number(eventInitialValues?.location.lat)}
+                    lng={Number(eventInitialValues?.location.lng)}
+                    isPreview
+                  />
                 </div>
                 <ColumnContainer>
                   <Label>Imagenes</Label>
