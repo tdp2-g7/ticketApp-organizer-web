@@ -5,6 +5,7 @@ import { numToLargeMonth } from 'src/helpers/longDates';
 import { Sizes } from 'src/helpers/sizes';
 import Map from 'src/components/Map/Map';
 import ProgressBar from 'src/components/ProgressBar';
+import { renderLocation } from 'src/helpers/location';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -109,7 +110,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
       title="Ver mapa"
       size={Sizes.medium}
     >
-      <Text>{event.location.label}</Text>
+      <Text>{renderLocation(event.location.label)}</Text>
       <Map
         lat={Number(event.location.lat)}
         lng={Number(event.location.lng)}
@@ -161,7 +162,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
             </RowContainer>
             <RowContainer>
               <LocationIcon />
-              <Text>{event.location.label}</Text>
+              <Text>{renderLocation(event.location.label)}</Text>
               <OpenModalButton onClick={() => setMapsModalOpen(true)}>
                 <p>Ver mapa</p>
               </OpenModalButton>

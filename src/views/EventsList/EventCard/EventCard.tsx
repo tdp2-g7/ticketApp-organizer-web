@@ -1,4 +1,6 @@
-import { globalNavigate } from '../../../helpers/history';
+import { renderLocation } from 'src/helpers/location';
+import { globalNavigate } from 'src/helpers/history';
+import { numToMonth } from 'src/helpers/shortDates';
 import {
   CustomImg,
   DateContainer,
@@ -14,7 +16,6 @@ import {
   TextContainer,
 } from './styles';
 import NoImage from '../../../assets/noImage.png';
-import { numToMonth } from '../../../helpers/shortDates';
 
 const EventCard = (props: any) => {
   const { event } = props;
@@ -48,7 +49,7 @@ const EventCard = (props: any) => {
           <EventTitle>{event.title}</EventTitle>
           <RowContainer>
             <PlaceOutlinedIcon />
-            <LocationText>{event.location.label}</LocationText>
+            <LocationText>{renderLocation(event.location.label)}</LocationText>
           </RowContainer>
         </TextContainer>
       </InfoContainer>

@@ -29,13 +29,14 @@ export const TopNav = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 50px;
+  width: 'auto';
   height: 50px;
 `;
 
 export const RowDiv = styled.div`
   display: flex;
   flex-direction: row;
+  cursor: pointer;
   align-items: center;
 
   & > p {
