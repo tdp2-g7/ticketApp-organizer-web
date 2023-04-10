@@ -21,7 +21,6 @@ const EditEventContainer: FunctionComponent = () => {
   const [location, setLocation] = useState<any>(eventData?.location);
   const [modalSchedule, setModalSchedule] = useState(false);
   const [schedule, setSchedule] = useState<any>([]);
-  console.log('🚀 ~ location:', location);
 
   const params = useParams();
   const eventId = params.id;
