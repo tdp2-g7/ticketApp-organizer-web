@@ -24,11 +24,6 @@ const EditEventContainer: FunctionComponent = () => {
 
   const params = useParams();
   const eventId = params.id;
-  let initialValues;
-  if (eventData) {
-    const { images, ...values } = eventData;
-    initialValues = { ...values, images: [] };
-  }
 
   useEffect(() => {
     if (eventId) {
@@ -114,7 +109,7 @@ const EditEventContainer: FunctionComponent = () => {
         onSubmit={onSubmit}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
-        eventInitialValues={initialValues}
+        eventInitialValues={eventData}
         isEdit
         deleteImage={deleteImage}
         setModalSchedule={setModalSchedule}

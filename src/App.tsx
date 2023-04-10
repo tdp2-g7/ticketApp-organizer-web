@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { gapi } from 'gapi-script';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter, Navigate, Route, Routes,
+} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import CreateEventContainer from './containers/CreateEventContainer';
 import EventDetailsContainer from './containers/EventDetailsContainer';
@@ -69,6 +71,7 @@ const App: FunctionComponent = () => {
               </PrivateRoute>
             }
           />
+          <Route path='*' element={<Navigate to='/home' replace />} />
         </Routes>
       </BrowserRouter>
     </>

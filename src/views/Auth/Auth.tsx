@@ -40,11 +40,18 @@ const Auth: FunctionComponent<IRegisterProps> = (props: IRegisterProps) => {
         <CenterContainer>
           <Title>¡Bienvenido de nuevo!</Title>
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-            <GoogleButton text='Registrarse con Google' onSuccess={responseRegisterGoogle} />
+            <GoogleButton
+              text='Iniciar sesión con Google'
+              onSuccess={responseLoginGoogle}
+            />
           </GoogleOAuthProvider>
           <InfoText>o</InfoText>
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-          <GoogleButton text='Iniciar sesión con Google' onSuccess={responseLoginGoogle} isSmall />
+            <GoogleButton
+              text='Registrarse con Google'
+              onSuccess={responseRegisterGoogle}
+              isSmall
+            />
           </GoogleOAuthProvider>
         </CenterContainer>
         <EndRowContainer>

@@ -27,10 +27,12 @@ const CreateEventContainer: FunctionComponent = () => {
 
   const onCreateEvent = async (formData: ICreateEventFormData) => {
     const imagesBase64: any = [];
-    await Promise.all(Array.from(formData.images).map(async (image: any) => {
-      const imageBase64: any = await getBase64Picture(image);
-      imagesBase64.push(imageBase64.split(',')[1]);
-    }));
+    await Promise.all(
+      Array.from(formData.images).map(async (image: any) => {
+        const imageBase64: any = await getBase64Picture(image);
+        imagesBase64.push(imageBase64.split(',')[1]);
+      }),
+    );
 
     if (imagesBase64 && user) {
       const body = {
