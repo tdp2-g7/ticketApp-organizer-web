@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
-import LogoImg from '../../assets/logo.png';
+import LogoImg from '../../assets/logo-sin-fondo.png';
 import { globalNavigate } from '../../helpers/history';
 import { onLogout } from '../../redux/actions/user.actions';
 
@@ -11,7 +11,6 @@ import {
   RightContainer,
   HeaderLink,
   LogoutContainer,
-  Title,
   CreateEventLink,
   LogoutLink,
 } from './styles';
@@ -31,7 +30,6 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
       <TopNav>
         <RowDiv onClick={() => globalNavigate('/home')}>
           <Logo src={LogoImg} alt='logo' />
-          <Title>TicketApp</Title>
         </RowDiv>
         <RightContainer>
           <CreateEventLink onClick={() => globalNavigate('/createEvent')}>

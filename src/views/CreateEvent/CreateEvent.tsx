@@ -201,8 +201,8 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   <Label>Ubicacion</Label>
                   <Map
                     onSearch={setLocation}
-                    lat={Number(eventInitialValues?.location.lat)}
-                    lng={Number(eventInitialValues?.location.lng)}
+                    lat={Number(eventInitialValues?.location.lat) || undefined}
+                    lng={Number(eventInitialValues?.location.lng) || undefined}
                     isPreview
                   />
                 </div>
