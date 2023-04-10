@@ -88,7 +88,7 @@ export const RightContainer = styled.div`
   align-items: center;
 
   @media (max-width: 1500px) {
-    width: 50%;
+    width: 40%;
   }
 
   @media (max-width: 1100px) {
@@ -98,7 +98,15 @@ export const RightContainer = styled.div`
 
 export const HeaderLink = styled.div`
   text-decoration: none;
-  width: 200px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: ${COLORS.white};
+`;
+
+export const CreateEventLink = styled.div`
+  text-decoration: none;
   font-size: 18px;
   border: none;
   cursor: pointer;
@@ -115,4 +123,13 @@ export const LogoutContainer = styled.div`
 export const Title = styled.p`
   font-size: 24px;
   font-weight: bold;
+`;
+
+export const LogoutLink = styled.div`
+  text-decoration: none;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: ${COLORS.white};
 `;

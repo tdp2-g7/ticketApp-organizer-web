@@ -28,6 +28,9 @@ const ScheduleComponent: FC<IScheduleProps> = (props: IScheduleProps) => {
 
   useEffect(() => {
     if (schedule) {
+      const newNumbers = schedule.map((item, index) => ({ id: index + 1 }));
+      setNumbers(newNumbers);
+
       const result: any = {};
 
       for (let i = 0; i < schedule.length; i += 1) {

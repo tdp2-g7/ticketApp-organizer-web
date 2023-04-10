@@ -123,7 +123,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     <>
       {renderScheduleModal()}
       {renderMapsModal()}
-      <RowContainer onClick={() => navigate('/')}>
+      <RowContainer onClick={() => navigate('/home')}>
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
       </RowContainer>

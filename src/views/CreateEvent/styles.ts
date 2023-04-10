@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Clear } from '@mui/icons-material';
+import { Clear, InfoOutlined } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 
 export const FormContainer = styled.div`
@@ -59,6 +59,12 @@ export const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+`;
+
+export const RowFAQsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const Label = styled.p`
@@ -122,6 +128,9 @@ export const RemoveIcon = styled(Clear)`
   margin: 0;
   color: ${COLORS.white};
   cursor: pointer;
+`;
+export const InfoOutlinedIcon = styled(InfoOutlined)`
+  margin: 0;
 `;
 
 export const RowImage = styled.div`

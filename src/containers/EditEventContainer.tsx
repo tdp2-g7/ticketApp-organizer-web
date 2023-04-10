@@ -60,7 +60,7 @@ const EditEventContainer: FunctionComponent = () => {
         ...formData,
         userId: user.userId,
         images: imagesBase64,
-        type: formData.type.toLowerCase(),
+        type: formData.type,
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
