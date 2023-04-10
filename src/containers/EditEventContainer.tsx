@@ -21,10 +21,14 @@ const EditEventContainer: FunctionComponent = () => {
   const [location, setLocation] = useState<any>(eventData?.location);
   const [modalSchedule, setModalSchedule] = useState(false);
   const [schedule, setSchedule] = useState<any>([]);
-  console.log('🚀 ~ location:', location);
 
   const params = useParams();
   const eventId = params.id;
+  let initialValues;
+  if (eventData) {
+    const { images, ...values } = eventData;
+    initialValues = { ...values, images: [] };
+  }
 
   useEffect(() => {
     if (eventId) {
@@ -53,6 +57,7 @@ const EditEventContainer: FunctionComponent = () => {
     eventData?.images.forEach((imageBase64: string) => {
       imagesBase64.push(imageBase64);
     });
+
     if (imagesBase64 && user) {
       const body = {
         ...formData,
@@ -107,7 +112,7 @@ const EditEventContainer: FunctionComponent = () => {
         onSubmit={onSubmit}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
-        eventInitialValues={eventData}
+        eventInitialValues={initialValues}
         isEdit
         deleteImage={deleteImage}
         setModalSchedule={setModalSchedule}
