@@ -129,9 +129,9 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
       </RowContainer>
       <RowContainerTitleEdit>
         <Title>{event.title}</Title>
-        <ButtonContainer>
+        <ButtonContainer onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}>
           <EditOutlinedIcon />
-          <Button onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}>Editar</Button>
+          <Button>Editar</Button>
         </ButtonContainer>
       </RowContainerTitleEdit>
       <ImagesContainer>

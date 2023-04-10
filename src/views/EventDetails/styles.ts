@@ -169,6 +169,7 @@ export const ButtonContainer = styled.div`
   border: 1px solid;
   border-color: ${COLORS.lightViolet};
   width: 80px;
+  padding: 5px;
   cursor: pointer;
 `;
 
