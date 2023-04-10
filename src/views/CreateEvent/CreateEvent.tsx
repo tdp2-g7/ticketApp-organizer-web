@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
+import { Tooltip } from 'react-tooltip';
 import Input from '../../components/Input/Input';
 import { typesOfEvents } from '../../helpers/options';
 import { requiredValidation } from '../../helpers/validations';
@@ -26,11 +27,14 @@ import {
   RemoveIcon,
   RowImage,
   ActionButton,
+  RowFAQsContainer,
+  InfoOutlinedIcon,
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
 import TimePicker from '../../components/TimePicker/TimePicker';
 import Map from '../../components/Map/Map';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const CreateEvent: FunctionComponent<ICreateEventProps> = (
   props: ICreateEventProps,
@@ -122,7 +126,17 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   />
                 </div>
                 <div>
-                  <Label>Preguntas frecuentes</Label>
+                  <RowFAQsContainer>
+                    <Label>Preguntas frecuentes</Label>
+                      <Tooltip id='my-tooltip' />
+                      <a
+                        data-tooltip-id='my-tooltip'
+                        data-tooltip-content='Las preguntas deben empezar con P: y las respuestas con R:'
+                      >
+                        <InfoOutlinedIcon />
+                      </a>
+                  </RowFAQsContainer>
+
                   <Field
                     render={Input}
                     multiline
@@ -138,7 +152,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     {schedule.length ? 'Editar' : 'Agregar'} cronograma
                   </ActionButton>
                 </div>
-                <div/>
+                <div />
                 <div>
                   <Label>Tipo de evento</Label>
                   <Field
@@ -155,7 +169,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                           showError={false}
                           input={input}
                           meta={meta}
-                          label='Type of Event'
+                          label='Tipo de evento'
                         />
                       </div>
                     )}
@@ -188,7 +202,17 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                   <Map onSearch={setLocation} />
                 </div>
                 <ColumnContainer>
+                  <RowFAQsContainer>
                   <Label>Imagenes</Label>
+
+                      <Tooltip id='my-tooltip' />
+                      <a
+                        data-tooltip-id='my-tooltip'
+                        data-tooltip-content='Al eliminar una imagen se debe confirmar con el boton Editar Evento'
+                      >
+                        <InfoOutlinedIcon />
+                      </a>
+                  </RowFAQsContainer>
                   <Field name='images' validate={requiredValidation}>
                     {({ input: { value, onChange, ...input } }) => (
                       <input

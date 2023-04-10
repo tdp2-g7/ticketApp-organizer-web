@@ -19,6 +19,7 @@ const EditEventContainer: FunctionComponent = () => {
 
   const [reserveDate, setReserveDate] = useState(new Date());
   const [modalSchedule, setModalSchedule] = useState(false);
+  const [location, setLocation] = useState<any>({});
   const [schedule, setSchedule] = useState<any>([]);
 
   const params = useParams();
@@ -51,16 +52,21 @@ const EditEventContainer: FunctionComponent = () => {
     eventData?.images.forEach((imageBase64: string) => {
       imagesBase64.push(imageBase64);
     });
-
     if (imagesBase64 && user) {
       const body = {
         ...formData,
         userId: user.userId,
         images: imagesBase64,
-        type: formData.type.toLowerCase(),
+        type: formData.type,
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
+        schedule,
+        location: {
+          lat: location.y.toString(),
+          lng: location.x.toString(),
+          label: location.label,
+        },
       };
       dispatch(onEditRequested(body));
     }
@@ -105,6 +111,8 @@ const EditEventContainer: FunctionComponent = () => {
         deleteImage={deleteImage}
         setModalSchedule={setModalSchedule}
         schedule={schedule}
+        location={location}
+        setLocation={setLocation}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}

@@ -14,6 +14,9 @@ const redirectMiddleware = () => (next: any) => (action: any) => {
     case eventConstants.ON_EDIT_SUCCEEDED:
       globalNavigate(`/events/${data.eventId}`);
       break;
+    case userConstants.USER_ON_LOGOUT:
+      globalNavigate('/auth');
+      break;
     default:
       break;
   }

@@ -29,7 +29,7 @@ const CreateEventContainer: FunctionComponent = () => {
       };
       dispatch(onGetAllEventsByUserIdRequested(data));
     }
-  }, [dispatch, currentPage]);
+  }, [dispatch, currentPage, user]);
 
   const handleFilters = () => {
     if (user) {

@@ -12,6 +12,8 @@ import {
   HeaderLink,
   LogoutContainer,
   Title,
+  CreateEventLink,
+  LogoutLink,
 } from './styles';
 import { ILayoutProps } from './types';
 
@@ -32,20 +34,17 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
           <Title>TicketApp</Title>
         </RowDiv>
         <RightContainer>
-          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+          <CreateEventLink onClick={() => globalNavigate('/createEvent')}>
             Crear evento
-          </HeaderLink>
-          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
-            Agenda
-          </HeaderLink>
-          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+          </CreateEventLink>
+          <HeaderLink onClick={() => globalNavigate('/home')}>
             Metricas
           </HeaderLink>
-          <HeaderLink onClick={() => globalNavigate('/createEvent')}>
+          <HeaderLink onClick={() => globalNavigate('/home')}>
             Perfil
           </HeaderLink>
           <LogoutContainer>
-            <HeaderLink onClick={() => onClickLogout()}>Salir</HeaderLink>
+            <LogoutLink onClick={() => onClickLogout()}>Salir</LogoutLink>
           </LogoutContainer>
         </RightContainer>
       </TopNav>
