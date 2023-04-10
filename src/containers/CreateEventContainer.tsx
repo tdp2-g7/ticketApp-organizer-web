@@ -43,8 +43,8 @@ const CreateEventContainer: FunctionComponent = () => {
         ticketsPerPerson: Number(formData.ticketsPerPerson),
         schedule,
         location: {
-          lat: location.y.toString(),
-          lng: location.x.toString(),
+          lat: location.lat.toString(),
+          lng: location.lng.toString(),
           label: location.label,
         },
       };

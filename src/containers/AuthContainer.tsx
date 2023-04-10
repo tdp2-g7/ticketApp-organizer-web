@@ -12,11 +12,11 @@ const AuthContainer: FunctionComponent = () => {
 
   const onRegister = (googleResponse: any) => {
     const data = {
-      userId: googleResponse.profileObj.googleId,
-      name: googleResponse.profileObj.givenName,
-      lastName: googleResponse.profileObj.familyName,
+      userId: googleResponse.sub,
+      name: googleResponse.given_name,
+      lastName: googleResponse.family_name,
       role: Role.ORGANIZER,
-      email: googleResponse.profileObj.email,
+      email: googleResponse.email,
     };
 
     dispatch(onRegisterRequested(data));
@@ -24,9 +24,9 @@ const AuthContainer: FunctionComponent = () => {
 
   const onLogin = (googleResponse: any) => {
     const data = {
-      userId: googleResponse.profileObj.googleId,
-      accessToken: googleResponse.accessToken,
-      email: googleResponse.profileObj.email,
+      userId: googleResponse.sub,
+      accessToken: googleResponse.access_token,
+      email: googleResponse.email,
     };
 
     dispatch(onLoginRequested(data));

@@ -23,7 +23,11 @@ const Search = (props: any) => {
   const { provider } = props;
 
   const searchEventHandler = (result: any) => {
-    props.onSearch(result.location);
+    props.onSearch({
+      lat: result.location.y,
+      lng: result.location.x,
+      label: result.location.label,
+    });
     props.setLocation(result.location);
   };
 
