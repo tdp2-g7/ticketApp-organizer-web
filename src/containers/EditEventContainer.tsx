@@ -43,12 +43,14 @@ const EditEventContainer: FunctionComponent = () => {
 
   const onSubmit = async (formData: ICreateEventFormData) => {
     const imagesBase64: any = [];
-    await Promise.all(
-      Array.from(formData.images).map(async (image: any) => {
-        const imageBase64: any = await getBase64Picture(image);
-        imagesBase64.push(imageBase64.split(',')[1]);
-      }),
-    );
+    if (formData.images instanceof FileList) {
+      await Promise.all(
+        Array.from(formData.images).map(async (image: any) => {
+          const imageBase64: any = await getBase64Picture(image);
+          imagesBase64.push(imageBase64.split(',')[1]);
+        }),
+      );
+    }
 
     eventData?.images.forEach((imageBase64: string) => {
       imagesBase64.push(imageBase64);
@@ -63,6 +65,12 @@ const EditEventContainer: FunctionComponent = () => {
         date: reserveDate,
         vacancies: Number(formData.vacancies),
         ticketsPerPerson: Number(formData.ticketsPerPerson),
+        schedule,
+        location: {
+          lat: location.lat.toString(),
+          lng: location.lng.toString(),
+          label: location.label,
+        },
       };
       dispatch(onEditRequested(body));
     }
