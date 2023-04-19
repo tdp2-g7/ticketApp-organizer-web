@@ -3,6 +3,7 @@ import { gapi } from 'gapi-script';
 import {
   BrowserRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
+import { NotificationContainer } from 'react-notifications';
 import { useDispatch } from 'react-redux';
 import CreateEventContainer from './containers/CreateEventContainer';
 import EventDetailsContainer from './containers/EventDetailsContainer';
@@ -11,6 +12,7 @@ import EventsListContainer from './containers/EventsListContainer';
 import AuthContainer from './containers/AuthContainer';
 import { GlobalHistory } from './helpers/history';
 import { getCookie } from './helpers/cookies';
+import 'react-notifications/lib/notifications.css';
 import { onLoginRequested } from './redux/actions/user.actions';
 import { GOOGLE_CLIENT_ID } from './configs/configs';
 import PrivateRoute from './containers/PrivateRoute';
@@ -35,6 +37,7 @@ const App: FunctionComponent = () => {
 
   return (
     <>
+      <NotificationContainer />
       <BrowserRouter>
         <GlobalHistory />
         <Routes>
