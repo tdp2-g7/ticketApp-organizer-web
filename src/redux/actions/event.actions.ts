@@ -92,3 +92,24 @@ export function onEventDeleteImage(data: unknown): AnyAction {
     data,
   };
 }
+
+export function onCreateDraftRequested(data: IEvent): AnyAction {
+  return {
+    type: constants.EVENT_ON_CREATE_DRAFT_REQUESTED,
+    data,
+  };
+}
+
+export function onCreateDraftSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_CREATE_DRAFT_SUCCEEDED,
+    data,
+  };
+}
+
+export function onCreateDraftFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_CREATE_DRAFT_FAILED,
+    error,
+  };
+}

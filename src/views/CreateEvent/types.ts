@@ -11,6 +11,8 @@ export interface ICreateEventProps {
   schedule: ISchedule[];
   location: any;
   setLocation: (location: any) => void;
+  setFormValues: (formValues: any) => void;
+  onSaveDraft?: () => void;
 }
 export interface ICreateEventFormData {
   title: string;

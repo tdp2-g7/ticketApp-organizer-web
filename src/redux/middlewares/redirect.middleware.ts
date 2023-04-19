@@ -6,8 +6,7 @@ const redirectMiddleware = () => (next: any) => (action: any) => {
   const { type, data } = action;
   switch (type) {
     case eventConstants.ON_CREATE_SUCCEEDED:
-      globalNavigate('/home');
-      break;
+    case eventConstants.EVENT_ON_CREATE_DRAFT_SUCCEEDED:
     case userConstants.USER_ON_LOGIN_SUCCEEDED:
       globalNavigate('/home');
       break;
