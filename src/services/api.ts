@@ -17,10 +17,10 @@ async function getOptions() {
 
 function errorResponse(error: any) {
   const { response } = error;
-  let message = error;
+  let message;
   if (response) {
     const { data } = response;
-    message = data.error;
+    message = data.message;
   }
   return message;
 }
