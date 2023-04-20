@@ -52,3 +52,25 @@ export function onRegisterFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+// onEditProfileRequested
+export function onEditProfileRequested(data: any): AnyAction {
+  return {
+    type: constants.USER_ON_EDIT_PROFILE_REQUESTED,
+    data,
+  };
+}
+
+export function onEditProfileSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.USER_ON_EDIT_PROFILE_SUCCEEDED,
+    data,
+  };
+}
+
+export function onEditProfileFailed(error: unknown): AnyAction {
+  return {
+    type: constants.USER_ON_EDIT_PROFILE_FAILED,
+    error,
+  };
+}

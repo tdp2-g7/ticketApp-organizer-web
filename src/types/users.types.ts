@@ -1,11 +1,10 @@
-import { Role } from 'src/helpers/roles';
-
 export interface IUser {
   userId: string;
   name: string;
   lastName: string;
-  role: Role;
   email: string;
+  description?: string;
+  image?: any;
 }
 
 export interface IUserDefaultState {
