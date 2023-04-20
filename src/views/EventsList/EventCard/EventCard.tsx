@@ -13,12 +13,13 @@ import {
   MonthLabel,
   PlaceOutlinedIcon,
   RowContainer,
+  Tag,
   TextContainer,
 } from './styles';
 import NoImage from '../../../assets/noImage.png';
 
 const EventCard = (props: any) => {
-  const { event } = props;
+  const { event, isDraft } = props;
 
   const minutes = () => {
     if (new Date(event.startTime).getMinutes() < 10) {
@@ -30,13 +31,14 @@ const EventCard = (props: any) => {
   return (
     <EventContainer
       key={event.eventId}
-      onClick={() => globalNavigate(`/events/${event.eventId}`)}
+      onClick={() => (isDraft ? globalNavigate(`/event/edit/${event.eventId}`) : globalNavigate(`/events/${event.eventId}`))}
     >
       {event.images ? (
         <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
       ) : (
         <CustomImg src={NoImage} />
       )}
+      {isDraft && <Tag>Borrador</Tag>}
       <InfoContainer>
         <DateContainer>
           <MonthLabel>{numToMonth(new Date(event.date).getMonth())}</MonthLabel>
@@ -46,10 +48,10 @@ const EventCard = (props: any) => {
           </HourLabel>
         </DateContainer>
         <TextContainer>
-          <EventTitle>{event.title}</EventTitle>
+          <EventTitle>{event.title || 'Titulo'}</EventTitle>
           <RowContainer>
             <PlaceOutlinedIcon />
-            <LocationText>{renderLocation(event.location.label)}</LocationText>
+            <LocationText>{event.location ? renderLocation(event.location.label) : 'Ubicación'}</LocationText>
           </RowContainer>
         </TextContainer>
       </InfoContainer>

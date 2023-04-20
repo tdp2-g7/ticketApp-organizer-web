@@ -38,6 +38,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
     filters,
     setFilters,
     handleFilters,
+    drafts,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -144,6 +145,9 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           <EventsContainer>
             {events.map((event) => (
               <EventCard event={event} />
+            ))}
+            {drafts.map((event) => (
+              <EventCard event={event} isDraft />
             ))}
           </EventsContainer>
           <ArrowsContainer>

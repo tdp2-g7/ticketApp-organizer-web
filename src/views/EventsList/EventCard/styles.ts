@@ -92,3 +92,16 @@ export const RowContainer = styled.div`
 export const PlaceOutlinedIcon = styled(PlaceOutlined)`
   transform: scale(0.7);
 `;
+
+export const Tag = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px;
+  margin: 10px;
+  background-color: red;
+  border-radius: 10px;
+  color: ${COLORS.white};
+  font-size: 12px;
+  font-family: 'Poppins';
+`;
