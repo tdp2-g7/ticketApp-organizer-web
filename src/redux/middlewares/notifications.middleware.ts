@@ -21,7 +21,7 @@ const notificationMiddleware = () => (next: any) => (action: any) => {
     case userConstants.USER_ON_REGISTER_FAILED:
     case eventConstants.ON_CREATE_FAILED:
     case eventConstants.ON_EDIT_FAILED:
-      sendErrorNotification(error[0]);
+      sendErrorNotification(error);
       break;
     default:
       break;
