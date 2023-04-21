@@ -8,6 +8,7 @@ const initialState: IEventDefaultState = {
   events: [],
   maxPage: 0,
   eventData: null,
+  drafts: [],
 };
 
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -18,6 +19,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_GET_DETAILS_REQUESTED:
     case constants.ON_EDIT_REQUESTED:
     case constants.EVENT_ON_CREATE_DRAFT_REQUESTED:
+    case constants.EVENT_ON_GET_DRAFTS_REQUESTED:
       return {
         ...state,
         loading: true,
@@ -44,7 +46,12 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         loading: false,
         eventData: data,
       };
-
+    case constants.EVENT_ON_GET_DRAFTS_SUCCEEDED:
+      return {
+        ...state,
+        loading: false,
+        drafts: data,
+      };
     case constants.ON_GET_DETAILS_SUCCEEDED:
       return {
         ...state,
@@ -59,6 +66,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_EDIT_FAILED:
     case constants.EVENT_ON_CREATE_DRAFT_FAILED:
     case constants.EVENT_ON_CREATE_DRAFT_SUCCEEDED:
+    case constants.EVENT_ON_GET_DRAFTS_FAILED:
       return {
         ...state,
         loading: false,

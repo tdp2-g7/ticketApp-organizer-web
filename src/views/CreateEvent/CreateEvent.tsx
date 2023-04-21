@@ -200,8 +200,10 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                     <Label>Ubicacion</Label>
                     <Map
                       onSearch={setLocation}
-                      lat={Number(eventInitialValues?.location.lat) || undefined}
-                      lng={Number(eventInitialValues?.location.lng) || undefined}
+                      lat={eventInitialValues?.location
+                        ? Number(eventInitialValues?.location.lat) : undefined}
+                      lng={eventInitialValues?.location
+                        ? Number(eventInitialValues?.location.lng) : undefined}
                       isPreview />
                   </div>
                   <ColumnContainer>
@@ -240,7 +242,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                       ))}
                     </ImagesRowContainer>
                     <ImagesToEditContainer>
-                      {eventInitialValues
+                      {eventInitialValues && eventInitialValues.images
                         && eventInitialValues.images.map((image: any) => (
                           <RowImage>
                             <ImageCard src={`data:image/jpeg;base64,${image}`} />

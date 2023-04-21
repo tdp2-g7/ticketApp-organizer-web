@@ -113,3 +113,24 @@ export function onCreateDraftFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onGetDrafts(userId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_DRAFTS_REQUESTED,
+    userId,
+  };
+}
+
+export function onGetDraftsSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_DRAFTS_SUCCEEDED,
+    data,
+  };
+}
+
+export function onGetDraftsFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_DRAFTS_FAILED,
+    error,
+  };
+}

@@ -21,6 +21,7 @@ export interface IEventDefaultState {
   data: any;
   maxPage: number;
   eventData: IEvent | null;
+  drafts: IEvent[];
 }
 
 export interface ISchedule {

@@ -38,3 +38,20 @@ export async function onCreateDraft(data: IEvent): Promise<AxiosResponse> {
   const response = await post(`${EVENTS_API_URL}/events/draft`, data);
   return response;
 }
+
+export async function onGetDrafts(userId: string): Promise<any> {
+  // const response = await get(`${EVENTS_API_URL}/events/drafts/${userId}`);
+
+  const response = [
+    {
+      eventId: 'ab89a968-1c39-415b-8a79-dad00ef291cf',
+      userId,
+      description: 'EVENTO MARTIN GARRIX',
+      type: 'Concierto ',
+      vacancies: 100000,
+      ticketsPerPerson: 4,
+      faqs: 'P: ¿Quien toca?\nR: Martin Garrix',
+    },
+  ];
+  return response;
+}
