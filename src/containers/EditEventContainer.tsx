@@ -116,6 +116,7 @@ const EditEventContainer: FunctionComponent = () => {
         schedule={schedule}
         location={location}
         setLocation={setLocation}
+        setFormValues={(values: any) => console.log(values)}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}

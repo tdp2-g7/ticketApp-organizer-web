@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useTypedSelector from 'src/hooks/useTypedSelector';
-import { onCreateEventRequested } from '../redux/actions/event.actions';
+import { onCreateDraftRequested, onCreateEventRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
@@ -15,6 +15,7 @@ const CreateEventContainer: FunctionComponent = () => {
   const [modalSchedule, setModalSchedule] = useState(false);
   const [location, setLocation] = useState<any>({});
   const [schedule, setSchedule] = useState<any>([]);
+  const [formValues, setFormValues] = useState<any>({});
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -69,6 +70,10 @@ const CreateEventContainer: FunctionComponent = () => {
     setModalSchedule(false);
   };
 
+  const onSaveDraft = () => {
+    dispatch(onCreateDraftRequested(formValues));
+  };
+
   return (
     <Layout>
       <CreateEvent
@@ -80,6 +85,8 @@ const CreateEventContainer: FunctionComponent = () => {
         setLocation={setLocation}
         setModalSchedule={setModalSchedule}
         schedule={schedule}
+        setFormValues={setFormValues}
+        onSaveDraft={onSaveDraft}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}

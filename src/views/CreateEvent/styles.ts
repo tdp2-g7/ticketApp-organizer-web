@@ -44,6 +44,7 @@ export const Title = styled.p`
   font-size: 24px;
   margin-bottom: 0px;
   margin-left: 10%;
+  margin-top: 0;
   font-weight: bold;
   flex: 1;
   font-family: 'Poppins';
@@ -150,4 +151,24 @@ export const ActionButton = styled.div`
   border-radius: 8px;
   width: 35%;
   background: ${COLORS.greyMischka};
+`;
+
+export const RowDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+export const DraftButton = styled.div`
+  padding: 8px;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 30px;
+  font-family: 'Poppins';
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid ${COLORS.violet};
+  color: ${COLORS.violet};
+  background-color: ${COLORS.white};
 `;

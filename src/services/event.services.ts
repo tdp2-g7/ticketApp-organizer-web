@@ -33,3 +33,8 @@ export async function onEditEvent(data: IEvent): Promise<AxiosResponse> {
   const response = await patch(`${EVENTS_API_URL}/events/${data.eventId}`, data);
   return response;
 }
+
+export async function onCreateDraft(data: IEvent): Promise<AxiosResponse> {
+  const response = await post(`${EVENTS_API_URL}/events/draft`, data);
+  return response;
+}
