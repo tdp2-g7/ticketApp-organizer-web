@@ -1,4 +1,7 @@
-import { sendErrorNotification, sendSuccessNotification } from '../../helpers/notifications';
+import {
+  sendErrorNotification,
+  sendSuccessNotification,
+} from '../../helpers/notifications';
 import * as userConstants from '../constants/user.constants';
 import * as eventConstants from '../constants/event.constants';
 

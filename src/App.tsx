@@ -16,6 +16,7 @@ import 'react-notifications/lib/notifications.css';
 import { onLoginRequested } from './redux/actions/user.actions';
 import { GOOGLE_CLIENT_ID } from './configs/configs';
 import PrivateRoute from './containers/PrivateRoute';
+import ProfileContainer from './containers/ProfileContainer';
 
 const App: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,14 @@ const App: FunctionComponent = () => {
             element={
               <PrivateRoute>
                 <EventDetailsContainer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoute>
+                <ProfileContainer />
               </PrivateRoute>
             }
           />
