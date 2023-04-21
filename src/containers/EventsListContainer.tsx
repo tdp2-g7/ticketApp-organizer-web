@@ -26,7 +26,6 @@ const CreateEventContainer: FunctionComponent = () => {
   }, [dispatch, user]);
 
   useEffect(() => {
-    // TODO change userId
     if (user) {
       const data = {
         userId: user.userId.toString(),

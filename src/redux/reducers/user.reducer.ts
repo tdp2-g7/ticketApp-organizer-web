@@ -13,12 +13,14 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
   switch (type) {
     case constants.USER_ON_LOGIN_REQUESTED:
     case constants.USER_ON_REGISTER_REQUESTED:
+    case constants.USER_ON_EDIT_PROFILE_REQUESTED:
       return {
         ...state,
         loading: true,
       };
 
     case constants.USER_ON_LOGIN_SUCCEEDED:
+    case constants.USER_ON_EDIT_PROFILE_SUCCEEDED:
       return {
         ...state,
         loading: false,
@@ -28,6 +30,7 @@ const userReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.USER_ON_LOGIN_FAILED:
     case constants.USER_ON_REGISTER_SUCCEEDED:
     case constants.USER_ON_REGISTER_FAILED:
+    case constants.USER_ON_EDIT_PROFILE_FAILED:
       return {
         ...state,
         loading: false,
