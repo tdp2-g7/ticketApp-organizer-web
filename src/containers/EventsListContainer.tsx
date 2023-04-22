@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useTypedSelector from '../hooks/useTypedSelector';
-import { onGetAllEventsByUserIdRequested, onGetDrafts } from '../redux/actions/event.actions';
+import { onGetAllEventsByUserIdRequested, onGetDrafts, onGetLocations } from '../redux/actions/event.actions';
 import EventsList from '../views/EventsList/EventsList';
 import Layout from '../views/Layout/Layout';
 
@@ -9,7 +9,9 @@ const ITEMS_PER_PAGE = 10;
 
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { events, maxPage, drafts } = useTypedSelector((state) => state.event);
+  const {
+    events, maxPage, drafts, locations,
+  } = useTypedSelector((state) => state.event);
   const { user } = useTypedSelector((state) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
@@ -22,6 +24,7 @@ const CreateEventContainer: FunctionComponent = () => {
   useEffect(() => {
     if (user) {
       dispatch(onGetDrafts(user.userId));
+      dispatch(onGetLocations(user.userId));
     }
   }, [dispatch, user]);
 
@@ -76,6 +79,7 @@ const CreateEventContainer: FunctionComponent = () => {
           setFilters={setFilters}
           handleFilters={handleFilters}
           drafts={drafts}
+          locations={locations}
         />
       )}
     </Layout>
