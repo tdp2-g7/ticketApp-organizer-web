@@ -53,7 +53,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   };
 
   const filtersView = (
-    <Modal title='Filters' onClose={() => setIsOpen(false)} isOpen={isOpen}>
+    <Modal title='Filtros' onClose={() => setIsOpen(false)} isOpen={isOpen}>
       <div>
         <CustomInput
           type='text'
@@ -78,6 +78,15 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           ))}
         </CustomSelect>
       </div>
+      <div>
+        <CustomInput
+          type='text'
+          placeholder='Buscar por Ubicacion'
+          value={filters.location}
+          onInput={(e) => setFilters({ ...filters, location: e.currentTarget.value })
+          }
+        />
+      </div>
       <CustomButton
         isInverted
         onClick={() => {
@@ -88,7 +97,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           });
         }}
       >
-        Clear
+        Limpiar
       </CustomButton>
       <CustomButton
         onClick={() => {
@@ -96,7 +105,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           setIsOpen(false);
         }}
       >
-        Filter
+        Filtrar
       </CustomButton>
     </Modal>
   );

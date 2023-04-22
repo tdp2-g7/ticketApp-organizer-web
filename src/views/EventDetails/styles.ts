@@ -206,3 +206,15 @@ export const ClockIcon = styled(AccessTime)`
   margin-right: 20px;
   margin-left: 30px;
 `;
+
+export const Type = styled.div`
+  padding: 6px;
+  margin-left: 20px;
+  width: 150px;
+  background-color: ${COLORS.lightViolet};
+  border-radius: 10px;
+  color: ${COLORS.white};
+  font-size: 12px;
+  font-family: 'Poppins';
+  text-align: center;
+`;

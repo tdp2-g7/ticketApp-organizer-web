@@ -33,6 +33,7 @@ import {
   RowContainerTitleEdit,
   OpenModalButton,
   ClockIcon,
+  Type,
 } from './styles';
 import { IEventDetailsProps } from './types';
 import { ColumnContainer } from '../CreateEvent/styles';
@@ -42,7 +43,11 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
   props: IEventDetailsProps,
 ) => {
   const {
-    event, setScheduleModalOpen, scheduleModalOpen, mapsModalOpen, setMapsModalOpen,
+    event,
+    setScheduleModalOpen,
+    scheduleModalOpen,
+    mapsModalOpen,
+    setMapsModalOpen,
   } = props;
   const navigate = useNavigate();
 
@@ -87,7 +92,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     <Modal
       isOpen={scheduleModalOpen}
       onClose={() => setScheduleModalOpen(false)}
-      title="Ver cronograma"
+      title='Ver cronograma'
       size={Sizes.small}
     >
       {event.schedule?.map((schedule) => (
@@ -107,7 +112,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     <Modal
       isOpen={mapsModalOpen}
       onClose={() => setMapsModalOpen(false)}
-      title="Ver mapa"
+      title='Ver mapa'
       size={Sizes.medium}
     >
       <Text>{renderLocation(event.location.label)}</Text>
@@ -128,14 +133,19 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <BackText>Volver a eventos</BackText>
       </RowContainer>
       <RowContainerTitleEdit>
-        <Title>{event.title}</Title>
-        <ButtonContainer onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}>
+        <RowContainer>
+          <Title>{event.title}</Title>
+          <Type>{event.type} </Type>
+        </RowContainer>
+        <ButtonContainer
+          onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}
+        >
           <EditOutlinedIcon />
           <Button>Editar</Button>
         </ButtonContainer>
       </RowContainerTitleEdit>
       <ImagesContainer>
-        <ArrowLeftIcon onClick={() => prevHandler()}/>
+        <ArrowLeftIcon onClick={() => prevHandler()} />
         {renderPictures()}
         <ArrowRightIcon onClick={() => nextHandler()} />
       </ImagesContainer>

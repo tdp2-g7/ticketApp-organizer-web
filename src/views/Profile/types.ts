@@ -8,5 +8,5 @@ export interface IProfileProps {
 export interface IEditProfileForm {
   name: string;
   description: string;
-  image: string;
+  image: string | any;
 }
