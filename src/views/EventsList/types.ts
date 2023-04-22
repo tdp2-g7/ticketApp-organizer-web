@@ -1,4 +1,4 @@
-import { IEvent } from '../../types/events.types';
+import { IEvent, ILocationMap } from '../../types/events.types';
 
 export interface IEventsList {
   events: IEvent[];
@@ -9,6 +9,7 @@ export interface IEventsList {
   filters: any;
   setFilters: (filters: any) => void;
   handleFilters: () => void;
+  locations: ILocationMap[];
 }
 
 export interface ISelect {

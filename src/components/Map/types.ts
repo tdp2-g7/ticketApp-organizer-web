@@ -3,4 +3,6 @@ export interface IMapProps {
   lat?: number;
   lng?: number;
   isPreview?: boolean;
+  multipleMarkers?: any;
+  hasMultipleMarkers?: boolean;
 }

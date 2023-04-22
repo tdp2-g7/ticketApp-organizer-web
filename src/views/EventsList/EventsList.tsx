@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import { Modal } from 'src/components/Modal/Modal';
 import { soryByOptions, typesOfEvents } from 'src/helpers/options';
+import Map from 'src/components/Map/Map';
 import { IEventsList } from './types';
 import {
   ArrowLeftIcon,
@@ -39,8 +40,10 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
     setFilters,
     handleFilters,
     drafts,
+    locations,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
+  const [mapIsOpen, setMapIsOpen] = useState(false);
 
   const nextHandler = () => {
     if (currentPage >= maxPage) return;
@@ -50,6 +53,21 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   const prevHandler = () => {
     if (currentPage - 1 < 1) return;
     setCurrentPage(currentPage - 1);
+  };
+
+  const renderMap = () => {
+    const markers = locations && locations.map((location) => ({
+      lng: location.location.lng,
+      lat: location.location.lat,
+      label: location.name,
+    }));
+    return (
+      <Modal title='Mapa' onClose={() => setMapIsOpen(false)} isOpen={mapIsOpen}>
+        <Map
+          multipleMarkers={markers}
+          hasMultipleMarkers />
+      </Modal>
+    );
   };
 
   const filtersView = (
@@ -88,7 +106,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           });
         }}
       >
-        Clear
+        Limpiar
       </CustomButton>
       <CustomButton
         onClick={() => {
@@ -96,7 +114,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           setIsOpen(false);
         }}
       >
-        Filter
+        Filtrar
       </CustomButton>
     </Modal>
   );
@@ -104,7 +122,11 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   return (
     <MainContainer>
       {isOpen && filtersView}
+      {mapIsOpen && renderMap()}
       <RowDiv>
+        <div onClick={() => setMapIsOpen(true)} style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+          <FiltersBox><p>Ver en mapa</p></FiltersBox>
+        </div>
         <FiltersBox onClick={() => setIsOpen(true)}>
           <p>Filtros</p>
         </FiltersBox>

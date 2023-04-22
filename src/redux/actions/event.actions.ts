@@ -134,3 +134,24 @@ export function onGetDraftsFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onGetLocations(userId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_LOCATIONS_REQUESTED,
+    userId,
+  };
+}
+
+export function onGetLocationsSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_LOCATIONS_SUCCEEDED,
+    data,
+  };
+}
+
+export function onGetLocationsFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_LOCATIONS_FAILED,
+    error,
+  };
+}

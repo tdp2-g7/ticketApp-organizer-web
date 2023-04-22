@@ -9,6 +9,7 @@ const initialState: IEventDefaultState = {
   maxPage: 0,
   eventData: null,
   drafts: [],
+  locations: [],
 };
 
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -20,6 +21,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_EDIT_REQUESTED:
     case constants.EVENT_ON_CREATE_DRAFT_REQUESTED:
     case constants.EVENT_ON_GET_DRAFTS_REQUESTED:
+    case constants.EVENT_ON_GET_LOCATIONS_REQUESTED:
       return {
         ...state,
         loading: true,
@@ -60,6 +62,12 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
           ...data.data,
         },
       };
+    case constants.EVENT_ON_GET_LOCATIONS_SUCCEEDED:
+      return {
+        ...state,
+        loading: false,
+        locations: data,
+      };
     case constants.ON_CREATE_FAILED:
     case constants.ON_GET_ALL_BY_USER_ID_FAILED:
     case constants.ON_GET_DETAILS_FAILED:
@@ -67,6 +75,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.EVENT_ON_CREATE_DRAFT_FAILED:
     case constants.EVENT_ON_CREATE_DRAFT_SUCCEEDED:
     case constants.EVENT_ON_GET_DRAFTS_FAILED:
+    case constants.EVENT_ON_GET_LOCATIONS_FAILED:
       return {
         ...state,
         loading: false,

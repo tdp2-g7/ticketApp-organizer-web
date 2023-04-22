@@ -57,12 +57,14 @@ const Map: FC<IMapProps> = (props: IMapProps) => {
     lat = -34.6037561,
     lng = -58.3816139,
     isPreview = false,
+    multipleMarkers = [{ lat: -34.6037561, lng: -58.3816139 }],
+    hasMultipleMarkers = false,
   } = props;
   const [location, setLocation] = useState<any>({});
 
   return (
     <MapContainer
-      center={[lat, lng]}
+      center={hasMultipleMarkers ? [multipleMarkers[0].lat, multipleMarkers[0].lng] : [lat, lng]}
       zoom={isPreview ? 20 : 13}
       scrollWheelZoom
       style={{
@@ -75,18 +77,26 @@ const Map: FC<IMapProps> = (props: IMapProps) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[lat, lng]} icon={icon}>
-        <Popup>{location.label}</Popup>
-        {!!onSearch && (
-          <div style={{ position: 'absolute', top: 0, right: 0 }}>
-            <Search
-              provider={new OpenStreetMapProvider()}
-              onSearch={onSearch}
-              setLocation={setLocation}
-            />
-          </div>
-        )}
-      </Marker>
+      {hasMultipleMarkers ? (
+        multipleMarkers.map((marker: any) => (
+          <Marker position={[marker.lat, marker.lng]} icon={icon}>
+            <Popup>{marker.label}</Popup>
+          </Marker>
+        ))
+      ) : (
+        <Marker position={[lat, lng]} icon={icon}>
+          <Popup>{location.label}</Popup>
+        </Marker>
+      )}
+      {!!onSearch && (
+        <div style={{ position: 'absolute', top: 0, right: 0 }}>
+          <Search
+            provider={new OpenStreetMapProvider()}
+            onSearch={onSearch}
+            setLocation={setLocation}
+          />
+        </div>
+      )}
     </MapContainer>
   );
 };

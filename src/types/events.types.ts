@@ -22,6 +22,7 @@ export interface IEventDefaultState {
   maxPage: number;
   eventData: IEvent | null;
   drafts: IEvent[];
+  locations: ILocationMap[];
 }
 
 export interface ISchedule {
@@ -34,4 +35,9 @@ export interface ILocation {
   lat: number | string;
   lng: number | string;
   label: string;
+}
+
+export interface ILocationMap {
+  location: ILocation;
+  name: string;
 }
