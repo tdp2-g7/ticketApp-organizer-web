@@ -10,6 +10,7 @@ import {
   onEditEvent,
   onGetDrafts,
   onGetLocations,
+  onUpdateDraft,
 } from '../../services/event.services';
 import {
   onCreateDraftFailed,
@@ -26,6 +27,8 @@ import {
   onGetDraftsSucceeded,
   onGetLocationsFailed,
   onGetLocationsSucceeded,
+  onUpdateDraftFailed,
+  onUpdateDraftSucceeded,
 } from '../actions/event.actions';
 import * as constants from '../constants/event.constants';
 
@@ -74,9 +77,18 @@ export function* createDraft(action: AnyAction): Generator {
   }
 }
 
+export function* updateDraft(action: AnyAction): Generator {
+  try {
+    const data: any = yield call(onUpdateDraft, action.data, action.eventDraftId);
+    yield put(onUpdateDraftSucceeded(data));
+  } catch (error) {
+    yield put(onUpdateDraftFailed(error));
+  }
+}
+
 export function* getDrafts(action: AnyAction): Generator {
   try {
-    const data: any = yield call(onGetDrafts, action.userId);
+    const { data }: any = yield call(onGetDrafts, action.userId);
     yield put(onGetDraftsSucceeded(data));
   } catch (error) {
     yield put(onGetDraftsFailed(error));
@@ -98,7 +110,8 @@ export function* watchEvents(): Generator {
     takeLatest(constants.ON_GET_ALL_BY_USER_ID_REQUESTED, getAllEventsByUserId),
     takeLatest(constants.ON_GET_DETAILS_REQUESTED, getEventDetails),
     takeLatest(constants.ON_EDIT_REQUESTED, editEvent),
-    takeLatest(constants.EVENT_ON_CREATE_DRAFT_REQUESTED, editEvent),
+    takeLatest(constants.EVENT_ON_CREATE_DRAFT_REQUESTED, createDraft),
+    takeLatest(constants.EVENT_ON_UPDATE_DRAFTS_REQUESTED, updateDraft),
     takeLatest(constants.EVENT_ON_GET_DRAFTS_REQUESTED, getDrafts),
     takeLatest(constants.EVENT_ON_GET_LOCATIONS_REQUESTED, getLocations),
   ]);

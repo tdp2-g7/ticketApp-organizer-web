@@ -115,7 +115,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
       title='Ver mapa'
       size={Sizes.medium}
     >
-      <Text>{renderLocation(event.location.label)}</Text>
+      <Text>{event.location && renderLocation(event.location.label)}</Text>
       <Map
         lat={Number(event.location.lat)}
         lng={Number(event.location.lng)}

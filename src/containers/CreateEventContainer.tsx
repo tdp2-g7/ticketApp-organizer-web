@@ -71,7 +71,11 @@ const CreateEventContainer: FunctionComponent = () => {
   };
 
   const onSaveDraft = () => {
-    dispatch(onCreateDraftRequested(formValues));
+    const body = {
+      ...formValues,
+      userId: user?.userId,
+    };
+    dispatch(onCreateDraftRequested(body));
   };
 
   return (
