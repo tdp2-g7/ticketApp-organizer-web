@@ -85,7 +85,7 @@ export function* getDrafts(action: AnyAction): Generator {
 
 export function* getLocations(action: AnyAction): Generator {
   try {
-    const data: any = yield call(onGetLocations, action.userId);
+    const { data }: any = yield call(onGetLocations, action.userId);
     yield put(onGetLocationsSucceeded(data));
   } catch (error) {
     yield put(onGetLocationsFailed(error));
