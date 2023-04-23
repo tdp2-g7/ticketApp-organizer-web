@@ -99,7 +99,7 @@ export const Tag = styled.div`
   right: 0;
   padding: 6px;
   margin: 10px;
-  background-color: red;
+  background-color: ${(props) => props.color};
   border-radius: 10px;
   color: ${COLORS.white};
   font-size: 12px;

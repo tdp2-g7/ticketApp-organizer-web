@@ -1,12 +1,14 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
+import { IEvent } from 'src/types/events.types';
 import useTypedSelector from '../hooks/useTypedSelector';
 import {
   onEditRequested,
   onEventDeleteImage,
   onGetDetailsRequested,
+  onUpdateDraftRequested,
 } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
@@ -15,13 +17,18 @@ import Layout from '../views/Layout/Layout';
 const EditEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { user } = useTypedSelector((state) => state.user);
-  const { eventData } = useTypedSelector((state) => state.event);
+  const { eventData, drafts } = useTypedSelector((state) => state.event);
+
+  const [searchParams] = useSearchParams();
+  const isDraft = searchParams.get('isDraft');
 
   const [reserveDate, setReserveDate] = useState(new Date());
-  const [location, setLocation] = useState<any>(eventData?.location);
+  const [currentLocation, setLocation] = useState<any>(eventData?.location);
   const [modalSchedule, setModalSchedule] = useState(false);
   const [schedule, setSchedule] = useState<any>([]);
+  const [formValues, setFormValues] = useState<any>({});
 
+  let eventDraft: IEvent | null | undefined;
   const params = useParams();
   const eventId = params.id;
 
@@ -30,6 +37,10 @@ const EditEventContainer: FunctionComponent = () => {
       dispatch(onGetDetailsRequested(eventId));
     }
   }, [dispatch]);
+
+  if (isDraft) {
+    eventDraft = drafts.find((draft: any) => draft.eventDraftId === eventId);
+  }
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -66,9 +77,9 @@ const EditEventContainer: FunctionComponent = () => {
         ticketsPerPerson: Number(formData.ticketsPerPerson),
         schedule,
         location: {
-          lat: location.lat.toString(),
-          lng: location.lng.toString(),
-          label: location.label,
+          lat: currentLocation.lat.toString(),
+          lng: currentLocation.lng.toString(),
+          label: currentLocation.label,
         },
       };
       dispatch(onEditRequested(body));
@@ -103,20 +114,46 @@ const EditEventContainer: FunctionComponent = () => {
     setModalSchedule(false);
   };
 
+  const onUpdateDraft = async () => {
+    const imagesBase64: any = [];
+    if (formValues.images instanceof FileList) {
+      await Promise.all(
+        Array.from(formValues.images).map(async (image: any) => {
+          const imageBase64: any = await getBase64Picture(image);
+          imagesBase64.push(imageBase64.split(',')[1]);
+        }),
+      );
+    }
+
+    eventDraft?.images.forEach((imageBase64: string) => {
+      imagesBase64.push(imageBase64);
+    });
+
+    const body = {
+      ...formValues,
+      images: imagesBase64,
+      userId: user?.userId,
+    };
+    if (eventId) {
+      dispatch(onUpdateDraftRequested(body, eventId));
+    }
+  };
+
   return (
     <Layout>
       <CreateEvent
         onSubmit={onSubmit}
         setReserveDate={setReserveDate}
         reserveDate={reserveDate}
-        eventInitialValues={eventData}
+        eventInitialValues={isDraft ? eventDraft : eventData}
         isEdit
         deleteImage={deleteImage}
         setModalSchedule={setModalSchedule}
         schedule={schedule}
-        location={location}
+        location={currentLocation}
         setLocation={setLocation}
-        setFormValues={(values: any) => console.log(values)}
+        setFormValues={setFormValues}
+        onSaveDraft={onUpdateDraft}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}

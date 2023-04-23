@@ -1,6 +1,7 @@
 import { renderLocation } from 'src/helpers/location';
 import { globalNavigate } from 'src/helpers/history';
 import { numToMonth } from 'src/helpers/shortDates';
+import COLORS from 'src/helpers/colors';
 import {
   CustomImg,
   DateContainer,
@@ -31,17 +32,30 @@ const EventCard = (props: any) => {
   return (
     <EventContainer
       key={event.eventId}
-      onClick={() => (isDraft ? globalNavigate(`/event/edit/${event.eventId}`) : globalNavigate(`/events/${event.eventId}`))}
+      onClick={() => (isDraft
+        ? globalNavigate(`/event/edit/${event.eventDraftId}?isDraft=true`)
+        : globalNavigate(`/events/${event.eventId}`))
+      }
     >
       {event.images ? (
         <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
       ) : (
         <CustomImg src={NoImage} />
       )}
-      {isDraft && <Tag>Borrador</Tag>}
+      {isDraft ? (
+        <Tag color="red">Borrador</Tag>
+      ) : (
+        <>
+          {new Date(event.date) < new Date() ? (
+            <Tag color={COLORS.mineShaft}>Finalizado</Tag>
+          ) : (
+            <Tag color={COLORS.lightViolet}>Activo</Tag>
+          )}
+        </>
+      )}
       <InfoContainer>
         <DateContainer>
-          <MonthLabel>{numToMonth(new Date(event.date).getMonth())}</MonthLabel>
+          <MonthLabel>{numToMonth(new Date(event.date).getMonth() + 1)}</MonthLabel>
           <DayLabel>{new Date(event.date).getDate()}</DayLabel>
           <HourLabel>
             {new Date(event.startTime).getHours()}:{minutes()}
@@ -51,7 +65,11 @@ const EventCard = (props: any) => {
           <EventTitle>{event.title || 'Titulo'}</EventTitle>
           <RowContainer>
             <PlaceOutlinedIcon />
-            <LocationText>{event.location ? renderLocation(event.location.label) : 'Ubicación'}</LocationText>
+            <LocationText>
+              {event.location.label
+                ? renderLocation(event.location.label)
+                : 'Ubicación'}
+            </LocationText>
           </RowContainer>
         </TextContainer>
       </InfoContainer>
