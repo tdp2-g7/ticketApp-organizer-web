@@ -17,7 +17,6 @@ import {
   Tag,
   TextContainer,
 } from './styles';
-import NoImage from '../../../assets/noImage.png';
 
 const EventCard = (props: any) => {
   const { event, isDraft } = props;
@@ -37,10 +36,10 @@ const EventCard = (props: any) => {
         : globalNavigate(`/events/${event.eventId}`))
       }
     >
-      {event.images ? (
-        <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
+      {event.mainImage ? (
+        <CustomImg src={`data:image/jpeg;base64,${event.mainImage}`} />
       ) : (
-        <CustomImg src={NoImage} />
+        <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
       )}
       {isDraft ? (
         <Tag color="red">Borrador</Tag>

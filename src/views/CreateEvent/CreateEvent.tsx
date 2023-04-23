@@ -31,6 +31,8 @@ import {
   InfoOutlinedIcon,
   RowDiv,
   DraftButton,
+  StarIcon,
+  RowIcons,
 } from './styles';
 import { ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
@@ -54,7 +56,11 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     setFormValues,
     onSaveDraft,
   } = props;
+
   const [imagesFile, setImagesFile] = useState<any>([]);
+  const [currentMainImage, setCurrentMainImage] = useState(
+    eventInitialValues?.mainImage,
+  );
 
   return (
     <>
@@ -259,13 +265,32 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                             <ImageCard
                               src={`data:image/jpeg;base64,${image}`}
                             />
-                            <RemoveIcon
-                              onClick={() => {
-                                if (deleteImage) {
-                                  deleteImage(image);
-                                }
-                              }}
-                            />
+                            <RowIcons>
+                            {image === currentMainImage ? (
+                                <StarIcon
+                                  style={{ color: '#FEC416', borderColor: 'black' }}
+                                  onClick={() => {
+                                    setCurrentMainImage(image);
+                                    eventInitialValues.mainImage = image;
+                                  }}
+                                />
+                            ) : (
+                                <StarIcon
+                                  style={{ color: '#999999' }}
+                                  onClick={() => {
+                                    setCurrentMainImage(image);
+                                    eventInitialValues.mainImage = image;
+                                  }}
+                                />
+                            )}
+                              <RemoveIcon
+                                onClick={() => {
+                                  if (deleteImage) {
+                                    deleteImage(image);
+                                  }
+                                }}
+                              />
+                            </RowIcons>
                           </RowImage>
                         ))}
                     </ImagesToEditContainer>

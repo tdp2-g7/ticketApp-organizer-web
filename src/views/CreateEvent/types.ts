@@ -26,4 +26,5 @@ export interface ICreateEventFormData {
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;
+  ticketsSold?: any;
 }

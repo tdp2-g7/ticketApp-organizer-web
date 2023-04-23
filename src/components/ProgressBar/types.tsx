@@ -1,7 +1,6 @@
 export interface IProgressBarProps {
-  completed: number;
+  completed: any;
   total: number;
-  //showPoints: boolean;
 }
 
 export interface IProgressBarStyle {

@@ -7,12 +7,14 @@ export interface IEvent {
   startTime: Date | null;
   endTime: Date | null;
   images: any;
+  mainImage?: any;
   vacancies: number;
   ticketsPerPerson: number;
   faqs: string;
   schedule?: ISchedule[];
   userId?: string;
   eventId?: string;
+  ticketsSold?: number;
 }
 
 export interface IEventDefaultState {

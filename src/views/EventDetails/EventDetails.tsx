@@ -185,16 +185,16 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
               <PeopleIcon />
             </RowContainerVacancies>
             <ProgressBar
-              completed={event.vacancies / 5}
+              completed={event.ticketsSold}
               total={event.vacancies}
             />
             <DivOccupied>
               <TextOccupied>
-                {event.vacancies / 5}/{event.vacancies} ocupado
+                {event.ticketsSold}/{event.vacancies} ocupado
               </TextOccupied>
             </DivOccupied>
             <RowContainerVacancies>
-              <Text>{event.ticketsPerPerson} entradas por persona max</Text>
+              <Text>{event.ticketsPerPerson} entradas por persona maximo</Text>
               <PersonIcon />
             </RowContainerVacancies>
           </ColumnContainer>

@@ -67,8 +67,9 @@ const EditEventContainer: FunctionComponent = () => {
     });
 
     if (imagesBase64 && user) {
+      const { ticketsSold, ...data } = formData;
       const body = {
-        ...formData,
+        ...data,
         userId: user.userId,
         images: imagesBase64,
         type: formData.type,

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Clear, InfoOutlined } from '@mui/icons-material';
+import { Clear, InfoOutlined, Star } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 
 export const FormContainer = styled.div`
@@ -7,12 +7,12 @@ export const FormContainer = styled.div`
   border-color: ${COLORS.black};
   width: 80%;
   border-radius: 10px;
-  padding: 0 10px 10px 10px; ;
+  padding: 0 10px 10px 10px;
 `;
 
 export const CustomForm = styled.form`
   line-height: 2rem;
-  font-size: 17px; ;
+  font-size: 17px;
 `;
 
 export const ButtonContainer = styled.div`
@@ -130,6 +130,13 @@ export const RemoveIcon = styled(Clear)`
   color: ${COLORS.white};
   cursor: pointer;
 `;
+
+export const StarIcon = styled(Star)`
+  border-radius: 100px;
+  margin: 0;
+  cursor: pointer;
+`;
+
 export const InfoOutlinedIcon = styled(InfoOutlined)`
   margin: 0;
 `;
@@ -171,4 +178,12 @@ export const DraftButton = styled.div`
   border: 1px solid ${COLORS.violet};
   color: ${COLORS.violet};
   background-color: ${COLORS.white};
+`;
+
+export const RowIcons = styled.div`
+  width: 150px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 `;
