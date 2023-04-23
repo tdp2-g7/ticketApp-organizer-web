@@ -7,6 +7,7 @@ import {
   Button,
   ButtonContainer,
   ColumnContainer,
+  ColumnFormContainer,
   Container,
   CustomForm,
   CustomImg,
@@ -35,7 +36,7 @@ const Profile: FunctionComponent<IProfileProps> = (props: IProfileProps) => {
 
         <ColumnContainer>
           <NameText> {user?.name} </NameText>
-          {user && user.description ? (
+          {user && user.description && user.description !== '' ? (
             <DescriptionText> {user.description}</DescriptionText>
           ) : (
             <DefaultDescription>
@@ -54,7 +55,7 @@ const Profile: FunctionComponent<IProfileProps> = (props: IProfileProps) => {
             render={({ handleSubmit }) => (
               <CustomForm onSubmit={handleSubmit}>
                 <Container>
-                  <ColumnContainer>
+                  <ColumnFormContainer>
                     <div>
                       <Label>Nombre del organizador/organizacion</Label>
                       <Field
@@ -77,7 +78,7 @@ const Profile: FunctionComponent<IProfileProps> = (props: IProfileProps) => {
                         />
                       )}
                     </Field>
-                  </ColumnContainer>
+                  </ColumnFormContainer>
 
                   <div>
                     <Label>Descripcion</Label>

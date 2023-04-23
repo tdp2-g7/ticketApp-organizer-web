@@ -17,6 +17,7 @@ const CreateEventContainer: FunctionComponent = () => {
   const [filters, setFilters] = useState({
     title: '',
     type: '',
+    location: '',
     orderBy: '',
     sortBy: 'asc',
   });
@@ -46,6 +47,7 @@ const CreateEventContainer: FunctionComponent = () => {
         page: currentPage,
         offset: ITEMS_PER_PAGE,
         title: filters.title,
+        location: filters.location,
         type: filters.type,
         [filters.orderBy]: filters.sortBy,
       };

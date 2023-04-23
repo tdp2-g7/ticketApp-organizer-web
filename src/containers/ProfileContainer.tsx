@@ -20,12 +20,16 @@ const ProfileContainer: FunctionComponent = () => {
   });
 
   const onEditProfile = async (formdata: IEditProfileForm) => {
-    const imageBase64: any = await getBase64Picture(formdata.image[0]);
+    let imageBase64: any;
+    if (formdata.image && !(typeof formdata.image === 'string')) {
+      imageBase64 = await getBase64Picture(formdata.image[0]);
+    }
+
     const data = {
       id: user?.userId,
       name: formdata.name,
       description: formdata.description,
-      image: imageBase64.split(',')[1],
+      image: imageBase64?.split(',')[1],
     };
     dispatch(onEditProfileRequested(data));
   };

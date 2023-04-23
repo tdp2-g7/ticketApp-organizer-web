@@ -6,12 +6,12 @@ export const FormContainer = styled.div`
   border-color: ${COLORS.black};
   width: 80%;
   border-radius: 10px;
-  padding: 0 10px 10px 10px; ;
+  padding: 0 10px 10px 10px;
 `;
 
 export const CustomForm = styled.form`
   line-height: 2rem;
-  font-size: 17px; ;
+  font-size: 17px;
 `;
 
 export const Container = styled.div`
@@ -37,7 +37,6 @@ export const Button = styled.button`
   font-size: 18px;
   width: 200px;
   border-radius: 30px;
-  margin-top: 10px;
   font-family: 'Poppins';
   cursor: pointer;
   border: 1px solid ${COLORS.violet};
@@ -61,11 +60,11 @@ export const CustomImg = styled.img`
   max-height: 300px;
   border-radius: 6px;
   object-fit: cover;
-  margin: 30px 0 0 10%;
+  margin: 10px 0 0 10%;
 `;
 
 export const EditContainer = styled.div`
-  margin-top: 150px;
+  margin-top: 50px;
 `;
 
 export const RowContainer = styled.div`
@@ -74,11 +73,12 @@ export const RowContainer = styled.div`
 `;
 
 export const ColumnContainer = styled.div`
-  margin: 30px 10% 0 0;
+  margin: 10px 10% 0 0;
   display: flex;
   flex: 1;
   justify-content: center;
   flex-direction: column;
+  max-width: 50%;
 `;
 
 export const NameText = styled.p`
@@ -95,6 +95,8 @@ export const DescriptionText = styled.p`
   flex: 1;
   font-family: 'Poppins';
   text-align: center;
+  width: 100%;
+  overflow-x: auto;
 `;
 
 export const DefaultDescription = styled.p`
@@ -104,4 +106,12 @@ export const DefaultDescription = styled.p`
   font-family: 'Poppins';
   text-align: center;
   color: ${COLORS.greyMystic};
+`;
+
+export const ColumnFormContainer = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  flex-direction: column;
 `;

@@ -80,7 +80,8 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                       name='title'
                       label='Título del evento'
                       validate={requiredValidation}
-                      type='text' />
+                      type='text'
+                    />
                   </div>
                   <RowContainer>
                     <CustomCalendarForm>
@@ -91,7 +92,8 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                         dateFormat='dd/MM/yyyy'
                         placeholderText='Seleccionar fecha'
                         isClearable={true}
-                        className='datePicker' />
+                        className='datePicker'
+                      />
                     </CustomCalendarForm>
                     <ColumnContainer>
                       <Label>Horario</Label>
@@ -103,8 +105,10 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                             render={(fieldRenderProps) => (
                               <TimePicker
                                 label='Hora de inicio'
-                                {...fieldRenderProps} />
-                            )} />
+                                {...fieldRenderProps}
+                              />
+                            )}
+                          />
                         </TimeContainer>
                         <TimeContainer>
                           <Field
@@ -112,8 +116,10 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                             render={(fieldRenderProps) => (
                               <TimePicker
                                 label='Hora de fin'
-                                {...fieldRenderProps} />
-                            )} />
+                                {...fieldRenderProps}
+                              />
+                            )}
+                          />
                         </TimeContainer>
                       </RowContainer>
                     </ColumnContainer>
@@ -126,27 +132,19 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                       label='Descripcion'
                       name='description'
                       validate={requiredValidation}
-                      type='textarea' />
+                      type='textarea'
+                    />
                   </div>
                   <div>
-                    <RowFAQsContainer>
-                      <Label>Preguntas frecuentes</Label>
-                      <Tooltip id='my-tooltip' />
-                      <a
-                        data-tooltip-id='my-tooltip'
-                        data-tooltip-content='Las preguntas deben empezar con P: y las respuestas con R:'
-                      >
-                        <InfoOutlinedIcon />
-                      </a>
-                    </RowFAQsContainer>
-
+                    <Label>Preguntas frecuentes</Label>
                     <Field
                       render={Input}
                       multiline
-                      label='Preguntas frecuentes'
+                      label='Las preguntas deben empezar con P: y las respuestas con R:'
                       name='faqs'
                       validate={requiredValidation}
-                      type='textarea' />
+                      type='textarea'
+                    />
                   </div>
                   <div>
                     <Label>Cronograma</Label>
@@ -171,7 +169,8 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                             showError={false}
                             input={input}
                             meta={meta}
-                            label='Tipo de evento' />
+                            label='Tipo de evento'
+                          />
                         </div>
                       )}
                     </Field>
@@ -184,7 +183,8 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                         label='Vacantes totales'
                         name='vacancies'
                         validate={requiredValidation}
-                        type='number' />
+                        type='number'
+                      />
                     </VacanciesContainer>
                     <TicketsPerUserContainer>
                       <Label>Entradas por persona</Label>
@@ -193,18 +193,26 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                         label='Entradas por persona'
                         name='ticketsPerPerson'
                         validate={requiredValidation}
-                        type='number' />
+                        type='number'
+                      />
                     </TicketsPerUserContainer>
                   </RowContainer>
                   <div>
                     <Label>Ubicacion</Label>
                     <Map
                       onSearch={setLocation}
-                      lat={eventInitialValues?.location
-                        ? Number(eventInitialValues?.location.lat) : undefined}
-                      lng={eventInitialValues?.location
-                        ? Number(eventInitialValues?.location.lng) : undefined}
-                      isPreview />
+                      lat={
+                        eventInitialValues?.location
+                          ? Number(eventInitialValues?.location.lat)
+                          : undefined
+                      }
+                      lng={
+                        eventInitialValues?.location
+                          ? Number(eventInitialValues?.location.lng)
+                          : undefined
+                      }
+                      isPreview
+                    />
                   </div>
                   <ColumnContainer>
                     <RowFAQsContainer>
@@ -226,14 +234,16 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                           type='file'
                           onChange={({ target }) => {
                             if (target.files) {
-                              const urls = Array.from(target.files)
-                                .map((file) => URL.createObjectURL(file));
+                              const urls = Array.from(target.files).map(
+                                (file) => URL.createObjectURL(file),
+                              );
                               setImagesFile([...imagesFile, ...urls]);
                             }
                             onChange(target.files);
-                          } }
+                          }}
                           // instead of the default target.value
-                          {...props} />
+                          {...props}
+                        />
                       )}
                     </Field>
                     <ImagesRowContainer>
@@ -242,16 +252,20 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                       ))}
                     </ImagesRowContainer>
                     <ImagesToEditContainer>
-                      {eventInitialValues && eventInitialValues.images
+                      {eventInitialValues
+                        && eventInitialValues.images
                         && eventInitialValues.images.map((image: any) => (
                           <RowImage>
-                            <ImageCard src={`data:image/jpeg;base64,${image}`} />
+                            <ImageCard
+                              src={`data:image/jpeg;base64,${image}`}
+                            />
                             <RemoveIcon
                               onClick={() => {
                                 if (deleteImage) {
                                   deleteImage(image);
                                 }
-                              } } />
+                              }}
+                            />
                           </RowImage>
                         ))}
                     </ImagesToEditContainer>

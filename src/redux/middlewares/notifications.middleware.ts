@@ -23,11 +23,15 @@ const notificationMiddleware = () => (next: any) => (action: any) => {
     case eventConstants.EVENT_ON_CREATE_DRAFT_SUCCEEDED:
       sendSuccessNotification('Evento guardado como borrador correctamente');
       break;
+    case userConstants.USER_ON_EDIT_PROFILE_SUCCEEDED:
+      sendSuccessNotification('Perfil actualizado correctamente');
+      break;
     case userConstants.USER_ON_LOGIN_FAILED:
     case userConstants.USER_ON_REGISTER_FAILED:
     case eventConstants.ON_CREATE_FAILED:
     case eventConstants.ON_EDIT_FAILED:
     case eventConstants.EVENT_ON_CREATE_DRAFT_FAILED:
+    case eventConstants.ON_GET_ALL_BY_USER_ID_FAILED:
       sendErrorNotification(error);
       break;
     default:

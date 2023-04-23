@@ -13,6 +13,7 @@ export async function getEventsByUserId(data: any): Promise<any> {
 
   /* eslint-disable */
   data.title && (url += `&title=${data.title}`); 
+  data.location && (url += `&location=${data.location}`); 
   data.type && (url += `&type=${data.type}`);
   data.userId && (url += `&userId=${data.userId.toString()}`);
   data.orderByTitle && (url += `&orderByTitle=${data.orderByTitle}`);
