@@ -155,3 +155,25 @@ export function onGetLocationsFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onUpdateDraftRequested(data: any, eventDraftId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_UPDATE_DRAFTS_REQUESTED,
+    data,
+    eventDraftId,
+  };
+}
+
+export function onUpdateDraftSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_UPDATE_DRAFTS_SUCCEEDED,
+    data,
+  };
+}
+
+export function onUpdateDraftFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_UPDATE_DRAFTS_FAILED,
+    error,
+  };
+}

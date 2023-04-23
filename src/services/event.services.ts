@@ -9,13 +9,12 @@ export async function createEvent(data: IEvent): Promise<AxiosResponse> {
 }
 
 export async function getEventsByUserId(data: any): Promise<any> {
-  let url = `${EVENTS_API_URL}/events/filteredBy?page=${data.page}&offset=${data.offset}`;
+  let url = `${EVENTS_API_URL}/events/organizer/${data.userId}?page=${data.page}&offset=${data.offset}`;
 
   /* eslint-disable */
   data.title && (url += `&title=${data.title}`); 
   data.location && (url += `&location=${data.location}`); 
   data.type && (url += `&type=${data.type}`);
-  data.userId && (url += `&userId=${data.userId.toString()}`);
   data.orderByTitle && (url += `&orderByTitle=${data.orderByTitle}`);
   data.orderByType && (url += `&orderByType=${data.orderByType}`);
   data.orderByDate && (url += `&orderByDate=${data.orderByDate}`);
@@ -40,20 +39,13 @@ export async function onCreateDraft(data: IEvent): Promise<AxiosResponse> {
   return response;
 }
 
-export async function onGetDrafts(userId: string): Promise<any> {
-  // const response = await get(`${EVENTS_API_URL}/events/drafts/${userId}`);
+export async function onUpdateDraft(data: IEvent, eventDraftId: string): Promise<AxiosResponse> {
+  const response = await patch(`${EVENTS_API_URL}/events/draft/${eventDraftId}`, data);
+  return response;
+}
 
-  const response = [
-    {
-      eventId: 'ab89a968-1c39-415b-8a79-dad00ef291cf',
-      userId,
-      description: 'EVENTO MARTIN GARRIX',
-      type: 'Concierto ',
-      vacancies: 100000,
-      ticketsPerPerson: 4,
-      faqs: 'P: ¿Quien toca?\nR: Martin Garrix',
-    },
-  ];
+export async function onGetDrafts(userId: string): Promise<any> {
+  const response = await get(`${EVENTS_API_URL}/events/draft/${userId}`);
   return response;
 }
 
