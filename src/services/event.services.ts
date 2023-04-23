@@ -58,17 +58,6 @@ export async function onGetDrafts(userId: string): Promise<any> {
 }
 
 export async function onGetLocations(userId: string): Promise<any> {
-  // const response = await get(`${EVENTS_API_URL}/events/locations/${userId}`);
-
-  const response = [
-    {
-      location: {
-        lat: 40.416775,
-        lng: -3.70379,
-        label: `Madrid, ${userId}`,
-      },
-      name: 'Bizarrap',
-    },
-  ];
+  const response = await get(`${EVENTS_API_URL}/events/locations/${userId}`);
   return response;
 }
