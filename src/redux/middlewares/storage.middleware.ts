@@ -5,9 +5,18 @@ const storageMiddleware = () => (next: any) => (action: any) => {
   const { data, type } = action;
   switch (type) {
     case constants.USER_ON_LOGIN_REQUESTED:
-      setCookie('accessToken', data.accessToken, { path: '/' });
-      setCookie('email', data.email, { path: '/' });
-      setCookie('userId', data.userId, { path: '/' });
+      setCookie('accessToken', data.accessToken, {
+        path: '/',
+        maxAge: 3600,
+      });
+      setCookie('email', data.email, {
+        path: '/',
+        maxAge: 3600,
+      });
+      setCookie('userId', data.userId, {
+        path: '/',
+        maxAge: 3600,
+      });
       break;
     case constants.USER_ON_LOGOUT:
       removeCookie('accessToken', { path: '/' });
