@@ -133,7 +133,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <BackText>Volver a eventos</BackText>
       </RowContainer>
       <RowContainerTitleEdit>
-        <RowContainer>
+        <RowContainer style={{ width: '60%' }}>
           <Title>{event.title}</Title>
           <Type>{event.type} </Type>
         </RowContainer>
