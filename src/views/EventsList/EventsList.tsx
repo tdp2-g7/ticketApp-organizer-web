@@ -111,6 +111,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           setFilters({
             title: '',
             type: '',
+            location: '',
             orderBy: '',
           });
         }}
