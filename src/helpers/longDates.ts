@@ -13,5 +13,5 @@ export const numToLargeMonth = (num: number) => {
     'Noviembre',
     'Diciembre',
   ];
-  return months[num - 1];
+  return months[num];
 };
