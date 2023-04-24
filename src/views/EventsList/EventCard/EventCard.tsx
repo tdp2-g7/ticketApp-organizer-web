@@ -41,7 +41,7 @@ const EventCard = (props: any) => {
         <CustomImg src={`data:image/jpeg;base64,${event.mainImage}`} />
       ) : (
         <>
-          {event.images ? (
+          {event.images.length ? (
             <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
           ) : (
             <CustomImg src={NoImage} />
