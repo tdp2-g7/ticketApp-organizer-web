@@ -15,7 +15,7 @@ import { IRowProps, ITextProps } from './types';
 
 export const Title = styled.p`
   font-size: 24px;
-  margin: 1% 0 0 2%;
+  margin: 0 0 0 2%;
   font-family: 'Poppins';
   font-weight: bold;
   color: ${COLORS.darkViolet};

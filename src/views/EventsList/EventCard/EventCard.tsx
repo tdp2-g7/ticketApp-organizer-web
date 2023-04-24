@@ -2,6 +2,7 @@ import { renderLocation } from 'src/helpers/location';
 import { globalNavigate } from 'src/helpers/history';
 import { numToMonth } from 'src/helpers/shortDates';
 import COLORS from 'src/helpers/colors';
+import NoImage from '../../../assets/noImage.png';
 import {
   CustomImg,
   DateContainer,
@@ -39,13 +40,20 @@ const EventCard = (props: any) => {
       {event.mainImage ? (
         <CustomImg src={`data:image/jpeg;base64,${event.mainImage}`} />
       ) : (
-        <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
+        <>
+          {event.images.length ? (
+            <CustomImg src={`data:image/jpeg;base64,${event.images[0]}`} />
+          ) : (
+            <CustomImg src={NoImage} />
+          )}
+        </>
       )}
+
       {isDraft ? (
         <Tag color="red">Borrador</Tag>
       ) : (
         <>
-          {new Date(event.date) < new Date() ? (
+          {new Date(event.startTime) < new Date() ? (
             <Tag color={COLORS.mineShaft}>Finalizado</Tag>
           ) : (
             <Tag color={COLORS.lightViolet}>Activo</Tag>
@@ -54,7 +62,9 @@ const EventCard = (props: any) => {
       )}
       <InfoContainer>
         <DateContainer>
-          <MonthLabel>{numToMonth(new Date(event.date).getMonth() + 1)}</MonthLabel>
+          <MonthLabel>
+            {numToMonth(new Date(event.date).getMonth() + 1)}
+          </MonthLabel>
           <DayLabel>{new Date(event.date).getDate()}</DayLabel>
           <HourLabel>
             {new Date(event.startTime).getHours()}:{minutes()}
