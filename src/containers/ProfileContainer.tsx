@@ -8,7 +8,7 @@ import { IEditProfileForm } from 'src/views/Profile/types';
 
 const ProfileContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
-  const { user } = useTypedSelector((state) => state.user);
+  const { user, loading } = useTypedSelector((state) => state.user);
 
   const getBase64Picture = async (file: any) => new Promise((resolve) => {
     const reader = new FileReader();
@@ -36,7 +36,7 @@ const ProfileContainer: FunctionComponent = () => {
 
   return (
     <Layout>
-      {user && <Profile user={user} onEditProfile={onEditProfile} />}
+      {user && <Profile user={user} onEditProfile={onEditProfile} loading={loading} />}
     </Layout>
   );
 };

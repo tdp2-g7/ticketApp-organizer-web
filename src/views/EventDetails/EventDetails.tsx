@@ -6,6 +6,7 @@ import { Sizes } from 'src/helpers/sizes';
 import Map from 'src/components/Map/Map';
 import ProgressBar from 'src/components/ProgressBar';
 import { renderLocation } from 'src/helpers/location';
+import Loading from 'src/components/Loading/Loading';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -48,6 +49,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     scheduleModalOpen,
     mapsModalOpen,
     setMapsModalOpen,
+    loading,
   } = props;
   const navigate = useNavigate();
 
@@ -132,7 +134,10 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
       </RowContainer>
-      <RowContainerTitleEdit>
+      {loading
+        ? <Loading/>
+        : <>
+            <RowContainerTitleEdit>
         <RowContainer style={{ width: '60%' }}>
           <Title>{event.title}</Title>
           <Type>{event.type} </Type>
@@ -204,6 +209,8 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <Subtitle>Preguntas frecuentes</Subtitle>
         <FAQsText>{event.faqs.replace(/R:/g, '\nR:')}</FAQsText>
       </InfoContainer>
+            </>
+          }
     </>
   );
 };

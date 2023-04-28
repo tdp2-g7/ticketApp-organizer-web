@@ -3,6 +3,7 @@ import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import { Modal } from 'src/components/Modal/Modal';
 import { soryByOptions, typesOfEvents } from 'src/helpers/options';
 import Map from 'src/components/Map/Map';
+import Loading from 'src/components/Loading/Loading';
 import { IEventsList } from './types';
 import {
   ArrowLeftIcon,
@@ -14,6 +15,7 @@ import {
   CustomInput,
   CustomSelect,
   EmptyContainer,
+  EmptyTitle,
   EventBusyIcon,
   EventsContainer,
   FiltersBox,
@@ -41,16 +43,15 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
     handleFilters,
     drafts,
     locations,
+    loading,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [mapIsOpen, setMapIsOpen] = useState(false);
 
-  const isFiltersEmpty = (
-    filters.title === ''
+  const isFiltersEmpty = filters.title === ''
     && filters.type === ''
     && filters.location === ''
-    && filters.orderBy === ''
-  );
+    && filters.orderBy === '';
 
   const nextHandler = () => {
     if (currentPage >= maxPage) return;
@@ -181,21 +182,24 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           {filters.sortBy === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
         </SortBy>
       </RowDiv>
-      {!(events.length > 0) ? (
+      {!(events.length > 0) && !loading ? (
         <EmptyContainer>
           <EventBusyIcon />
-          <Title> Aún no creaste ningún evento </Title>
+          <EmptyTitle> Aún no creaste ningún evento </EmptyTitle>
         </EmptyContainer>
       ) : (
         <>
           <Title>Tus eventos</Title>
-          <EventsContainer>
-            {events.map((event) => (
-              <EventCard event={event} />
-            ))}
-            {isFiltersEmpty
-              && drafts.map((event) => <EventCard event={event} isDraft />)}
-          </EventsContainer>
+          {loading
+            ? <Loading/>
+            : <EventsContainer>
+              {events.map((event) => (
+                <EventCard event={event} />
+              ))}
+              {isFiltersEmpty
+                && drafts.map((event) => <EventCard event={event} isDraft />)}
+            </EventsContainer>
+          }
           <ArrowsContainer>
             <ArrowLeftIcon
               isDisabled={currentPage === 1}
