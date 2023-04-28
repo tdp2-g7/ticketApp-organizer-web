@@ -45,6 +45,13 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mapIsOpen, setMapIsOpen] = useState(false);
 
+  const isFiltersEmpty = (
+    filters.title === ''
+    && filters.type === ''
+    && filters.location === ''
+    && filters.orderBy === ''
+  );
+
   const nextHandler = () => {
     if (currentPage >= maxPage) return;
     setCurrentPage(currentPage + 1);
@@ -56,16 +63,19 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
   };
 
   const renderMap = () => {
-    const markers = locations && locations.map((location) => ({
-      lng: location.location.lng,
-      lat: location.location.lat,
-      label: location.name,
-    }));
+    const markers = locations
+      && locations.map((location) => ({
+        lng: location.location.lng,
+        lat: location.location.lat,
+        label: location.name,
+      }));
     return (
-      <Modal title='Mapa' onClose={() => setMapIsOpen(false)} isOpen={mapIsOpen}>
-        <Map
-          multipleMarkers={markers}
-          hasMultipleMarkers />
+      <Modal
+        title='Mapa'
+        onClose={() => setMapIsOpen(false)}
+        isOpen={mapIsOpen}
+      >
+        <Map multipleMarkers={markers} hasMultipleMarkers />
       </Modal>
     );
   };
@@ -134,8 +144,13 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
       {isOpen && filtersView}
       {mapIsOpen && renderMap()}
       <RowDiv>
-        <div onClick={() => setMapIsOpen(true)} style={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
-          <FiltersBox><p>Ver en mapa</p></FiltersBox>
+        <div
+          onClick={() => setMapIsOpen(true)}
+          style={{ display: 'flex', flex: 1, justifyContent: 'center' }}
+        >
+          <FiltersBox>
+            <p>Ver en mapa</p>
+          </FiltersBox>
         </div>
         <FiltersBox onClick={() => setIsOpen(true)}>
           <p>Filtros</p>
@@ -178,9 +193,8 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
             {events.map((event) => (
               <EventCard event={event} />
             ))}
-            {drafts.map((event) => (
-              <EventCard event={event} isDraft />
-            ))}
+            {isFiltersEmpty
+              && drafts.map((event) => <EventCard event={event} isDraft />)}
           </EventsContainer>
           <ArrowsContainer>
             <ArrowLeftIcon
