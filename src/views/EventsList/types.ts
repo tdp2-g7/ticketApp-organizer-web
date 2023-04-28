@@ -10,6 +10,7 @@ export interface IEventsList {
   setFilters: (filters: any) => void;
   handleFilters: () => void;
   locations: ILocationMap[];
+  loading: boolean;
 }
 
 export interface ISelect {

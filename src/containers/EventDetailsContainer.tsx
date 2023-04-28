@@ -7,7 +7,7 @@ import EventDetails from '../views/EventDetails/EventDetails';
 import Layout from '../views/Layout/Layout';
 
 const EventDetailsContainer: FunctionComponent = () => {
-  const { eventData } = useTypedSelector((state) => state.event);
+  const { eventData, loading } = useTypedSelector((state) => state.event);
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
   const [mapsModalOpen, setMapsModalOpen] = useState(false);
   const dispatch = useDispatch();
@@ -22,12 +22,12 @@ const EventDetailsContainer: FunctionComponent = () => {
 
   return (
     <Layout>
-      {eventData
-        && <EventDetails event={eventData}
+      {eventData && <EventDetails event={eventData}
           scheduleModalOpen={scheduleModalOpen}
           setScheduleModalOpen={setScheduleModalOpen}
           mapsModalOpen={mapsModalOpen}
           setMapsModalOpen={setMapsModalOpen}
+          loading={loading}
         />
       }
       </Layout>

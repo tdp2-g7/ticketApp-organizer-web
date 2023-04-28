@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
 import Input from 'src/components/Input/Input';
+import Loading from 'src/components/Loading/Loading';
 import { IProfileProps } from './types';
 import NoImage from '../../assets/noImage.png';
 import {
@@ -22,12 +23,16 @@ import {
 } from './styles';
 
 const Profile: FunctionComponent<IProfileProps> = (props: IProfileProps) => {
-  const { user, onEditProfile } = props;
+  const { user, onEditProfile, loading } = props;
 
   return (
     <>
       <Title>Mi Perfil</Title>
-      <RowContainer>
+      {
+        loading
+          ? <Loading/>
+          : <>
+        <RowContainer>
         {user && user.image ? (
           <CustomImg src={`data:image/jpeg;base64,${user.image}`} />
         ) : (
@@ -99,6 +104,9 @@ const Profile: FunctionComponent<IProfileProps> = (props: IProfileProps) => {
           />
         </FormContainer>
       </EditContainer>
+        </>
+      }
+
     </>
   );
 };

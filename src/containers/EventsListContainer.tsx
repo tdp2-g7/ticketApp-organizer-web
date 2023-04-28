@@ -10,7 +10,7 @@ const ITEMS_PER_PAGE = 10;
 const CreateEventContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const {
-    events, maxPage, drafts, locations,
+    events, maxPage, drafts, locations, loading,
   } = useTypedSelector((state) => state.event);
   const { user } = useTypedSelector((state) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,6 +82,7 @@ const CreateEventContainer: FunctionComponent = () => {
           handleFilters={handleFilters}
           drafts={drafts}
           locations={locations}
+          loading={loading}
         />
       )}
     </Layout>

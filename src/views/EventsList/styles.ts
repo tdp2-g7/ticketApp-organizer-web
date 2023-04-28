@@ -6,8 +6,7 @@ import { ISelect } from './types';
 
 export const Title = styled.p`
   font-size: 24px;
-  margin-bottom: 0px;
-  margin-left: 1%;
+  margin: 0 0 0 1%;
   font-weight: bold;
   color: ${COLORS.darkViolet};
 `;
@@ -212,4 +211,11 @@ export const SortBy = styled.div`
   padding: 4px 0;
   margin-right: 10px;
   cursor: pointer;
+`;
+
+export const EmptyTitle = styled.p`
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: ${COLORS.black};
 `;

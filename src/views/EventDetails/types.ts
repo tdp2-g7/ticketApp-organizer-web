@@ -6,6 +6,7 @@ export interface IEventDetailsProps {
   setScheduleModalOpen: (value: boolean) => void;
   mapsModalOpen: boolean;
   setMapsModalOpen: (value: boolean) => void;
+  loading: boolean;
 }
 
 export interface IRowProps {
