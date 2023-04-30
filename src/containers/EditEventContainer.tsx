@@ -5,6 +5,7 @@ import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
 import { IEvent } from 'src/types/events.types';
 import useTypedSelector from '../hooks/useTypedSelector';
 import {
+  onCreateEventRequested,
   onEditRequested,
   onEventDeleteImage,
   onGetDetailsRequested,
@@ -33,10 +34,10 @@ const EditEventContainer: FunctionComponent = () => {
   const eventId = params.id;
 
   useEffect(() => {
-    if (eventId) {
+    if (eventId && !isDraft) {
       dispatch(onGetDetailsRequested(eventId));
     }
-  }, [dispatch]);
+  }, [dispatch, isDraft, eventId]);
 
   if (isDraft) {
     eventDraft = drafts.find((draft: any) => draft.eventDraftId === eventId);
@@ -83,7 +84,11 @@ const EditEventContainer: FunctionComponent = () => {
           label: currentLocation.label,
         },
       };
-      dispatch(onEditRequested(body));
+      if (eventDraft) {
+        dispatch(onCreateEventRequested(body));
+      } else {
+        dispatch(onEditRequested(body));
+      }
     }
   };
 
@@ -126,7 +131,7 @@ const EditEventContainer: FunctionComponent = () => {
       );
     }
 
-    eventDraft?.images.forEach((imageBase64: string) => {
+    eventDraft?.images?.forEach((imageBase64: string) => {
       imagesBase64.push(imageBase64);
     });
 
