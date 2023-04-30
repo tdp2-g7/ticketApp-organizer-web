@@ -155,6 +155,7 @@ const EditEventContainer: FunctionComponent = () => {
         setLocation={setLocation}
         setFormValues={setFormValues}
         onSaveDraft={onUpdateDraft}
+        isDraft={isDraft}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}
