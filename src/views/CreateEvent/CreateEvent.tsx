@@ -2,9 +2,12 @@ import { FunctionComponent, useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import ReactDatePicker from 'react-datepicker';
 import { Tooltip } from 'react-tooltip';
+import { Modal } from 'src/components/Modal/Modal';
+import { Sizes } from 'src/helpers/sizes';
 import Input from '../../components/Input/Input';
 import { typesOfEvents } from '../../helpers/options';
 import { requiredValidation } from '../../helpers/validations';
+import WarningImage from '../../assets/warning.png';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
   Button,
@@ -33,8 +36,9 @@ import {
   DraftButton,
   StarIcon,
   RowIcons,
+  ModalTitle,
 } from './styles';
-import { ICreateEventProps } from './types';
+import { ICreateEventFormData, ICreateEventProps } from './types';
 import Select from '../../components/Select/Select';
 import TimePicker from '../../components/TimePicker/TimePicker';
 import Map from '../../components/Map/Map';
@@ -55,15 +59,45 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     schedule,
     setFormValues,
     onSaveDraft,
+    isDraft,
   } = props;
 
   const [imagesFile, setImagesFile] = useState<any>([]);
   const [currentMainImage, setCurrentMainImage] = useState(
     eventInitialValues?.mainImage,
   );
+  const [isWarningOpen, setIsWarningOpen] = useState(false);
+  const [dataEditEvent, setDataEditEvent] = useState({});
+
+  const onHandleSubmit = (formData: ICreateEventFormData) => {
+    if (isDraft) {
+      onSubmit(formData);
+    } else {
+      setIsWarningOpen(true);
+      setDataEditEvent(formData);
+    }
+  };
+
+  const renderWarning = () => (
+    <Modal
+      isOpen={isWarningOpen}
+      onClose={() => setIsWarningOpen(false)}
+      title=''
+      size={Sizes.medium}
+    >
+      <ButtonContainer>
+        <ModalTitle>Atención!</ModalTitle>
+        <CustomImg src={WarningImage} />
+        <Label>Los clientes que ya hayan obtenido entradas de </Label>
+        <Label>este evento serán notificadas sobre este cambio</Label>
+          <Button onClick={() => onSubmit(dataEditEvent)}>Editar de todas formas</Button>
+      </ButtonContainer>
+    </Modal>
+  );
 
   return (
     <>
+      {renderWarning()}
       <RowDiv>
         <Title>{isEdit ? 'Editar evento' : 'Crear evento'}</Title>
         <ButtonContainer>
@@ -72,7 +106,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
       </RowDiv>
       <FormContainer>
         <Form
-          onSubmit={onSubmit}
+          onSubmit={onHandleSubmit}
           initialValues={eventInitialValues}
           render={({ handleSubmit, form }) => {
             setFormValues(form.getState().values);
@@ -266,15 +300,18 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                               src={`data:image/jpeg;base64,${image}`}
                             />
                             <RowIcons>
-                            {image === currentMainImage ? (
+                              {image === currentMainImage ? (
                                 <StarIcon
-                                  style={{ color: '#FEC416', borderColor: 'black' }}
+                                  style={{
+                                    color: '#FEC416',
+                                    borderColor: 'black',
+                                  }}
                                   onClick={() => {
                                     setCurrentMainImage(image);
                                     eventInitialValues.mainImage = image;
                                   }}
                                 />
-                            ) : (
+                              ) : (
                                 <StarIcon
                                   style={{ color: '#999999' }}
                                   onClick={() => {
@@ -282,7 +319,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                                     eventInitialValues.mainImage = image;
                                   }}
                                 />
-                            )}
+                              )}
                               <RemoveIcon
                                 onClick={() => {
                                   if (deleteImage) {

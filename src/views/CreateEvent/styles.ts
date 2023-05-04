@@ -187,3 +187,10 @@ export const RowIcons = styled.div`
   justify-content: space-between;
   flex-direction: row;
 `;
+
+export const ModalTitle = styled.p`
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+  font-family: 'Poppins';
+`;
