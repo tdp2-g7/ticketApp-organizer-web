@@ -6,6 +6,7 @@ import {
   createEvent,
   getDetails,
   getEventsByUserId,
+  onCancel,
   onCreateDraft,
   onEditEvent,
   onGetDrafts,
@@ -13,6 +14,8 @@ import {
   onUpdateDraft,
 } from '../../services/event.services';
 import {
+  onCancelFailed,
+  onCancelSucceeded,
   onCreateDraftFailed,
   onCreateDraftSucceeded,
   onCreateEventFailed,
@@ -104,6 +107,15 @@ export function* getLocations(action: AnyAction): Generator {
   }
 }
 
+export function* eventCancel(action: AnyAction): Generator {
+  try {
+    const { data }: any = yield call(onCancel, action.eventId);
+    yield put(onCancelSucceeded(data));
+  } catch (error) {
+    yield put(onCancelFailed(error));
+  }
+}
+
 export function* watchEvents(): Generator {
   yield all([
     takeLatest(constants.ON_CREATE_REQUESTED, eventCreate),
@@ -114,5 +126,6 @@ export function* watchEvents(): Generator {
     takeLatest(constants.EVENT_ON_UPDATE_DRAFTS_REQUESTED, updateDraft),
     takeLatest(constants.EVENT_ON_GET_DRAFTS_REQUESTED, getDrafts),
     takeLatest(constants.EVENT_ON_GET_LOCATIONS_REQUESTED, getLocations),
+    takeLatest(constants.EVENT_ON_CANCEL_REQUESTED, eventCancel),
   ]);
 }
