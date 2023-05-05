@@ -53,3 +53,9 @@ export async function onGetLocations(userId: string): Promise<any> {
   const response = await get(`${EVENTS_API_URL}/events/locations/${userId}`);
   return response;
 }
+
+export async function onCancel(eventId: string): Promise<any> {
+  console.log('🚀 ~ onCancel ~ eventId:', eventId);
+  // const response = await get(`${EVENTS_API_URL}/events/cancel/${eventId}`);
+  return eventId;
+}

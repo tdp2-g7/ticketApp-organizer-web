@@ -164,7 +164,7 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   text-align: center;
-  margin: 0 10px 10px 0;
+  margin: 0 15px 10px 0;
   border-radius: 20px;
   border: 1px solid;
   border-color: ${COLORS.lightViolet};
@@ -217,4 +217,16 @@ export const Type = styled.div`
   font-size: 12px;
   font-family: 'Poppins';
   text-align: center;
+`;
+
+export const CancelButton = styled.div`
+  text-align: center;
+  margin: 0 15px 10px 0;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: ${COLORS.warningRed};
+  color: ${COLORS.redMandy};
+  width: 140px;
+  padding: 8px;
+  cursor: pointer;
 `;

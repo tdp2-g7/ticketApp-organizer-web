@@ -7,6 +7,7 @@ export interface IEventDetailsProps {
   mapsModalOpen: boolean;
   setMapsModalOpen: (value: boolean) => void;
   loading: boolean;
+  onCancel: () => void
 }
 
 export interface IRowProps {

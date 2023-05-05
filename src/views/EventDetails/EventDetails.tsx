@@ -35,6 +35,7 @@ import {
   OpenModalButton,
   ClockIcon,
   Type,
+  CancelButton,
 } from './styles';
 import { IEventDetailsProps } from './types';
 import { ColumnContainer } from '../CreateEvent/styles';
@@ -50,6 +51,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     mapsModalOpen,
     setMapsModalOpen,
     loading,
+    onCancel,
   } = props;
   const navigate = useNavigate();
 
@@ -134,83 +136,91 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
         <BackArrowContainer />
         <BackText>Volver a eventos</BackText>
       </RowContainer>
-      {loading
-        ? <Loading/>
-        : <>
-            <RowContainerTitleEdit>
-        <RowContainer style={{ width: '60%' }}>
-          <Title>{event.title}</Title>
-          <Type>{event.type} </Type>
-        </RowContainer>
-        <ButtonContainer
-          onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}
-        >
-          <EditOutlinedIcon />
-          <Button>Editar</Button>
-        </ButtonContainer>
-      </RowContainerTitleEdit>
-      <ImagesContainer>
-        <ArrowLeftIcon onClick={() => prevHandler()} />
-        {renderPictures()}
-        <ArrowRightIcon onClick={() => nextHandler()} />
-      </ImagesContainer>
-      <InfoContainer>
-        <LocationAndTimeRowContainer>
-          <ColumnContainer>
-            <Subtitle>Ubicacion y horario</Subtitle>
-            <RowContainer hasMargin>
-              <CalendarIcon />
-              <Text>
-                <>
-                  {numToLargeMonth(new Date(event.date).getMonth())}{' '}
-                  {new Date(event.date).getDate()},{' '}
-                  {new Date(event.date).getFullYear()},{' '}
-                  {event.startTime && handleTime(event.startTime)}hs
-                  {event.endTime && `- ${handleTime(event.endTime)}hs`}
-                </>
-              </Text>
-              {event.schedule && (
-                <OpenModalButton onClick={() => setScheduleModalOpen(true)}>
-                  <p>Ver cronograma</p>
-                </OpenModalButton>
-              )}
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <RowContainerTitleEdit>
+            <RowContainer style={{ width: '60%' }}>
+              <Title>{event.title}</Title>
+              <Type>{event.type} </Type>
             </RowContainer>
             <RowContainer>
-              <LocationIcon />
-              <Text>{renderLocation(event.location.label)}</Text>
-              <OpenModalButton onClick={() => setMapsModalOpen(true)}>
-                <p>Ver mapa</p>
-              </OpenModalButton>
+              <CancelButton onClick={() => onCancel()}>
+                Cancelar evento
+              </CancelButton>
+              <ButtonContainer
+                onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}
+              >
+                <EditOutlinedIcon />
+                <Button>Editar</Button>
+              </ButtonContainer>
             </RowContainer>
-          </ColumnContainer>
-          <ColumnContainer>
-            <Subtitle>Vacantes</Subtitle>
-            <RowContainerVacancies>
-              <Text>{event.vacancies} vacantes totales</Text>
-              <PeopleIcon />
-            </RowContainerVacancies>
-            <ProgressBar
-              completed={event.ticketsSold}
-              total={event.vacancies}
-            />
-            <DivOccupied>
-              <TextOccupied>
-                {event.ticketsSold}/{event.vacancies} ocupado
-              </TextOccupied>
-            </DivOccupied>
-            <RowContainerVacancies>
-              <Text>{event.ticketsPerPerson} entradas por persona maximo</Text>
-              <PersonIcon />
-            </RowContainerVacancies>
-          </ColumnContainer>
-        </LocationAndTimeRowContainer>
-        <Subtitle>Descripcion e informacion</Subtitle>
-        <Text>{event.description}</Text>
-        <Subtitle>Preguntas frecuentes</Subtitle>
-        <FAQsText>{event.faqs.replace(/R:/g, '\nR:')}</FAQsText>
-      </InfoContainer>
-            </>
-          }
+          </RowContainerTitleEdit>
+          <ImagesContainer>
+            <ArrowLeftIcon onClick={() => prevHandler()} />
+            {renderPictures()}
+            <ArrowRightIcon onClick={() => nextHandler()} />
+          </ImagesContainer>
+          <InfoContainer>
+            <LocationAndTimeRowContainer>
+              <ColumnContainer>
+                <Subtitle>Ubicacion y horario</Subtitle>
+                <RowContainer hasMargin>
+                  <CalendarIcon />
+                  <Text>
+                    <>
+                      {numToLargeMonth(new Date(event.date).getMonth())}{' '}
+                      {new Date(event.date).getDate()},{' '}
+                      {new Date(event.date).getFullYear()},{' '}
+                      {event.startTime && handleTime(event.startTime)}hs
+                      {event.endTime && `- ${handleTime(event.endTime)}hs`}
+                    </>
+                  </Text>
+                  {event.schedule && (
+                    <OpenModalButton onClick={() => setScheduleModalOpen(true)}>
+                      <p>Ver cronograma</p>
+                    </OpenModalButton>
+                  )}
+                </RowContainer>
+                <RowContainer>
+                  <LocationIcon />
+                  <Text>{renderLocation(event.location.label)}</Text>
+                  <OpenModalButton onClick={() => setMapsModalOpen(true)}>
+                    <p>Ver mapa</p>
+                  </OpenModalButton>
+                </RowContainer>
+              </ColumnContainer>
+              <ColumnContainer>
+                <Subtitle>Vacantes</Subtitle>
+                <RowContainerVacancies>
+                  <Text>{event.vacancies} vacantes totales</Text>
+                  <PeopleIcon />
+                </RowContainerVacancies>
+                <ProgressBar
+                  completed={event.ticketsSold}
+                  total={event.vacancies}
+                />
+                <DivOccupied>
+                  <TextOccupied>
+                    {event.ticketsSold}/{event.vacancies} ocupado
+                  </TextOccupied>
+                </DivOccupied>
+                <RowContainerVacancies>
+                  <Text>
+                    {event.ticketsPerPerson} entradas por persona maximo
+                  </Text>
+                  <PersonIcon />
+                </RowContainerVacancies>
+              </ColumnContainer>
+            </LocationAndTimeRowContainer>
+            <Subtitle>Descripcion e informacion</Subtitle>
+            <Text>{event.description}</Text>
+            <Subtitle>Preguntas frecuentes</Subtitle>
+            <FAQsText>{event.faqs.replace(/R:/g, '\nR:')}</FAQsText>
+          </InfoContainer>
+        </>
+      )}
     </>
   );
 };
