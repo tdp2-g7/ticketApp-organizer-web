@@ -177,3 +177,24 @@ export function onUpdateDraftFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onCreateEventFromDraftRequested(data: IEvent): AnyAction {
+  return {
+    type: constants.ON_CREATE_FROM_DRAFT_REQUESTED,
+    data,
+  };
+}
+
+export function onCreateEventFromDraftSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.ON_CREATE_FROM_DRAFT_SUCCEEDED,
+    data,
+  };
+}
+
+export function onCreateEventFromDraftFailed(error: unknown): AnyAction {
+  return {
+    type: constants.ON_CREATE_FROM_DRAFT_FAILED,
+    error,
+  };
+}

@@ -14,6 +14,7 @@ const redirectMiddleware = () => (next: any) => (action: any) => {
       globalNavigate(`/events/${data.eventId}`);
       break;
     case eventConstants.EVENT_ON_UPDATE_DRAFTS_SUCCEEDED:
+    case eventConstants.ON_CREATE_FROM_DRAFT_SUCCEEDED:
       globalNavigate('/home');
       break;
     case userConstants.USER_ON_LOGOUT:

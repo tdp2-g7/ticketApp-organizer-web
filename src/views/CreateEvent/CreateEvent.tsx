@@ -55,6 +55,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
     schedule,
     setFormValues,
     onSaveDraft,
+    isDraft,
   } = props;
 
   const [imagesFile, setImagesFile] = useState<any>([]);
@@ -265,7 +266,8 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                             <ImageCard
                               src={`data:image/jpeg;base64,${image}`}
                             />
-                            <RowIcons>
+                            { !isDraft
+                            && <RowIcons>
                             {image === currentMainImage ? (
                                 <StarIcon
                                   style={{ color: '#FEC416', borderColor: 'black' }}
@@ -291,6 +293,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                                 }}
                               />
                             </RowIcons>
+                      }
                           </RowImage>
                         ))}
                     </ImagesToEditContainer>
@@ -298,7 +301,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
                 </Container>
                 <ButtonContainer>
                   <Button type='submit'>
-                    {isEdit ? 'Editar evento' : 'Crear evento'}
+                    {isEdit && (!isDraft) ? 'Editar evento' : 'Crear evento'}
                   </Button>
                 </ButtonContainer>
               </CustomForm>

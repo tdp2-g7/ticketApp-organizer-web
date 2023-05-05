@@ -5,7 +5,7 @@ import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
 import { IEvent } from 'src/types/events.types';
 import useTypedSelector from '../hooks/useTypedSelector';
 import {
-  onCreateEventRequested,
+  onCreateEventFromDraftRequested,
   onEditRequested,
   onEventDeleteImage,
   onGetDetailsRequested,
@@ -85,7 +85,7 @@ const EditEventContainer: FunctionComponent = () => {
         },
       };
       if (eventDraft) {
-        dispatch(onCreateEventRequested(body));
+        dispatch(onCreateEventFromDraftRequested(body));
       } else {
         dispatch(onEditRequested(body));
       }
@@ -121,8 +121,12 @@ const EditEventContainer: FunctionComponent = () => {
   };
 
   const onUpdateDraft = async () => {
+    const {
+      vacancies, ticketsPerPerson, images, ...data
+    } = formValues;
     const imagesBase64: any = [];
-    if (formValues.images instanceof FileList) {
+
+    if (images instanceof FileList) {
       await Promise.all(
         Array.from(formValues.images).map(async (image: any) => {
           const imageBase64: any = await getBase64Picture(image);
@@ -136,8 +140,10 @@ const EditEventContainer: FunctionComponent = () => {
     });
 
     const body = {
-      ...formValues,
+      ...data,
       images: imagesBase64,
+      vacancies: Number(vacancies),
+      ticketsPerPerson: Number(ticketsPerPerson),
       userId: user?.userId,
     };
     if (eventId) {
@@ -160,6 +166,7 @@ const EditEventContainer: FunctionComponent = () => {
         setLocation={setLocation}
         setFormValues={setFormValues}
         onSaveDraft={onUpdateDraft}
+        isDraft={isDraft}
       />
       <ScheduleComponent
         onSubmit={onSubmitSchedule}
