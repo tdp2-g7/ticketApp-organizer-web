@@ -23,6 +23,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.EVENT_ON_GET_DRAFTS_REQUESTED:
     case constants.EVENT_ON_GET_LOCATIONS_REQUESTED:
     case constants.ON_CREATE_FROM_DRAFT_REQUESTED:
+    case constants.EVENT_ON_CANCEL_REQUESTED:
       return {
         ...state,
         loading: true,
@@ -31,6 +32,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_CREATE_SUCCEEDED:
     case constants.ON_EDIT_SUCCEEDED:
     case constants.ON_CREATE_FROM_DRAFT_SUCCEEDED:
+    case constants.EVENT_ON_CANCEL_SUCCEEDED:
       return {
         ...state,
         data,
@@ -79,6 +81,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.EVENT_ON_GET_DRAFTS_FAILED:
     case constants.EVENT_ON_GET_LOCATIONS_FAILED:
     case constants.ON_CREATE_FROM_DRAFT_FAILED:
+    case constants.EVENT_ON_CANCEL_FAILED:
       return {
         ...state,
         loading: false,

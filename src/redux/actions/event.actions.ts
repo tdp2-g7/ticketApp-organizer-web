@@ -198,3 +198,24 @@ export function onCreateEventFromDraftFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onCancelRequested(eventId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_CANCEL_REQUESTED,
+    eventId,
+  };
+}
+
+export function onCancelSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_CANCEL_SUCCEEDED,
+    data,
+  };
+}
+
+export function onCancelFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_CANCEL_FAILED,
+    error,
+  };
+}
