@@ -54,6 +54,11 @@ export async function onGetLocations(userId: string): Promise<any> {
   return response;
 }
 
+export async function onCreateFromDraft(data: IEvent): Promise<any> {
+  const response = await post(`${EVENTS_API_URL}/events/from-draft`, data);
+  return response;
+}
+
 export async function onCancel(eventId: string): Promise<any> {
   console.log('🚀 ~ onCancel ~ eventId:', eventId);
   // const response = await get(`${EVENTS_API_URL}/events/cancel/${eventId}`);

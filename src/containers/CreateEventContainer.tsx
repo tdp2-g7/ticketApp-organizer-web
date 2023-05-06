@@ -72,11 +72,38 @@ const CreateEventContainer: FunctionComponent = () => {
     setModalSchedule(false);
   };
 
-  const onSaveDraft = () => {
-    const body = {
-      ...formValues,
-      userId: user?.userId,
-    };
+  const onSaveDraft = async () => {
+    const {
+      vacancies, ticketsPerPerson, images, ...data
+    } = formValues;
+    const imagesBase64: any = [];
+    if (images) {
+      await Promise.all(
+        Array.from(images).map(async (image: any) => {
+          const imageBase64: any = await getBase64Picture(image);
+          imagesBase64.push(imageBase64.split(',')[1]);
+        }),
+      );
+    }
+
+    let body;
+    if (imagesBase64) {
+      body = {
+        ...data,
+        images: imagesBase64,
+        vacancies: Number(vacancies),
+        ticketsPerPerson: Number(ticketsPerPerson),
+        userId: user?.userId,
+      };
+    } else {
+      body = {
+        ...data,
+        vacancies: Number(vacancies),
+        ticketsPerPerson: Number(ticketsPerPerson),
+        userId: user?.userId,
+      };
+    }
+
     dispatch(onCreateDraftRequested(body));
   };
 
