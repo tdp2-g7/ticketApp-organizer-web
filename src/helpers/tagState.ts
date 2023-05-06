@@ -13,7 +13,7 @@ export const tagState = (event: IEvent) => {
     : new Date(startTime?.setHours(startTime.getHours() + 1));
   const startEvent = new Date(startTime?.setHours(startTime.getHours() - 2));
 
-  if (event.state === State.BLOQUED) {
+  if (event.state === State.BLOCKED) {
     return { text: 'Bloqueado', color: COLORS.black };
   }
   if (event.state === State.CANCELLED) {

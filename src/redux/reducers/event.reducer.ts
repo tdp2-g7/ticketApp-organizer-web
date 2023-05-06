@@ -38,6 +38,8 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         data,
         loading: false,
       };
+
+    // TODO: Remove random
     case constants.ON_GET_ALL_BY_USER_ID_SUCCEEDED:
       return {
         ...state,

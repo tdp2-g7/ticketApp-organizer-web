@@ -1,5 +1,5 @@
 export enum State {
   ACTIVE = 1,
   CANCELLED = 2,
-  BLOQUED = 3,
+  BLOCKED = 3,
 }
