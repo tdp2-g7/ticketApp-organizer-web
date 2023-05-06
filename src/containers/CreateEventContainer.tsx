@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useTypedSelector from 'src/hooks/useTypedSelector';
-import { onCreateDraftRequested } from '../redux/actions/event.actions';
+import { onCreateDraftRequested, onCreateEventRequested } from '../redux/actions/event.actions';
 import CreateEvent from '../views/CreateEvent/CreateEvent';
 import { ICreateEventFormData } from '../views/CreateEvent/types';
 import Layout from '../views/Layout/Layout';
@@ -51,9 +51,7 @@ const CreateEventContainer: FunctionComponent = () => {
           label: location.label,
         },
       };
-      console.log('🚀 ~ ON CREATE', body);
-
-      // dispatch(onCreateEventRequested(body));
+      dispatch(onCreateEventRequested(body));
     }
   };
 

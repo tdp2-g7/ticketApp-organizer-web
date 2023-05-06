@@ -70,10 +70,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
   const [dataEditEvent, setDataEditEvent] = useState({});
 
   const onHandleSubmit = (formData: ICreateEventFormData) => {
-    console.log('🚀 ~ onHandleSubmit ~ isEdit:', isEdit);
-    console.log('🚀 ~ onHandleSubmit ~ isDraft:', isDraft);
-
-    if (isEdit) {
+    if (isEdit && !isDraft) {
       setIsWarningOpen(true);
       setDataEditEvent(formData);
     } else {
