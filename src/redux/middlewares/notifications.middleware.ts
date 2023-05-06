@@ -15,6 +15,7 @@ const notificationMiddleware = () => (next: any) => (action: any) => {
       sendSuccessNotification('Usuario registrado correctamente');
       break;
     case eventConstants.ON_CREATE_SUCCEEDED:
+    case eventConstants.ON_CREATE_FROM_DRAFT_SUCCEEDED:
       sendSuccessNotification('Evento creado correctamente');
       break;
     case eventConstants.ON_EDIT_SUCCEEDED:

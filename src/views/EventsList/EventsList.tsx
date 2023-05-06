@@ -52,7 +52,6 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
     && filters.type === ''
     && filters.location === ''
     && filters.orderBy === '';
-
   const nextHandler = () => {
     if (currentPage >= maxPage) return;
     setCurrentPage(currentPage + 1);
@@ -182,7 +181,7 @@ const EventsList: FunctionComponent<IEventsList> = (props: IEventsList) => {
           {filters.sortBy === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
         </SortBy>
       </RowDiv>
-      {!(events.length > 0) && !loading ? (
+      {!(events.length > 0 || drafts.length > 0) && !loading ? (
         <EmptyContainer>
           <EventBusyIcon />
           <EmptyTitle> Aún no creaste ningún evento </EmptyTitle>

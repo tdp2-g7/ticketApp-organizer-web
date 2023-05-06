@@ -5,6 +5,7 @@ import ScheduleComponent from 'src/views/CreateEvent/Schedule/Schedule';
 import { IEvent } from 'src/types/events.types';
 import useTypedSelector from '../hooks/useTypedSelector';
 import {
+  onCreateEventFromDraftRequested,
   onEditRequested,
   onEventDeleteImage,
   onGetDetailsRequested,
@@ -33,10 +34,10 @@ const EditEventContainer: FunctionComponent = () => {
   const eventId = params.id;
 
   useEffect(() => {
-    if (eventId) {
+    if (eventId && !isDraft) {
       dispatch(onGetDetailsRequested(eventId));
     }
-  }, [dispatch]);
+  }, [dispatch, isDraft, eventId]);
 
   if (isDraft) {
     eventDraft = drafts.find((draft: any) => draft.eventDraftId === eventId);
@@ -83,7 +84,11 @@ const EditEventContainer: FunctionComponent = () => {
           label: currentLocation.label,
         },
       };
-      dispatch(onEditRequested(body));
+      if (eventDraft) {
+        dispatch(onCreateEventFromDraftRequested(body));
+      } else {
+        dispatch(onEditRequested(body));
+      }
     }
   };
 
@@ -116,8 +121,12 @@ const EditEventContainer: FunctionComponent = () => {
   };
 
   const onUpdateDraft = async () => {
+    const {
+      vacancies, ticketsPerPerson, images, ...data
+    } = formValues;
     const imagesBase64: any = [];
-    if (formValues.images instanceof FileList) {
+
+    if (images instanceof FileList) {
       await Promise.all(
         Array.from(formValues.images).map(async (image: any) => {
           const imageBase64: any = await getBase64Picture(image);
@@ -126,13 +135,15 @@ const EditEventContainer: FunctionComponent = () => {
       );
     }
 
-    eventDraft?.images.forEach((imageBase64: string) => {
+    eventDraft?.images?.forEach((imageBase64: string) => {
       imagesBase64.push(imageBase64);
     });
 
     const body = {
-      ...formValues,
+      ...data,
       images: imagesBase64,
+      vacancies: Number(vacancies),
+      ticketsPerPerson: Number(ticketsPerPerson),
       userId: user?.userId,
     };
     if (eventId) {

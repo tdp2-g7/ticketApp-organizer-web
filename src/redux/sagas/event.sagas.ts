@@ -8,6 +8,7 @@ import {
   getEventsByUserId,
   onCancel,
   onCreateDraft,
+  onCreateFromDraft,
   onEditEvent,
   onGetDrafts,
   onGetLocations,
@@ -19,6 +20,8 @@ import {
   onCreateDraftFailed,
   onCreateDraftSucceeded,
   onCreateEventFailed,
+  onCreateEventFromDraftFailed,
+  onCreateEventFromDraftSucceeded,
   onCreateEventSucceeded,
   onEditFailed,
   onEditSucceeded,
@@ -107,6 +110,15 @@ export function* getLocations(action: AnyAction): Generator {
   }
 }
 
+export function* createFromDraft(action: AnyAction): Generator {
+  try {
+    const { data }: any = yield call(onCreateFromDraft, action.data);
+    yield put(onCreateEventFromDraftSucceeded(data));
+  } catch (error) {
+    yield put(onCreateEventFromDraftFailed(error));
+  }
+}
+
 export function* eventCancel(action: AnyAction): Generator {
   try {
     const { data }: any = yield call(onCancel, action.eventId);
@@ -126,6 +138,7 @@ export function* watchEvents(): Generator {
     takeLatest(constants.EVENT_ON_UPDATE_DRAFTS_REQUESTED, updateDraft),
     takeLatest(constants.EVENT_ON_GET_DRAFTS_REQUESTED, getDrafts),
     takeLatest(constants.EVENT_ON_GET_LOCATIONS_REQUESTED, getLocations),
+    takeLatest(constants.ON_CREATE_FROM_DRAFT_REQUESTED, createFromDraft),
     takeLatest(constants.EVENT_ON_CANCEL_REQUESTED, eventCancel),
   ]);
 }
