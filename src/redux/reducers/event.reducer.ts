@@ -39,7 +39,10 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_GET_ALL_BY_USER_ID_SUCCEEDED:
       return {
         ...state,
-        events: data.data.events,
+        events: data.data.events.map((event: any) => ({
+          ...event,
+          state: Math.ceil(Math.random() * 3),
+        })),
         maxPage: data.data.maxPage,
         loading: false,
       };
