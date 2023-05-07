@@ -19,6 +19,7 @@ const redirectMiddleware = () => (next: any) => (action: any) => {
       globalNavigate('/home');
       break;
     case userConstants.USER_ON_LOGOUT:
+    case userConstants.USER_ON_INITIALIZE_FAILED:
       globalNavigate('/auth');
       break;
     default:

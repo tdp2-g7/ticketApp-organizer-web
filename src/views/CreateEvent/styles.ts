@@ -156,7 +156,7 @@ export const ActionButton = styled.div`
   border: 1px solid ${COLORS.violet};
   color: ${COLORS.violet};
   border-radius: 8px;
-  width: 35%;
+  width: 60%;
   background: ${COLORS.greyMischka};
 `;
 
