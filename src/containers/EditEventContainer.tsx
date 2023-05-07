@@ -39,6 +39,12 @@ const EditEventContainer: FunctionComponent = () => {
     }
   }, [dispatch, isDraft, eventId]);
 
+  useEffect(() => {
+    if (eventData?.date) {
+      setReserveDate(new Date(eventData.date));
+    }
+  }, [eventData]);
+
   if (isDraft) {
     eventDraft = drafts.find((draft: any) => draft.eventDraftId === eventId);
   }

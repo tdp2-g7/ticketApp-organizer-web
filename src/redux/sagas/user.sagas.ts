@@ -6,6 +6,8 @@ import { editProfile, login, register } from '../../services/user.services';
 import {
   onEditProfileFailed,
   onEditProfileSucceeded,
+  onInitializeFailed,
+  onInitializeSucceeded,
   onLoginFailed,
   onLoginSucceeded,
   onRegisterFailed,
@@ -40,9 +42,19 @@ export function* userEditProfile(action: AnyAction): Generator {
   }
 }
 
+export function* userInitialize(action: AnyAction): Generator {
+  try {
+    const { data }: any = yield call(login, action.data);
+    yield put(onInitializeSucceeded(data));
+  } catch (error) {
+    yield put(onInitializeFailed(error));
+  }
+}
+
 export function* watchUsers(): Generator {
   yield all([
     takeLatest(constants.USER_ON_LOGIN_REQUESTED, userLogin),
+    takeLatest(constants.USER_ON_INITIALIZE_REQUESTED, userInitialize),
     takeLatest(constants.USER_ON_REGISTER_REQUESTED, userRegister),
     takeLatest(constants.USER_ON_EDIT_PROFILE_REQUESTED, userEditProfile),
   ]);

@@ -74,3 +74,25 @@ export function onEditProfileFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+// USER_ON_INITIALIZE
+export function onInitializeRequested(data: any): AnyAction {
+  return {
+    type: constants.USER_ON_INITIALIZE_REQUESTED,
+    data,
+  };
+}
+
+export function onInitializeSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.USER_ON_INITIALIZE_SUCCEEDED,
+    data,
+  };
+}
+
+export function onInitializeFailed(error: unknown): AnyAction {
+  return {
+    type: constants.USER_ON_INITIALIZE_FAILED,
+    error,
+  };
+}
