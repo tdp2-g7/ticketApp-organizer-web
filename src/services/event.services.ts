@@ -24,7 +24,7 @@ export async function getEventsByUserId(data: any): Promise<any> {
   return response;
 }
 
-export async function getDetails(eventId: string): Promise<any> {
+export async function getDetails(eventId: string): Promise<AxiosResponse> {
   const response = await get(`${EVENTS_API_URL}/events/${eventId}`);
   return response;
 }
@@ -44,23 +44,22 @@ export async function onUpdateDraft(data: IEvent, eventDraftId: string): Promise
   return response;
 }
 
-export async function onGetDrafts(userId: string): Promise<any> {
+export async function onGetDrafts(userId: string): Promise<AxiosResponse> {
   const response = await get(`${EVENTS_API_URL}/events/draft/${userId}`);
   return response;
 }
 
-export async function onGetLocations(userId: string): Promise<any> {
+export async function onGetLocations(userId: string): Promise<AxiosResponse> {
   const response = await get(`${EVENTS_API_URL}/events/locations/${userId}`);
   return response;
 }
 
-export async function onCreateFromDraft(data: IEvent): Promise<any> {
+export async function onCreateFromDraft(data: IEvent): Promise<AxiosResponse> {
   const response = await post(`${EVENTS_API_URL}/events/from-draft`, data);
   return response;
 }
 
-export async function onCancel(eventId: string): Promise<any> {
-  console.log('🚀 ~ onCancel ~ eventId:', eventId);
-  // const response = await get(`${EVENTS_API_URL}/events/cancel/${eventId}`);
-  return eventId;
+export async function onCancel(eventId: string): Promise<AxiosResponse> {
+  const response = await patch(`${EVENTS_API_URL}/events/cancel/${eventId}`);
+  return response;
 }
