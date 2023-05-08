@@ -13,7 +13,7 @@ import AuthContainer from './containers/AuthContainer';
 import { GlobalHistory } from './helpers/history';
 import { getCookie } from './helpers/cookies';
 import 'react-notifications/lib/notifications.css';
-import { onLoginRequested } from './redux/actions/user.actions';
+import { onInitializeRequested } from './redux/actions/user.actions';
 import { GOOGLE_CLIENT_ID } from './configs/configs';
 import PrivateRoute from './containers/PrivateRoute';
 import ProfileContainer from './containers/ProfileContainer';
@@ -33,7 +33,7 @@ const App: FunctionComponent = () => {
   const userId = getCookie('userId');
   const cookieObject = { accessToken, email, userId };
   if (userId) {
-    dispatch(onLoginRequested(cookieObject));
+    dispatch(onInitializeRequested(cookieObject));
   }
 
   return (
