@@ -7,6 +7,7 @@ import Map from 'src/components/Map/Map';
 import ProgressBar from 'src/components/ProgressBar';
 import { renderLocation } from 'src/helpers/location';
 import Loading from 'src/components/Loading/Loading';
+import { State } from 'src/helpers/states';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -147,7 +148,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
             </RowContainer>
             <RowContainer>
               <CancelButton onClick={() => onCancel()}>
-                Cancelar evento
+                {event.state === State.CANCELLED ? 'Reanudar evento' : 'Cancelar evento'}
               </CancelButton>
               <ButtonContainer
                 onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}
