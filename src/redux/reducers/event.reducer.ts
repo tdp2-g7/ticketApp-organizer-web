@@ -58,7 +58,6 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
       };
     case constants.ON_GET_DETAILS_SUCCEEDED:
     case constants.EVENT_ON_CANCEL_SUCCEEDED:
-      console.log('🚀 ~ REDUCER data:', data);
       return {
         ...state,
         eventData: data,
