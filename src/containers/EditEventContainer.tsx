@@ -43,6 +43,9 @@ const EditEventContainer: FunctionComponent = () => {
     if (eventData?.date) {
       setReserveDate(new Date(eventData.date));
     }
+    if (eventData?.schedule) {
+      setSchedule(eventData.schedule);
+    }
   }, [eventData]);
 
   if (isDraft) {
