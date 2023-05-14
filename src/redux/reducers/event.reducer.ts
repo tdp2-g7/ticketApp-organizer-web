@@ -32,14 +32,11 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.ON_CREATE_SUCCEEDED:
     case constants.ON_EDIT_SUCCEEDED:
     case constants.ON_CREATE_FROM_DRAFT_SUCCEEDED:
-    case constants.EVENT_ON_CANCEL_SUCCEEDED:
       return {
         ...state,
         data,
         loading: false,
       };
-
-    // TODO: Remove random
     case constants.ON_GET_ALL_BY_USER_ID_SUCCEEDED:
       return {
         ...state,
@@ -47,7 +44,6 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         maxPage: data.data.maxPage,
         loading: false,
       };
-
     case constants.EVENT_DELETE_IMAGE:
       return {
         ...state,
@@ -61,11 +57,11 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
         loading: false,
       };
     case constants.ON_GET_DETAILS_SUCCEEDED:
+    case constants.EVENT_ON_CANCEL_SUCCEEDED:
+      console.log('🚀 ~ REDUCER data:', data);
       return {
         ...state,
-        eventData: {
-          ...data.data,
-        },
+        eventData: data,
         loading: false,
       };
     case constants.EVENT_ON_GET_LOCATIONS_SUCCEEDED:

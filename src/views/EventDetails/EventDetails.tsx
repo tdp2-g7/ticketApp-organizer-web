@@ -8,6 +8,8 @@ import ProgressBar from 'src/components/ProgressBar';
 import { renderLocation } from 'src/helpers/location';
 import Loading from 'src/components/Loading/Loading';
 import { State } from 'src/helpers/states';
+import COLORS from 'src/helpers/colors';
+import { tagState } from 'src/helpers/tagState';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -97,7 +99,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     <Modal
       isOpen={scheduleModalOpen}
       onClose={() => setScheduleModalOpen(false)}
-      title='Ver cronograma'
+      title="Ver cronograma"
       size={Sizes.small}
     >
       {event.schedule?.map((schedule) => (
@@ -117,7 +119,7 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
     <Modal
       isOpen={mapsModalOpen}
       onClose={() => setMapsModalOpen(false)}
-      title='Ver mapa'
+      title="Ver mapa"
       size={Sizes.medium}
     >
       <Text>{event.location && renderLocation(event.location.label)}</Text>
@@ -128,6 +130,13 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
       />
     </Modal>
   );
+
+  // Check if event has already started
+  let startTime = new Date();
+  if (event.startTime) {
+    startTime = new Date(event.startTime);
+  }
+  const startEvent = new Date(startTime?.setHours(startTime.getHours() - 2));
 
   return (
     <>
@@ -144,19 +153,26 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
           <RowContainerTitleEdit>
             <RowContainer style={{ width: '60%' }}>
               <Title>{event.title}</Title>
-              <Type>{event.type} </Type>
+              <Type color={COLORS.lightViolet}>{event.type} </Type>
             </RowContainer>
-            <RowContainer>
-              <CancelButton onClick={() => onCancel()}>
-                {event.state === State.CANCELLED ? 'Reanudar evento' : 'Cancelar evento'}
-              </CancelButton>
-              <ButtonContainer
-                onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}
-              >
-                <EditOutlinedIcon />
-                <Button>Editar</Button>
-              </ButtonContainer>
-            </RowContainer>
+              <RowContainer>
+                <Type color={tagState(event).color}>{tagState(event).text}</Type>
+                {new Date() < startEvent && (
+                <>
+                  <CancelButton onClick={() => onCancel()}>
+                    {event.state === State.CANCELLED
+                      ? 'Reanudar evento'
+                      : 'Cancelar evento'}
+                  </CancelButton>
+                  <ButtonContainer
+                    onClick={() => globalNavigate(`/event/edit/${event.eventId}`)}
+                  >
+                    <EditOutlinedIcon />
+                    <Button>Editar</Button>
+                  </ButtonContainer>
+                </>
+                )}
+              </RowContainer>
           </RowContainerTitleEdit>
           <ImagesContainer>
             <ArrowLeftIcon onClick={() => prevHandler()} />

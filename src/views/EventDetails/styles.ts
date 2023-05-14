@@ -164,12 +164,12 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   text-align: center;
-  margin: 0 15px 10px 0;
   border-radius: 20px;
   border: 1px solid;
   border-color: ${COLORS.lightViolet};
   width: 80px;
   padding: 5px;
+  margin-right: 10px;
   cursor: pointer;
 `;
 
@@ -208,10 +208,9 @@ export const ClockIcon = styled(AccessTime)`
 `;
 
 export const Type = styled.div`
-  padding: 6px;
+  padding: 6px 32px;
   margin-left: 20px;
-  width: 150px;
-  background-color: ${COLORS.lightViolet};
+  background-color: ${(props) => props.color};
   border-radius: 10px;
   color: ${COLORS.white};
   font-size: 12px;
@@ -221,9 +220,9 @@ export const Type = styled.div`
 
 export const CancelButton = styled.div`
   text-align: center;
-  margin: 0 15px 10px 0;
   border-radius: 20px;
   border: 1px solid;
+  margin: 0 10px;
   border-color: ${COLORS.warningRed};
   color: ${COLORS.redMandy};
   width: 140px;
