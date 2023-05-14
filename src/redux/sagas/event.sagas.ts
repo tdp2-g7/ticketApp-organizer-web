@@ -58,7 +58,7 @@ export function* getAllEventsByUserId(action: AnyAction): Generator {
 
 export function* getEventDetails(action: AnyAction): Generator {
   try {
-    const data: any = yield call(getDetails, action.eventId);
+    const { data }: any = yield call(getDetails, action.eventId);
     yield put(onGetDetailsSucceeded(data));
   } catch (error) {
     yield put(onGetDetailsFailed(error));
@@ -121,7 +121,7 @@ export function* createFromDraft(action: AnyAction): Generator {
 
 export function* eventCancel(action: AnyAction): Generator {
   try {
-    const { data }: any = yield call(onCancel, action.eventId);
+    const data: any = yield call(onCancel, action.eventId);
     yield put(onCancelSucceeded(data));
   } catch (error) {
     yield put(onCancelFailed(error));
