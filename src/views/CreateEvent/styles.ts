@@ -156,7 +156,7 @@ export const ActionButton = styled.div`
   border: 1px solid ${COLORS.violet};
   color: ${COLORS.violet};
   border-radius: 8px;
-  width: 35%;
+  width: 60%;
   background: ${COLORS.greyMischka};
 `;
 
@@ -186,4 +186,11 @@ export const RowIcons = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+`;
+
+export const ModalTitle = styled.p`
+  font-size: 24px;
+  margin: 0;
+  font-weight: bold;
+  font-family: 'Poppins';
 `;

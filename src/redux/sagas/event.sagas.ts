@@ -6,16 +6,22 @@ import {
   createEvent,
   getDetails,
   getEventsByUserId,
+  onCancel,
   onCreateDraft,
+  onCreateFromDraft,
   onEditEvent,
   onGetDrafts,
   onGetLocations,
   onUpdateDraft,
 } from '../../services/event.services';
 import {
+  onCancelFailed,
+  onCancelSucceeded,
   onCreateDraftFailed,
   onCreateDraftSucceeded,
   onCreateEventFailed,
+  onCreateEventFromDraftFailed,
+  onCreateEventFromDraftSucceeded,
   onCreateEventSucceeded,
   onEditFailed,
   onEditSucceeded,
@@ -52,7 +58,7 @@ export function* getAllEventsByUserId(action: AnyAction): Generator {
 
 export function* getEventDetails(action: AnyAction): Generator {
   try {
-    const data: any = yield call(getDetails, action.eventId);
+    const { data }: any = yield call(getDetails, action.eventId);
     yield put(onGetDetailsSucceeded(data));
   } catch (error) {
     yield put(onGetDetailsFailed(error));
@@ -104,6 +110,24 @@ export function* getLocations(action: AnyAction): Generator {
   }
 }
 
+export function* createFromDraft(action: AnyAction): Generator {
+  try {
+    const { data }: any = yield call(onCreateFromDraft, action.data);
+    yield put(onCreateEventFromDraftSucceeded(data));
+  } catch (error) {
+    yield put(onCreateEventFromDraftFailed(error));
+  }
+}
+
+export function* eventCancel(action: AnyAction): Generator {
+  try {
+    const data: any = yield call(onCancel, action.eventId);
+    yield put(onCancelSucceeded(data));
+  } catch (error) {
+    yield put(onCancelFailed(error));
+  }
+}
+
 export function* watchEvents(): Generator {
   yield all([
     takeLatest(constants.ON_CREATE_REQUESTED, eventCreate),
@@ -114,5 +138,7 @@ export function* watchEvents(): Generator {
     takeLatest(constants.EVENT_ON_UPDATE_DRAFTS_REQUESTED, updateDraft),
     takeLatest(constants.EVENT_ON_GET_DRAFTS_REQUESTED, getDrafts),
     takeLatest(constants.EVENT_ON_GET_LOCATIONS_REQUESTED, getLocations),
+    takeLatest(constants.ON_CREATE_FROM_DRAFT_REQUESTED, createFromDraft),
+    takeLatest(constants.EVENT_ON_CANCEL_REQUESTED, eventCancel),
   ]);
 }

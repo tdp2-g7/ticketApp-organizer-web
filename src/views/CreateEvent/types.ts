@@ -13,6 +13,7 @@ export interface ICreateEventProps {
   setLocation: (location: any) => void;
   setFormValues: (formValues: any) => void;
   onSaveDraft?: () => void;
+  isDraft?: string | null;
 }
 export interface ICreateEventFormData {
   title: string;

@@ -15,9 +15,11 @@ const notificationMiddleware = () => (next: any) => (action: any) => {
       sendSuccessNotification('Usuario registrado correctamente');
       break;
     case eventConstants.ON_CREATE_SUCCEEDED:
+    case eventConstants.ON_CREATE_FROM_DRAFT_SUCCEEDED:
       sendSuccessNotification('Evento creado correctamente');
       break;
     case eventConstants.ON_EDIT_SUCCEEDED:
+    case eventConstants.EVENT_ON_UPDATE_DRAFTS_SUCCEEDED:
       sendSuccessNotification('Evento modificado correctamente');
       break;
     case eventConstants.EVENT_ON_CREATE_DRAFT_SUCCEEDED:
@@ -32,6 +34,8 @@ const notificationMiddleware = () => (next: any) => (action: any) => {
     case eventConstants.ON_EDIT_FAILED:
     case eventConstants.EVENT_ON_CREATE_DRAFT_FAILED:
     case eventConstants.ON_GET_ALL_BY_USER_ID_FAILED:
+    case eventConstants.ON_CREATE_FROM_DRAFT_FAILED:
+    case eventConstants.EVENT_ON_UPDATE_DRAFTS_FAILED:
       sendErrorNotification(error);
       break;
     default:
