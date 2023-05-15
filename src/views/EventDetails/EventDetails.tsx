@@ -157,7 +157,6 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
             </RowContainer>
               <RowContainer>
                 <Type color={tagState(event).color}>{tagState(event).text}</Type>
-                {new Date() < startEvent && (
                 <>
                   <CancelButton onClick={() => onCancel()}>
                     {event.state === State.CANCELLED
@@ -171,7 +170,6 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
                     <Button>Editar</Button>
                   </ButtonContainer>
                 </>
-                )}
               </RowContainer>
           </RowContainerTitleEdit>
           <ImagesContainer>
