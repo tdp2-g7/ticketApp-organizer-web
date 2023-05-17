@@ -101,7 +101,7 @@ const CreateEvent: FunctionComponent<ICreateEventProps> = (
       <RowDiv>
         <Title>{isEdit ? 'Editar evento' : 'Crear evento'}</Title>
         {
-          isDraft && <ButtonContainer>
+          (!isEdit || isDraft) && <ButtonContainer>
           <DraftButton onClick={onSaveDraft}>Guardar como borrador</DraftButton>
         </ButtonContainer>
         }
