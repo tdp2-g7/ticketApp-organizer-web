@@ -14,20 +14,20 @@ export const tagState = (event: IEvent) => {
   const startEvent = new Date(startTime?.setHours(startTime.getHours() - 2));
 
   if (event.state === State.BLOCKED) {
-    return { text: 'Bloqueado', color: COLORS.black };
+    return { text: 'Bloqueado', color: 'red' };
   }
   if (event.state === State.CANCELLED) {
-    return { text: 'Cancelado', color: COLORS.redMandy };
+    return { text: 'Cancelado', color: COLORS.sunshade };
   }
   if (event.state === State.ACTIVE) {
     if (startEvent < new Date() && new Date() < endEvent) {
       return { text: 'En curso', color: COLORS.greenLimeade };
     }
     if (endEvent < new Date()) {
-      return { text: 'Finalizado', color: COLORS.mineShaft };
+      return { text: 'Finalizado', color: COLORS.corduroy };
     }
     if (startEvent > new Date()) {
-      return { text: 'Activo', color: COLORS.lightViolet };
+      return { text: 'Activo', color: COLORS.orchide };
     }
   }
   return { text: 'null', color: COLORS.lightViolet };

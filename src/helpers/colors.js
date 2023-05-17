@@ -16,7 +16,10 @@ const COLORS = {
   ghost: '#CACDD3',
   redMandy: '#E24F4F',
   greenLimeade: '#2CAA00',
-
+  malibu: '#7CBDFE',
+  sunshade: '#FE942A',
+  orchide: '#D373C2',
+  corduroy: '#686A68',
 };
 
 export default COLORS;

@@ -132,12 +132,6 @@ const EventDetails: FunctionComponent<IEventDetailsProps> = (
   );
 
   // Check if event has already started
-  let startTime = new Date();
-  if (event.startTime) {
-    startTime = new Date(event.startTime);
-  }
-  const startEvent = new Date(startTime?.setHours(startTime.getHours() - 2));
-
   return (
     <>
       {renderScheduleModal()}
