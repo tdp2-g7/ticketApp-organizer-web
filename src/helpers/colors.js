@@ -16,7 +16,11 @@ const COLORS = {
   ghost: '#CACDD3',
   redMandy: '#E24F4F',
   greenLimeade: '#2CAA00',
-
+  persianBlue: '#153BCB',
+  clementine: '#F06800',
+  orchide: '#D373C2',
+  tundora: '#474747',
+  electricViolet: '#BA00E0',
 };
 
 export default COLORS;
