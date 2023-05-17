@@ -17,17 +17,17 @@ export const tagState = (event: IEvent) => {
     return { text: 'Bloqueado', color: 'red' };
   }
   if (event.state === State.CANCELLED) {
-    return { text: 'Cancelado', color: COLORS.sunshade };
+    return { text: 'Cancelado', color: COLORS.clementine };
   }
   if (event.state === State.ACTIVE) {
     if (startEvent < new Date() && new Date() < endEvent) {
       return { text: 'En curso', color: COLORS.greenLimeade };
     }
     if (endEvent < new Date()) {
-      return { text: 'Finalizado', color: COLORS.corduroy };
+      return { text: 'Finalizado', color: COLORS.tundora };
     }
     if (startEvent > new Date()) {
-      return { text: 'Activo', color: COLORS.orchide };
+      return { text: 'Activo', color: COLORS.pink };
     }
   }
   return { text: 'null', color: COLORS.lightViolet };

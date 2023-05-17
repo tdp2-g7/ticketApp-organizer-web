@@ -51,7 +51,7 @@ const EventCard = (props: any) => {
       )}
 
       {isDraft ? (
-        <Tag color= {COLORS.malibu}>Borrador</Tag>
+        <Tag color= {COLORS.persianBlue}>Borrador</Tag>
       ) : (
         <Tag color={tagState(event).color}>{tagState(event).text}</Tag>
       )}
