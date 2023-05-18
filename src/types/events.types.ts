@@ -26,6 +26,7 @@ export interface IEventDefaultState {
   eventData: IEvent | null;
   drafts: IEvent[];
   locations: ILocationMap[];
+  statisticsData: any;
 }
 
 export interface ISchedule {

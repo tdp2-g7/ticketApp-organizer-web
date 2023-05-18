@@ -9,6 +9,7 @@ import {
   PersonOutlineOutlined,
   EditOutlined,
   AccessTime,
+  InsertChartOutlined,
 } from '@mui/icons-material';
 import COLORS from '../../helpers/colors';
 import { IRowProps, ITextProps } from './types';
@@ -19,6 +20,7 @@ export const Title = styled.p`
   font-family: 'Poppins';
   font-weight: bold;
   color: ${COLORS.darkViolet};
+  white-space: nowrap;
 `;
 
 export const CustomImg = styled.img`
@@ -216,6 +218,7 @@ export const Type = styled.div`
   font-size: 12px;
   font-family: 'Poppins';
   text-align: center;
+  white-space: nowrap;
 `;
 
 export const CancelButton = styled.div`
@@ -227,5 +230,22 @@ export const CancelButton = styled.div`
   color: ${COLORS.redMandy};
   width: 140px;
   padding: 8px;
+  cursor: pointer;
+`;
+
+export const InsertChartOutlinedIcon = styled(InsertChartOutlined)`
+  color: ${COLORS.lightViolet};
+  margin-right: 3px;
+`;
+
+export const MetricsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: ${COLORS.lightViolet};
+  padding: 5px 15px;
+  width: 150px;
   cursor: pointer;
 `;

@@ -219,3 +219,24 @@ export function onCancelFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onGetStatisticsRequested(eventId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_STATISTICS_REQUESTED,
+    eventId,
+  };
+}
+
+export function onGetStatisticsSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_STATISTICS_SUCCEEDED,
+    data,
+  };
+}
+
+export function onGetStatisticsFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_STATISTICS_FAILED,
+    error,
+  };
+}

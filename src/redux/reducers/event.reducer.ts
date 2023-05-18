@@ -10,6 +10,7 @@ const initialState: IEventDefaultState = {
   eventData: null,
   drafts: [],
   locations: [],
+  statisticsData: null,
 };
 
 const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
@@ -24,6 +25,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.EVENT_ON_GET_LOCATIONS_REQUESTED:
     case constants.ON_CREATE_FROM_DRAFT_REQUESTED:
     case constants.EVENT_ON_CANCEL_REQUESTED:
+    case constants.EVENT_ON_GET_STATISTICS_REQUESTED:
       return {
         ...state,
         loading: true,
@@ -35,6 +37,12 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
       return {
         ...state,
         data,
+        loading: false,
+      };
+    case constants.EVENT_ON_GET_STATISTICS_SUCCEEDED:
+      return {
+        ...state,
+        statisticsData: data,
         loading: false,
       };
     case constants.ON_GET_ALL_BY_USER_ID_SUCCEEDED:
@@ -79,6 +87,7 @@ const eventReducer: Reducer = (state = initialState, action = { type: '' }) => {
     case constants.EVENT_ON_GET_LOCATIONS_FAILED:
     case constants.ON_CREATE_FROM_DRAFT_FAILED:
     case constants.EVENT_ON_CANCEL_FAILED:
+    case constants.EVENT_ON_GET_STATISTICS_FAILED:
       return {
         ...state,
         loading: false,
