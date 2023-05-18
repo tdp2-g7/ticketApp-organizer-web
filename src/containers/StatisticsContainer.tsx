@@ -27,7 +27,6 @@ const StatisticsContainer: FunctionComponent = () => {
 
   return (
     <Layout>
-      statisticsData &&{' '}
       <Statistics
         loading={loading}
         eventData={eventData}
