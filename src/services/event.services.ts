@@ -65,7 +65,7 @@ export async function onCancel(eventId: string): Promise<AxiosResponse> {
 }
 
 export async function onGetStatistics(eventId: string): Promise<AxiosResponse> {
-  const response = await get(`${EVENTS_API_URL}/event-reservations/registration-metrics/{eventId}?id=${eventId}`);
+  const response = await get(`${EVENTS_API_URL}/event-reservations/registration-metrics?id=${eventId}`);
   // const data = {
   //   eventId,
   //   bar: [
