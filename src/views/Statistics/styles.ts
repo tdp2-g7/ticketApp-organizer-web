@@ -1,7 +1,7 @@
 import COLORS from 'src/helpers/colors';
 import styled from 'styled-components';
 import {
-  ArrowBackIos,
+  ArrowBackIos, BarChart, ShowChart, DonutSmall,
 } from '@mui/icons-material';
 import { IRowProps } from './types';
 
@@ -52,4 +52,38 @@ export const BackText = styled.p`
   color: ${COLORS.greyMystic};
   font-family: 'Poppins';
   cursor: pointer;
+`;
+
+export const EmptyTitle = styled.p`
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: ${COLORS.black};
+`;
+
+export const BarChartIcon = styled(BarChart)`
+  margin-top: 100px;
+  transform: scale(10);
+  margin-bottom: 50px;
+`;
+
+export const EmptyStatistics = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  height: 100%;
+  width: 100%;
+`;
+
+export const ShowChartIcon = styled(ShowChart)`
+  margin-top: 100px;
+  transform: scale(10);
+  margin-bottom: 50px;
+`;
+
+export const DonutSmallIcon = styled(DonutSmall)`
+  margin-top: 100px;
+  transform: scale(10);
+  margin-bottom: 80px;
 `;
