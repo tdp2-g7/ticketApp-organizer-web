@@ -17,6 +17,7 @@ const COLORS = {
   redMandy: '#E24F4F',
   greenLimeade: '#2CAA00',
   persianBlue: '#153BCB',
+  jordyBlue: '#84ACF0',
   clementine: '#F06800',
   orchide: '#D373C2',
   tundora: '#474747',

@@ -18,6 +18,7 @@ import { GOOGLE_CLIENT_ID } from './configs/configs';
 import PrivateRoute from './containers/PrivateRoute';
 import ProfileContainer from './containers/ProfileContainer';
 import StatisticsContainer from './containers/StatisticsContainer';
+import MetricsContainer from './containers/MetricsContainer';
 
 const App: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,14 @@ const App: FunctionComponent = () => {
             element={
               <PrivateRoute>
                 <ProfileContainer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/metrics'
+            element={
+              <PrivateRoute>
+                <MetricsContainer />
               </PrivateRoute>
             }
           />

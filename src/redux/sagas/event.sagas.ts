@@ -11,6 +11,8 @@ import {
   onCreateFromDraft,
   onEditEvent,
   onGetDrafts,
+  onGetEventsByMonth,
+  onGetEventsByState,
   onGetLocations,
   onGetStatistics,
   onUpdateDraft,
@@ -28,6 +30,10 @@ import {
   onEditSucceeded,
   onGetAllEventsByUserIdFailed,
   onGetAllEventsByUserIdSucceeded,
+  onGetByMonthFailed,
+  onGetByMonthSucceeded,
+  onGetByStateFailed,
+  onGetByStateSucceeded,
   onGetDetailsFailed,
   onGetDetailsSucceeded,
   onGetDraftsFailed,
@@ -140,6 +146,24 @@ export function* getStatistics(action: AnyAction): Generator {
   }
 }
 
+export function* getEventsByState(action: AnyAction): Generator {
+  try {
+    const data: any = yield call(onGetEventsByState, action.userId);
+    yield put(onGetByStateSucceeded(data));
+  } catch (error) {
+    yield put(onGetByStateFailed(error));
+  }
+}
+
+export function* getEventsByMonth(action: AnyAction): Generator {
+  try {
+    const data: any = yield call(onGetEventsByMonth, action.userId, action.year);
+    yield put(onGetByMonthSucceeded(data));
+  } catch (error) {
+    yield put(onGetByMonthFailed(error));
+  }
+}
+
 export function* watchEvents(): Generator {
   yield all([
     takeLatest(constants.ON_CREATE_REQUESTED, eventCreate),
@@ -153,5 +177,7 @@ export function* watchEvents(): Generator {
     takeLatest(constants.ON_CREATE_FROM_DRAFT_REQUESTED, createFromDraft),
     takeLatest(constants.EVENT_ON_CANCEL_REQUESTED, eventCancel),
     takeLatest(constants.EVENT_ON_GET_STATISTICS_REQUESTED, getStatistics),
+    takeLatest(constants.EVENT_ON_GET_BY_STATE_REQUESTED, getEventsByState),
+    takeLatest(constants.EVENT_ON_GET_BY_MONTH_REQUESTED, getEventsByMonth),
   ]);
 }
