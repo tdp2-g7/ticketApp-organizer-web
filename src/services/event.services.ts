@@ -70,10 +70,9 @@ export async function onGetStatistics(eventId: string): Promise<AxiosResponse> {
 }
 
 export async function onGetEventsByState(userId: string): Promise<any> {
-  console.log('🚀 ~ getEventsByState ~ userId:', userId);
   // const response = await patch(`${EVENTS_API_URL}/events/cancel/${eventId}`);
   const response = [
-    { name: 'Bloqueado', value: 300 },
+    { name: 'Bloqueado', value: userId },
     { name: 'Cancelado', value: 300 },
     { name: 'En curso', value: 400 },
     { name: 'Finalizado', value: 200 },
@@ -84,17 +83,15 @@ export async function onGetEventsByState(userId: string): Promise<any> {
 }
 
 export async function onGetEventsByMonth(userId: string, year: number): Promise<any> {
-  console.log('🚀 ~ getEventsByMonth ~ year:', year);
-  console.log('🚀 ~ getEventsByState ~ userId:', userId);
   // const response = await patch(`${EVENTS_API_URL}/events/cancel/${eventId}`);
   const response = [
     {
       name: '01',
-      value: 4000,
+      value: year,
     },
     {
       name: '02',
-      value: 3000,
+      value: userId,
     },
     {
       name: '03',
