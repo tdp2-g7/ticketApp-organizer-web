@@ -219,3 +219,69 @@ export function onCancelFailed(error: unknown): AnyAction {
     error,
   };
 }
+
+export function onGetStatisticsRequested(eventId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_STATISTICS_REQUESTED,
+    eventId,
+  };
+}
+
+export function onGetStatisticsSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_STATISTICS_SUCCEEDED,
+    data,
+  };
+}
+
+export function onGetStatisticsFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_STATISTICS_FAILED,
+    error,
+  };
+}
+
+// EVENT_ON_GET_BY_STATE
+export function onGetByStateRequested(userId: string): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_BY_STATE_REQUESTED,
+    userId,
+  };
+}
+
+export function onGetByStateSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_BY_STATE_SUCCEEDED,
+    data,
+  };
+}
+
+export function onGetByStateFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_BY_STATE_FAILED,
+    error,
+  };
+}
+
+// EVENT_ON_GET_BY_MONTH
+export function onGetByMonthRequested(userId: string, month: number): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_BY_MONTH_REQUESTED,
+    userId,
+    month,
+  };
+}
+
+export function onGetByMonthSucceeded(data: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_BY_MONTH_SUCCEEDED,
+    data,
+  };
+}
+
+export function onGetByMonthFailed(error: unknown): AnyAction {
+  return {
+    type: constants.EVENT_ON_GET_BY_MONTH_FAILED,
+    error,
+  };
+}

@@ -63,3 +63,75 @@ export async function onCancel(eventId: string): Promise<AxiosResponse> {
   const response = await patch(`${EVENTS_API_URL}/events/cancel/${eventId}`);
   return response;
 }
+
+export async function onGetStatistics(eventId: string): Promise<AxiosResponse> {
+  const response = await get(`${EVENTS_API_URL}/event-reservations/registration-metrics/${eventId}`);
+  return response;
+}
+
+export async function onGetEventsByState(userId: string): Promise<any> {
+  console.log('🚀 ~ getEventsByState ~ userId:', userId);
+  // const response = await patch(`${EVENTS_API_URL}/events/cancel/${eventId}`);
+  const response = [
+    { name: 'Bloqueado', value: 300 },
+    { name: 'Cancelado', value: 300 },
+    { name: 'En curso', value: 400 },
+    { name: 'Finalizado', value: 200 },
+    { name: 'Activo', value: 200 },
+    { name: 'Borrador', value: 50 },
+  ];
+  return response;
+}
+
+export async function onGetEventsByMonth(userId: string, year: number): Promise<any> {
+  console.log('🚀 ~ getEventsByMonth ~ year:', year);
+  console.log('🚀 ~ getEventsByState ~ userId:', userId);
+  // const response = await patch(`${EVENTS_API_URL}/events/cancel/${eventId}`);
+  const response = [
+    {
+      name: '01',
+      value: 4000,
+    },
+    {
+      name: '02',
+      value: 3000,
+    },
+    {
+      name: '03',
+      value: 2000,
+    },
+    {
+      name: '05',
+      value: 2780,
+    },
+    {
+      name: '06',
+      value: 1890,
+    },
+    {
+      name: '07',
+      value: 2390,
+    },
+    {
+      name: '08',
+      value: 3490,
+    },
+    {
+      name: '09',
+      value: 500,
+    },
+    {
+      name: '10',
+      value: 1000,
+    },
+    {
+      name: '11',
+      value: 1254,
+    },
+    {
+      name: '12',
+      value: 764,
+    },
+  ];
+  return response;
+}

@@ -2,6 +2,7 @@ import { renderLocation } from 'src/helpers/location';
 import { globalNavigate } from 'src/helpers/history';
 import { numToMonth } from 'src/helpers/shortDates';
 import { tagState } from 'src/helpers/tagState';
+import COLORS from 'src/helpers/colors';
 import NoImage from '../../../assets/noImage.png';
 import {
   CustomImg,
@@ -50,7 +51,7 @@ const EventCard = (props: any) => {
       )}
 
       {isDraft ? (
-        <Tag color="red">Borrador</Tag>
+        <Tag color= {COLORS.persianBlue}>Borrador</Tag>
       ) : (
         <Tag color={tagState(event).color}>{tagState(event).text}</Tag>
       )}
