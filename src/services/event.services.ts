@@ -65,74 +65,7 @@ export async function onCancel(eventId: string): Promise<AxiosResponse> {
 }
 
 export async function onGetStatistics(eventId: string): Promise<AxiosResponse> {
-  const response = await get(`${EVENTS_API_URL}/event-reservations/registration-metrics?id=${eventId}`);
-  // const data = {
-  //   eventId,
-  //   bar: [
-  //     {
-  //       time: '19:00 - 19:20',
-  //       quantity: 4000,
-  //     },
-  //     {
-  //       time: '19:20 - 19:40',
-  //       quantity: 3000,
-  //     },
-  //     {
-  //       time: '19:40 - 20:00',
-  //       quantity: 2000,
-  //     },
-  //     {
-  //       time: '20:00 - 20:20',
-  //       quantity: 2780,
-  //     },
-  //     {
-  //       time: '20:20 - 20:40',
-  //       quantity: 1890,
-  //     },
-  //     {
-  //       time: '21:00 - 21:20',
-  //       quantity: 2390,
-  //     },
-  //   ],
-  //   line: [
-  //     {
-  //       time: '19:00',
-  //       quantity: 0,
-  //     },
-  //     {
-  //       time: '19:20',
-  //       quantity: 100,
-  //     },
-  //     {
-  //       time: '19:40',
-  //       quantity: 500,
-  //     },
-  //     {
-  //       time: '20:00',
-  //       quantity: 1300,
-  //     },
-  //     {
-  //       time: '20:20',
-  //       quantity: 1900,
-  //     },
-  //     {
-  //       time: '20:40',
-  //       quantity: 2000,
-  //     },
-  //     {
-  //       time: '21:00',
-  //       quantity: 2500,
-  //     },
-  //     {
-  //       time: '21:20',
-  //       quantity: 2900,
-  //     },
-  //   ],
-  //   pie: [
-  //     { name: 'Ingresados', quantity: 400 },
-  //     { name: 'Sin ingresar', quantity: 300 },
-  //   ],
-  // };
+  const response = await get(`${EVENTS_API_URL}/event-reservations/registration-metrics/${eventId}`);
   return response;
 }
 

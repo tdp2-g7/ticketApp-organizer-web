@@ -1,19 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import Loading from 'src/components/Loading/Loading';
 import {
-  PieChart,
-  Pie,
-  Cell,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Label,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  BarChart,
-  Bar,
+  PieChart, Pie, Cell, XAxis, YAxis, BarChart, Bar,
 } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 import COLORS from 'src/helpers/colors';
@@ -26,7 +14,6 @@ import {
   EmptyStatistics,
   EmptyTitle,
   RowContainer,
-  ShowChartIcon,
   StatisticsContainer,
   Subtitle,
   Title,
@@ -40,6 +27,16 @@ const Statistics: FunctionComponent<IStatisticsProps> = (
   const navigate = useNavigate();
 
   const donutColors = [COLORS.greenLimeade, COLORS.warningRed];
+
+  const checkEmptyQuantities = (data: any) => {
+    let allZero = true;
+    data.forEach((item:any) => {
+      if (item.quantity !== 0) {
+        allZero = false;
+      }
+    });
+    return allZero;
+  };
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
@@ -82,7 +79,7 @@ const Statistics: FunctionComponent<IStatisticsProps> = (
         <Container>
           <Title>Estadísticas de {eventData?.title}</Title>
           <Subtitle>
-            Cantidad de clientes que ingresaron por período de tiempo
+            Cantidad de clientes acreditados por período de tiempo
           </Subtitle>
           {!statisticsData?.bar.length ? (
             <EmptyStatistics>
@@ -102,60 +99,8 @@ const Statistics: FunctionComponent<IStatisticsProps> = (
             </StatisticsContainer>
           )}
 
-          <Subtitle>Cantidad de clientes que ingresaron en el tiempo</Subtitle>
-
-          {!statisticsData?.line.length ? (
-            <EmptyStatistics>
-              <ShowChartIcon />
-              <EmptyTitle>
-                {' '}
-                Aún no hay estadisticas para este evento{' '}
-              </EmptyTitle>
-            </EmptyStatistics>
-          ) : (
-            <StatisticsContainer>
-              <LineChart
-                width={600}
-                height={300}
-                data={statisticsData?.line}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='time' />
-                <YAxis>
-                  <Label
-                    dx={-40}
-                    style={{
-                      textAnchor: 'middle',
-                      fontSize: '100%',
-                      fill: 'black',
-                      marginRight: 100,
-                      marginBottom: 100,
-                    }}
-                    angle={270}
-                    value={'Cantidad de clientes ingresados'}
-                  />
-                </YAxis>
-                /
-                <Tooltip />
-                <Legend />
-                <Line
-                  type='monotone'
-                  name='Clientes ingresados hasta horario'
-                  dataKey='quantity'
-                  stroke='#FE53BB'
-                />
-              </LineChart>
-            </StatisticsContainer>
-          )}
-
           <Subtitle>Porcentaje de clientes ingresados y sin ingresar</Subtitle>
-          {!statisticsData?.pie.length ? (
+          {!statisticsData?.pie.length || checkEmptyQuantities(statisticsData.pie) ? (
             <EmptyStatistics>
               <DonutSmallIcon />
               <EmptyTitle>

@@ -1,7 +1,7 @@
 import COLORS from 'src/helpers/colors';
 import styled from 'styled-components';
 import {
-  ArrowBackIos, BarChart, ShowChart, DonutSmall,
+  ArrowBackIos, BarChart, DonutSmall,
 } from '@mui/icons-material';
 import { IRowProps } from './types';
 
@@ -74,12 +74,6 @@ export const EmptyStatistics = styled.div`
   min-height: 300px;
   height: 100%;
   width: 100%;
-`;
-
-export const ShowChartIcon = styled(ShowChart)`
-  margin-top: 100px;
-  transform: scale(10);
-  margin-bottom: 50px;
 `;
 
 export const DonutSmallIcon = styled(DonutSmall)`
