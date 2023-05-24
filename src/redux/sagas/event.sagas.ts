@@ -139,7 +139,7 @@ export function* eventCancel(action: AnyAction): Generator {
 
 export function* getStatistics(action: AnyAction): Generator {
   try {
-    const data: any = yield call(onGetStatistics, action.eventId);
+    const { data }: any = yield call(onGetStatistics, action.eventId);
     yield put(onGetStatisticsSucceeded(data));
   } catch (error) {
     yield put(onGetStatisticsFailed(error));
