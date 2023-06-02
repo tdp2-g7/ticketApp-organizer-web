@@ -35,9 +35,6 @@ const Layout: FunctionComponent<ILayoutProps> = (props: ILayoutProps) => {
           <CreateEventLink onClick={() => globalNavigate('/createEvent')}>
             Crear evento
           </CreateEventLink>
-          <HeaderLink onClick={() => globalNavigate('/metrics')}>
-            Metricas
-          </HeaderLink>
           <HeaderLink onClick={() => globalNavigate('/profile')}>
             Perfil
           </HeaderLink>

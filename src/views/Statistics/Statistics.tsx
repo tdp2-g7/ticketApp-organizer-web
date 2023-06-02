@@ -26,7 +26,7 @@ const Statistics: FunctionComponent<IStatisticsProps> = (
   const { loading, eventData, statisticsData } = props;
   const navigate = useNavigate();
 
-  const donutColors = [COLORS.greenLimeade, COLORS.warningRed];
+  const donutColors = [COLORS.lightViolet, COLORS.greyZyrcon];
 
   const checkEmptyQuantities = (data: any) => {
     let allZero = true;
